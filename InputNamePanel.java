@@ -9,27 +9,29 @@ public class InputNamePanel extends JPanel implements ActionListener {
   Image textboxImage = new ImageIcon("./img/inputname_textbox.png").getImage(); 
 
   int buttonW = 60,buttonH = 60;
-  ImageIcon startImage[] = {
+  ImageIcon goImage[] = {
     new ImageIcon(new ImageIcon("./img/btn/check.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT)),
     new ImageIcon(new ImageIcon("./img/btn/check_r.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT)),
     new ImageIcon(new ImageIcon("./img/btn/check_p.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT))
   }; 
-  JButton startButton = new JButton();
+  JButton goButton = new JButton();
+  JTextField nameField = new JTextField("user1",10);
+
   InputNamePanel(MainFrame mf){
     this.mainframe = mf;
     this.setSize(this.mainframe.getSize());
     this.setLayout(null);
-    startButton.setBounds(795, 420, buttonW, buttonH);
-    startButton.setIcon(startImage[0]);
-    startButton.setRolloverIcon(startImage[1]);
-    startButton.setPressedIcon(startImage[2]);
-    startButton.setBorder(null);
-    startButton.setContentAreaFilled(false);
-    startButton.addActionListener(this);
-    this.add(startButton);
+    goButton.setBounds(795, 420, buttonW, buttonH);
+    goButton.setIcon(goImage[0]);
+    goButton.setRolloverIcon(goImage[1]);
+    goButton.setPressedIcon(goImage[2]);
+    goButton.setBorder(null);
+    goButton.setContentAreaFilled(false);
+    goButton.addActionListener(this);
+    this.add(goButton);
   }
   public void actionPerformed(ActionEvent e) {
-    if (e.getSource() == startButton) {
+    if (e.getSource() == goButton) {
       this.mainframe.changeScene("menu");
     }
   } 
@@ -40,4 +42,5 @@ public class InputNamePanel extends JPanel implements ActionListener {
     g.fillRect(0,0,this.getWidth(),this.getHeight());
     g.drawImage(textboxImage, this.getWidth()/2-this.getWidth()/6, this.getHeight()/2-this.getHeight()/6,this.getWidth()/3,this.getHeight()/3,mainframe);
   }
+
 }
