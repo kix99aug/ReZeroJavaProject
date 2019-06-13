@@ -2,8 +2,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import jdk.jfr.Percentage;
-
 public class MenuPanel extends JPanel implements ActionListener {
   MainFrame mainframe = null;
 
