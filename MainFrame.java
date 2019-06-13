@@ -21,4 +21,10 @@ public class MainFrame extends JFrame {
     this.getContentPane().add(panels.get("menu"));
     this.setVisible(true);
   }
+  public void changeScene(String target){
+    for(JPanel p : panels.values()){
+      p.setVisible(false);
+    }
+    panels.get(target).setVisible(true);
+  }
 }
