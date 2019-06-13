@@ -6,6 +6,7 @@ public class InputNamePanel extends JPanel implements ActionListener {
   MainFrame mainframe = null;
 
   Image bgImage = new ImageIcon("./img/bg.png").getImage(); 
+  Image bg2Image = new ImageIcon("./img/InputNameBG.png").getImage(); 
 
   int buttonW = 190,buttonH = 80;
   ImageIcon startImage[] = {
@@ -31,10 +32,13 @@ public class InputNamePanel extends JPanel implements ActionListener {
     if (e.getSource() == startButton) {
       this.setVisible(false);
       this.mainframe.panels.get("menu").setVisible(true);
+      this.mainframe.panels.get("inputname").setVisible(false);
     }
   } 
   public void paintComponent(Graphics g){
     super.paintComponent(g);
     g.drawImage(bgImage, 0, 0,this.mainframe.getWidth(),this.mainframe.getHeight(),mainframe);
+    g.drawImage(bg2Image, 0, 0,this.mainframe.getWidth(),this.mainframe.getHeight(),mainframe);
   }
+  
 }

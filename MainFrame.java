@@ -17,8 +17,8 @@ public class MainFrame extends JFrame {
     panels.put("menu", new MenuPanel(this));
     panels.get("inputname").setVisible(true);
     panels.get("menu").setVisible(false);
-    this.getContentPane().add(panels.get("inputname"));
     this.getContentPane().add(panels.get("menu"));
+    this.getContentPane().add(panels.get("inputname"));
     this.setVisible(true);
   }
 }
