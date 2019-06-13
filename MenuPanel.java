@@ -2,11 +2,12 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import jdk.jfr.Percentage;
+
 public class MenuPanel extends JPanel implements ActionListener {
   MainFrame mainframe = null;
 
   Image bgImage = new ImageIcon("./img/bg.png").getImage(); 
-  ImageIcon logoImage = new ImageIcon("./img/logo.png");
 
   JButton startButton = new JButton();
   JButton bagButton = new JButton();
@@ -15,8 +16,9 @@ public class MenuPanel extends JPanel implements ActionListener {
   JLabel logo=new JLabel();
 
   int buttonW = 190,buttonH = 80;
-
-
+  ImageIcon LogoImg[] = {
+    new ImageIcon(new ImageIcon("./img/logo.png").getImage().getScaledInstance(300,250, Image.SCALE_DEFAULT))
+  }; 
   ImageIcon startImage[] = {
     new ImageIcon(new ImageIcon("./img/btn/start.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT)),
     new ImageIcon(new ImageIcon("./img/btn/start_r.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT)),
@@ -38,9 +40,9 @@ public class MenuPanel extends JPanel implements ActionListener {
 
     this.setLayout(null);
     this.add(logo);
-    logo.setBounds(1280/2-buttonW/2, 100,450,100);
+    logo.setBounds(490,40,300,250);
     logo.setBorder(null);
-    logo.setIcon(logoImage);
+    logo.setIcon(LogoImg[0]);
     this.setLayout(null);
 
     startButton.setBounds(1280/2-buttonW/2, 300, buttonW, buttonH);
