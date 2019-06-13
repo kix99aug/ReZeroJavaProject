@@ -1,0 +1,45 @@
+如下代码中animation X中的X代表动画库内动画的编号
+因为个人工程内动画的编号都不一样 所以请自行根据技能效果自行更改
+
+The X in animation X represents the number of animation in the animation library 
+
+Because the number of the animation in the personal project is different, please change it according to the effect of the skill
+
+
+<setup action>
+display action
+immortal: target, true
+</setup action>
+<target action>
+move user: target, front, 15
+motion forward: user
+wait for movement
+wait: 25
+move user: forward, 90, 5
+motion swing: user
+motion wait: user
+animation X: target
+face target: user
+action effect
+wait: 45
+move user: forward, 40, 5
+motion swing: user
+motion wait: user
+animation X: target
+face target: user
+action effect
+wait: 65
+motion swing: user
+animation X: target
+move target: backward, 60, 20
+face target: user
+jump target: 100, 20
+action effect
+immortal: target, false
+wait: 25
+jump user: 40, 20
+move user: home, 20
+motion forward: user
+face user: forward
+wait for jump
+</target action>
