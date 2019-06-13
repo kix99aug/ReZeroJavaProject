@@ -7,6 +7,7 @@ public class MainFrame extends JFrame {
   HashMap<String,JPanel> panels = new HashMap<String,JPanel>();
   Image cursorImage = new ImageIcon("./img/cursor.png").getImage();
   Point hotspot = new Point(0, 0);
+
   MainFrame(){
     super("Game");
     this.setCursor(getToolkit().createCustomCursor(cursorImage, hotspot, "Cursor"));
@@ -17,7 +18,7 @@ public class MainFrame extends JFrame {
     for(JPanel p : panels.values()){
       this.getContentPane().add(p);
     }
-    changeScene("inputname");
+    //changeScene("inputname");
     this.setVisible(true);
   }
   public void changeScene(String target){
