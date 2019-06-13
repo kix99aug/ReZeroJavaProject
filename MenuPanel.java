@@ -35,8 +35,6 @@ public class MenuPanel extends JPanel implements ActionListener {
   MenuPanel(MainFrame mf){
     this.mainframe = mf;
     this.setSize(this.mainframe.getSize());
-
-    this.setLayout(null);
     this.add(logo);
     logo.setBounds(490,40,300,250);
     logo.setBorder(null);
