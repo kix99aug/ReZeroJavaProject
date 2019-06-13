@@ -16,6 +16,7 @@ public class InputNamePanel extends JPanel implements ActionListener {
   }; 
   JButton goButton = new JButton();
   JTextField nameField = new JTextField("user1",10);
+  Color C1 = new Color(186,191,194,0);
 
   InputNamePanel(MainFrame mf){
     this.mainframe = mf;
@@ -29,6 +30,13 @@ public class InputNamePanel extends JPanel implements ActionListener {
     goButton.setContentAreaFilled(false);
     goButton.addActionListener(this);
     this.add(goButton);
+    
+    nameField.setFont(new Font("NasuM",Font.BOLD,32));
+    nameField.setBounds(460, 400, 300, 40);
+    nameField.setVisible(true);
+    nameField.setBorder(null);
+    nameField.setOpaque(false);
+    this.add(nameField);
   }
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == goButton) {
