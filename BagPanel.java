@@ -3,9 +3,11 @@ import java.awt.event.*;
 import javax.swing.*;
 public class BagPanel extends AbstractPanel {
     MainFrame mainframe = null;
-    JButton close = new JButton();
+    JButton closebutton = new JButton();
     JButton tab1 = new JButton();
-    
+
+
+
     JButton nineButtons[]={
       new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton()
     };
@@ -56,6 +58,8 @@ public class BagPanel extends AbstractPanel {
           nineButtons[i].addActionListener(this);
           this.add(nineButtons[i]);
         }*/
+
+        closebutton = new Button("close",1093,70,83,92,this);
 
     }
     public void actionPerformed(ActionEvent e) {
