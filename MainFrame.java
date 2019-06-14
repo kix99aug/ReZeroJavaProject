@@ -16,6 +16,7 @@ public class MainFrame extends JFrame {
     panels.put("inputname", new InputNamePanel(this));
     panels.put("menu", new MenuPanel(this));
     panels.put("bag", new BagPanel(this));
+    panels.put("game", new GamePanel(this));
     for(JPanel p : panels.values()){
       this.getContentPane().add(p);
     }

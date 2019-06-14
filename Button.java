@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class Button extends JButton {
   ImageIcon Images[] = {null,null,null}; 
-  Button(String name,String text,int x,int y,int buttonW,int buttonH,AbstractPanel menu) {
+  Button(String name,int x,int y,int buttonW,int buttonH,AbstractPanel menu) {
     super();
     Images[0]=new ImageIcon(new ImageIcon("./img/btn/"+name+".png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST));
     Images[1]=new ImageIcon(new ImageIcon("./img/btn/"+name+"_r.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST));
