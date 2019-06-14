@@ -30,6 +30,8 @@ public class InputNamePanel extends AbstractPanel implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == goButton) {
       this.mainframe.changeScene("menu");
+      this.mainframe.username = new String (nameField.getText());
+      //((MenuPanel)this.mainframe.panels.get("menu")).testButton.setText(this.mainframe.username);  測試 JTextField 有無輸入進去
     }
   } 
   public void paintComponent(Graphics g){
