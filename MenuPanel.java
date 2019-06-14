@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class MenuPanel extends JPanel implements ActionListener {
+public class MenuPanel extends AbstractPanel {
   MainFrame mainframe = null;
 
   Image bgImage = new ImageIcon("./img/bg.png").getImage(); 
@@ -15,22 +15,22 @@ public class MenuPanel extends JPanel implements ActionListener {
 
   int buttonW = 190,buttonH = 80;
   ImageIcon LogoImg[] = {
-    new ImageIcon(new ImageIcon("./img/logo.png").getImage().getScaledInstance(300,250, Image.SCALE_DEFAULT))
+    new ImageIcon(new ImageIcon("./img/logo.png").getImage().getScaledInstance(300,250, Image.SCALE_FAST))
   }; 
   ImageIcon startImage[] = {
-    new ImageIcon(new ImageIcon("./img/btn/start.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT)),
-    new ImageIcon(new ImageIcon("./img/btn/start_r.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT)),
-    new ImageIcon(new ImageIcon("./img/btn/start_p.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT))
+    new ImageIcon(new ImageIcon("./img/btn/start.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST)),
+    new ImageIcon(new ImageIcon("./img/btn/start_r.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST)),
+    new ImageIcon(new ImageIcon("./img/btn/start_p.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST))
   }; 
   ImageIcon bagImage[] = {
-    new ImageIcon(new ImageIcon("./img/btn/bag.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT)),
-    new ImageIcon(new ImageIcon("./img/btn/bag_r.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT)),
-    new ImageIcon(new ImageIcon("./img/btn/bag_p.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT))
+    new ImageIcon(new ImageIcon("./img/btn/bag.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST)),
+    new ImageIcon(new ImageIcon("./img/btn/bag_r.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST)),
+    new ImageIcon(new ImageIcon("./img/btn/bag_p.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST))
   }; 
   ImageIcon exitImage[] = {
-    new ImageIcon(new ImageIcon("./img/btn/exit.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT)),
-    new ImageIcon(new ImageIcon("./img/btn/exit_r.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT)),
-    new ImageIcon(new ImageIcon("./img/btn/exit_p.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT))
+    new ImageIcon(new ImageIcon("./img/btn/exit.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST)),
+    new ImageIcon(new ImageIcon("./img/btn/exit_r.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST)),
+    new ImageIcon(new ImageIcon("./img/btn/exit_p.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST))
   }; 
   MenuPanel(MainFrame mf){
     this.mainframe = mf;
@@ -73,14 +73,12 @@ public class MenuPanel extends JPanel implements ActionListener {
   }
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == startButton) {
-      startButton.setLocation(startButton.getX()-1, startButton.getY()-1);
+    }
+    else if(e.getSource() == bagButton){
+      this.mainframe.changeScene("bag");
     }
     else if(e.getSource() == exitButton){
       System.exit(0);
-    }
-    else if(e.getSource() == bagButton){
-      this.setVisible(false);
-      this.mainframe.panels.get("bag").setVisible(true);
     }
     /*else if(e.getSource() == bagButton){
      // mf.getContentPane().add();

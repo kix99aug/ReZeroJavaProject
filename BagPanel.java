@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-public class BagPanel extends JPanel implements ActionListener {
+public class BagPanel extends AbstractPanel {
     MainFrame mainframe = null;
     JButton nineButtons[]={
       new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton()

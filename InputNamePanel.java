@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class InputNamePanel extends JPanel implements ActionListener {
+public class InputNamePanel extends AbstractPanel {
   MainFrame mainframe = null;
 
   Image bgImage = new ImageIcon("./img/bg.png").getImage(); 
@@ -10,9 +10,9 @@ public class InputNamePanel extends JPanel implements ActionListener {
 
   int buttonW = 60,buttonH = 60;
   ImageIcon goImage[] = {
-    new ImageIcon(new ImageIcon("./img/btn/check.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT)),
-    new ImageIcon(new ImageIcon("./img/btn/check_r.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT)),
-    new ImageIcon(new ImageIcon("./img/btn/check_p.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_DEFAULT))
+    new ImageIcon(new ImageIcon("./img/btn/check.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST)),
+    new ImageIcon(new ImageIcon("./img/btn/check_r.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST)),
+    new ImageIcon(new ImageIcon("./img/btn/check_p.png").getImage().getScaledInstance(buttonW, buttonH, Image.SCALE_FAST))
   }; 
   JButton goButton = new JButton();
   JTextField nameField = new JTextField("user1",10);
@@ -22,20 +22,14 @@ public class InputNamePanel extends JPanel implements ActionListener {
     this.mainframe = mf;
     this.setSize(this.mainframe.getSize());
     this.setLayout(null);
-    goButton.setBounds(795, 420, buttonW, buttonH);
-    goButton.setIcon(goImage[0]);
-    goButton.setRolloverIcon(goImage[1]);
-    goButton.setPressedIcon(goImage[2]);
-    goButton.setBorder(null);
-    goButton.setContentAreaFilled(false);
+    goButton = new Button("go",null,795,420,60,60,this);
     goButton.addActionListener(this);
-    this.add(goButton);
-    
-    nameField.setFont(new Font("NasuM",Font.BOLD,32));
-    nameField.setBounds(460, 400, 300, 40);
+    nameField.setFont(new Font("NasuM",Font.BOLD,28));
+    nameField.setBounds(475, 405, 260, 32);
     nameField.setVisible(true);
     nameField.setBorder(null);
     nameField.setOpaque(false);
+    nameField.setForeground(new Color(255,255,255,255));
     this.add(nameField);
   }
   public void actionPerformed(ActionEvent e) {
