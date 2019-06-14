@@ -63,7 +63,9 @@ public class BagPanel extends AbstractPanel {
 
     }
     public void actionPerformed(ActionEvent e) {
-
+      if (e.getSource() == closebutton) {
+        this.mainframe.changeScene("menu");
+      }
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
