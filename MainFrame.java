@@ -7,7 +7,7 @@ public class MainFrame extends JFrame {
   HashMap<String,JPanel> panels = new HashMap<String,JPanel>();
   Image cursorImage = new ImageIcon("./img/cursor.png").getImage();
   Point hotspot = new Point(0, 0);
-
+  String username;
   MainFrame(){
     super("Game");
     this.setCursor(getToolkit().createCustomCursor(cursorImage, hotspot, "Cursor"));

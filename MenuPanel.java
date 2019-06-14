@@ -10,7 +10,7 @@ public class MenuPanel extends AbstractPanel {
   JButton startButton;
   JButton bagButton;
   JButton exitButton;
-
+  JButton testButton;
   JLabel logo=new JLabel();
 
   int buttonW = 190,buttonH = 80;
@@ -26,7 +26,8 @@ public class MenuPanel extends AbstractPanel {
     this.setLayout(null);
     startButton = new Button("start",(1280-buttonW)/2,300,buttonW,buttonH,this);
     bagButton = new Button("bag",(1280-buttonW)/2,400,buttonW,buttonH,this);
-    exitButton = new Button("exit",(1280-buttonW)/2,500,buttonW,buttonH,this);    
+    exitButton = new Button("exit",(1280-buttonW)/2,500,buttonW,buttonH,this);
+    
   }
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == startButton) {
