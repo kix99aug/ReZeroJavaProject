@@ -36,10 +36,10 @@ public class InputNamePanel extends AbstractPanel implements ActionListener {
   } 
   public void paintComponent(Graphics g){
     super.paintComponent(g);
-    g.drawImage(bgImage, 0, 0,this.getWidth(),this.getHeight(),mainframe);
+    g.drawImage(bgImage, 0, 0,this.getWidth(),this.getHeight(),this);
     g.setColor(new Color(0,0,0,128));
     g.fillRect(0,0,this.getWidth(),this.getHeight());
-    g.drawImage(textboxImage, this.getWidth()/2-this.getWidth()/6, this.getHeight()/2-this.getHeight()/6,this.getWidth()/3,this.getHeight()/3,mainframe);
+    g.drawImage(textboxImage, this.getWidth()/2-this.getWidth()/6, this.getHeight()/2-this.getHeight()/6,this.getWidth()/3,this.getHeight()/3,this);
   }
 
 }
