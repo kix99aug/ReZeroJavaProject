@@ -13,7 +13,7 @@ public class MenuPanel extends AbstractPanel {
 
   JLabel logo=new JLabel();
 
-  int buttonW = 190,buttonH = 80;
+  int buttonW = 240,buttonH = 64;
   ImageIcon LogoImg = new ImageIcon(new ImageIcon("./img/logo.png").getImage().getScaledInstance(300,250, Image.SCALE_FAST));
   MenuPanel(MainFrame mf){
     this.mainframe = mf;
@@ -24,9 +24,9 @@ public class MenuPanel extends AbstractPanel {
     logo.setBorder(null);
     logo.setIcon(LogoImg);
     this.setLayout(null);
-    startButton = new Button("start",(1280-buttonW)/2,300,buttonW,buttonH,this);
-    bagButton = new Button("bag",(1280-buttonW)/2,400,buttonW,buttonH,this);
-    exitButton = new Button("exit",(1280-buttonW)/2,500,buttonW,buttonH,this);    
+    startButton = new Button("play",(1280-buttonW)/2,300,buttonW,buttonH,this);
+    bagButton = new Button("inventory",(1280-buttonW)/2,400,buttonW,buttonH,this);
+    exitButton = new Button("quit",(1280-buttonW)/2,500,buttonW,buttonH,this);    
   }
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == startButton) {
