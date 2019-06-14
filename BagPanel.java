@@ -59,6 +59,6 @@ public class BagPanel extends AbstractPanel {
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(bgImage, 0, 0,this.mainframe.getWidth(),this.mainframe.getHeight(),mainframe);
+        g.drawImage(bgImage, 0, 0,mainframe);
       }
 }

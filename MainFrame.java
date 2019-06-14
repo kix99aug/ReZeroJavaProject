@@ -13,6 +13,7 @@ public class MainFrame extends JFrame {
     this.setCursor(getToolkit().createCustomCursor(cursorImage, hotspot, "Cursor"));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(1280, 720);
+    this.setUndecorated(true);
     panels.put("inputname", new InputNamePanel(this));
     panels.put("menu", new MenuPanel(this));
     panels.put("bag", new BagPanel(this));
