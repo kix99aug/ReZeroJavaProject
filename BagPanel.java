@@ -5,9 +5,6 @@ public class BagPanel extends AbstractPanel {
     MainFrame mainframe = null;
     JButton closebutton = new JButton();
     JButton tab1 = new JButton();
-    JButton Active_A = new JButton();
-    JButton Active_B = new JButton();
-    JButton Active_C = new JButton();
 
     JButton nineButtons[]={
       new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton()
@@ -61,9 +58,6 @@ public class BagPanel extends AbstractPanel {
         }*/
 
         closebutton = new Button("close",1093,70,83,92,this);
-        Active_A = new Button("Active_A", 1093, 70, 20, 20, this);
-        Active_B = new Button("Active_B", 1093, 80, 20, 20, this);
-        Active_C = new Button("Active_C", 1093, 90, 20, 20, this);
 
     }
     public void actionPerformed(ActionEvent e) {
