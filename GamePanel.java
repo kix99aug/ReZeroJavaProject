@@ -5,25 +5,23 @@ import javax.swing.*;
 public class GamePanel extends AbstractPanel {
   MainFrame mainframe = null;
 
-  Image bgImage = new ImageIcon("./img/bg.png").getImage(); 
+  Image skyImage = new ImageIcon("./img/sky1.png").getImage(); 
+  Image groundImage = new ImageIcon("./img/ground1.png").getImage(); 
+  int bgx = 0,bgy=0;
 
-  JButton startButton;
-  JButton bagButton;
-  JButton exitButton;
-
-  JLabel logo=new JLabel();
-
-  int buttonW = 190,buttonH = 80;
-  ImageIcon LogoImg = new ImageIcon(new ImageIcon("./img/logo.png").getImage().getScaledInstance(300,250, Image.SCALE_FAST));
   GamePanel(MainFrame mf){
     this.mainframe = mf;
     this.setSize(this.mainframe.getSize());
     this.setLayout(null);
   }
   public void actionPerformed(ActionEvent e) {
-} 
-  public void paintComponent(Graphics g){
-    super.paintComponent(g);
-    g.drawImage(bgImage, 0, 0,this.mainframe.getWidth(),this.mainframe.getHeight(),mainframe);
+    
+  } 
+  public void paint(Graphics g){
+    super.paint(g);
+    for(int i = 0;i<1280;i+=319){
+      g.drawImage(skyImage, i, 0,mainframe);
+      g.drawImage(groundImage, i, 320,mainframe);
+    }
   }
 }
