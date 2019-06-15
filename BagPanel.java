@@ -57,7 +57,7 @@ public class BagPanel extends AbstractPanel {
           this.add(nineButtons[i]);
         }*/
 
-        closebutton = new Button("close",1093,70,83,92,this);
+        closebutton = new Button("close",1063,45,83,98,this);
 
     }
     public void actionPerformed(ActionEvent e) {
