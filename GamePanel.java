@@ -28,12 +28,12 @@ public class GamePanel extends AbstractPanel {
   } 
   public void paint(Graphics g){
     super.paint(g);
-    for(int i = 0;i<1280;i+=319){
+    for(int i = 0;i<2560;i+=319){
       g.drawImage(skyImage, i, 0,mainframe);
       g.drawImage(groundImage, i, 320,mainframe);
     }
-    for(int i = 0; i < 5;i++){
-      g.drawImage(obstacle[ran.nextInt(5)], ran.nextInt(1280), ran.nextInt(80)+i*80+320-214,175,214,mainframe);
+    for(int i = 0; i < 8;i++){
+      g.drawImage(obstacle[ran.nextInt(5)], ran.nextInt(2560), ran.nextInt(50)+i*50+320-214,175,214,mainframe);
     }
   }
 }
