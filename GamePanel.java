@@ -7,6 +7,15 @@ public class GamePanel extends AbstractPanel {
 
   Image skyImage = new ImageIcon("./img/sky1.png").getImage(); 
   Image groundImage = new ImageIcon("./img/ground1.png").getImage(); 
+
+  ImageIcon obstacle[] = {
+    new ImageIcon(new ImageIcon("./img/MapSource/圖層7.png").getImage().getScaledInstance( 107,  85, Image.SCALE_DEFAULT)),
+    new ImageIcon(new ImageIcon("./img/MapSource/圖層8.png").getImage().getScaledInstance( 107,  85, Image.SCALE_DEFAULT)),
+    new ImageIcon(new ImageIcon("./img/MapSource/圖層9.png").getImage().getScaledInstance( 107,  85, Image.SCALE_DEFAULT)),
+    new ImageIcon(new ImageIcon("./img/MapSource/圖層10.png").getImage().getScaledInstance( 107,  85, Image.SCALE_DEFAULT)),
+    new ImageIcon(new ImageIcon("./img/MapSource/圖層11.png").getImage().getScaledInstance( 107,  85, Image.SCALE_DEFAULT)),
+    new ImageIcon(new ImageIcon("./img/MapSource/圖層12.png").getImage().getScaledInstance( 107,  85, Image.SCALE_DEFAULT)),
+  }; 
   int bgx = 0,bgy=0;
 
   GamePanel(MainFrame mf){
