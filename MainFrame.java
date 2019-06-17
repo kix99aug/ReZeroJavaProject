@@ -13,19 +13,14 @@ public class MainFrame extends JFrame {
   String username;
   PlaySounds BGM;
    
-  int[] store_X;
-  int[] store_Y;
-  int[] choose;
+  public int[] store_X;
+  public int[] store_Y;
+  public int[] choose;
   MainFrame(){
     //File BGM = new File("");
     super("Game");
-    Random ran = new Random();
-    for(int i =0; i <8; i++){
-      store_X[i] = ran.nextInt(2560);
-      store_Y[i] = ran.nextInt(50);
-      choose[i] = ran.nextInt(5);
-    }
-
+    
+    
     this.setCursor(getToolkit().createCustomCursor(cursorImage, hotspot, "Cursor"));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(1280, 720);
@@ -41,6 +36,14 @@ public class MainFrame extends JFrame {
     this.setVisible(true);
     BGM = new PlaySounds("./music/BGM.wav");
     BGM.run();
+  }
+  public void positionXY(){
+    for(int i =0; i <8; i++){
+      Random ran = new Random();
+      this.store_X[i] = ran.nextInt(2560);
+      this.store_Y[i] = ran.nextInt(50);
+      this.choose[i] = ran.nextInt(5);
+    }
   }
   public void changeScene(String target){
     for(JPanel p : panels.values()){
