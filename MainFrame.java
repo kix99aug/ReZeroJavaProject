@@ -11,7 +11,8 @@ public class MainFrame extends JFrame {
   Image cursorImage = new ImageIcon("./img/cursor.png").getImage();
   Point hotspot = new Point(0, 0);
   String username;
-  Thread P;
+  PlaySounds BGM;
+   
   int[] store_X;
   int[] store_Y;
   int[] choose;
