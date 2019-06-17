@@ -5,12 +5,6 @@ import javax.swing.event.*;
 import java.io.*;
 import java.io.IOException;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.SourceDataLine;
-
 public class MainFrame extends JFrame {
   HashMap<String,JPanel> panels = new HashMap<String,JPanel>();
   Image cursorImage = new ImageIcon("./img/cursor.png").getImage();
