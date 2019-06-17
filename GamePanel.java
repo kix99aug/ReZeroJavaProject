@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.util.Random;
 
 public class GamePanel extends AbstractPanel {
-
   MainFrame mainframe = null;
+
   Image skyImage = new ImageIcon("./img/sky1.png").getImage(); 
   Image groundImage = new ImageIcon("./img/ground1.png").getImage(); 
 
