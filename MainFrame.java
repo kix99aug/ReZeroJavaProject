@@ -38,13 +38,16 @@ public class MainFrame extends JFrame {
     }
     changeScene("inputname");
     this.setVisible(true);
-    P = new PlaySounds("./music/BGM.wav");
-    P.run(); 
+    BGM = new PlaySounds("./music/BGM.wav");
+    BGM.run();
   }
   public void changeScene(String target){
     for(JPanel p : panels.values()){
       p.setVisible(false);
+
     }
     panels.get(target).setVisible(true);
+    if(target=="menu") BGM._stop();
+    if(target=="game") BGM.change("./music/gameoverBGM.wav");
   }
 }
