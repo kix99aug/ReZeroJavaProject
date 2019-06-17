@@ -2,14 +2,27 @@ import java.awt.*;
 import java.util.HashMap;
 import javax.swing.*;
 import javax.swing.event.*;
+import java.io.*;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.SourceDataLine;
 
 public class MainFrame extends JFrame {
   HashMap<String,JPanel> panels = new HashMap<String,JPanel>();
   Image cursorImage = new ImageIcon("./img/cursor.png").getImage();
   Point hotspot = new Point(0, 0);
   String username;
+  Thread P;
   MainFrame(){
+    //File BGM = new File("");
     super("Game");
+     P = new PlaySounds("./music/BGM.wav");
+     P.run();
+     
     this.setCursor(getToolkit().createCustomCursor(cursorImage, hotspot, "Cursor"));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(1280, 720);
