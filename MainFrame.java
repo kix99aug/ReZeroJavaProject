@@ -37,7 +37,6 @@ public class MainFrame extends JFrame {
   public void changeScene(String target){
     for(JPanel p : panels.values()){
       p.setVisible(false);
-
     }
     panels.get(target).setVisible(true);
     if(target=="menu") BGM._stop();
