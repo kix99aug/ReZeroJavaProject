@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.Random;
 
 public class GamePanel extends AbstractPanel {
   MainFrame mainframe = null;
@@ -17,20 +16,14 @@ public class GamePanel extends AbstractPanel {
     new ImageIcon("./img/MapSource/obstacle6.png").getImage()
   }; 
   int bgx = 0,bgy=0;
-  Random ran = new Random();
- 
-  int[] store_X;
-  int[] store_Y;
-  int[] choose;
+  
+  
+  
   GamePanel(MainFrame mf){
     this.mainframe = mf;
     this.setSize(this.mainframe.getSize());
     this.setLayout(null);
-    for(int i =0; i <8; i++){
-      store_X[i] = ran.nextInt(2560);
-      store_Y[i] = ran.nextInt(50);
-      choose[i] = ran.nextInt(5);
-    }
+    
     new Thread(){
 		  public void run(){
 			  while(true){
@@ -57,7 +50,7 @@ public class GamePanel extends AbstractPanel {
       g.drawImage(groundImage, i, 320,mainframe);
     }
     for(int i = 0; i < 8;i++){
-      g.drawImage(obstacle[choose[i]], store_X[i], store_Y[i]+i*50+320-214,175,214,mainframe);
+      g.drawImage(obstacle[this.mainframe.choose[i]], this.mainframe.store_X[i], this.mainframe.store_Y[i]+i*50+320-214,175,214,mainframe);
     }
   }
 }

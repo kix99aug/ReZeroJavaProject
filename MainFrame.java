@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.io.*;
 import java.io.IOException;
+import java.util.Random;
 
 public class MainFrame extends JFrame {
   HashMap<String,JPanel> panels = new HashMap<String,JPanel>();
@@ -11,13 +12,20 @@ public class MainFrame extends JFrame {
   Point hotspot = new Point(0, 0);
   String username;
   PlaySounds BGM;
+   
+  int[] store_X;
+  int[] store_Y;
+  int[] choose;
   MainFrame(){
     //File BGM = new File("");
     super("Game");
-    BGM = new PlaySounds("./music/BGM.wav");
-    BGM.start();
-     
-     
+    Random ran = new Random();
+    for(int i =0; i <8; i++){
+      store_X[i] = ran.nextInt(2560);
+      store_Y[i] = ran.nextInt(50);
+      choose[i] = ran.nextInt(5);
+    }
+
     this.setCursor(getToolkit().createCustomCursor(cursorImage, hotspot, "Cursor"));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(1280, 720);
