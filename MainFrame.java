@@ -16,12 +16,13 @@ public class MainFrame extends JFrame {
   Image cursorImage = new ImageIcon("./img/cursor.png").getImage();
   Point hotspot = new Point(0, 0);
   String username;
-  Thread P;
+  PlaySounds BGM;
   MainFrame(){
     //File BGM = new File("");
     super("Game");
-     P = new PlaySounds("./music/BGM.wav");
-     P.run();
+    BGM = new PlaySounds("./music/BGM.wav");
+    BGM.start();
+     
      
     this.setCursor(getToolkit().createCustomCursor(cursorImage, hotspot, "Cursor"));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,11 +37,16 @@ public class MainFrame extends JFrame {
     }
     changeScene("inputname");
     this.setVisible(true);
+    BGM = new PlaySounds("./music/BGM.wav");
+    BGM.run();
   }
   public void changeScene(String target){
     for(JPanel p : panels.values()){
       p.setVisible(false);
+
     }
     panels.get(target).setVisible(true);
+    if(target=="menu") BGM._stop();
+    if(target=="game") BGM.change("./music/gameoverBGM.wav");
   }
 }
