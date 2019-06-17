@@ -14,8 +14,7 @@ public class MainFrame extends JFrame {
   MainFrame(){
     //File BGM = new File("");
     super("Game");
-    P = new PlaySounds("./music/BGM.wav");
-    P.run(); 
+    
 
     this.setCursor(getToolkit().createCustomCursor(cursorImage, hotspot, "Cursor"));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,6 +29,8 @@ public class MainFrame extends JFrame {
     }
     changeScene("inputname");
     this.setVisible(true);
+    P = new PlaySounds("./music/BGM.wav");
+    P.run(); 
   }
   public void changeScene(String target){
     for(JPanel p : panels.values()){
