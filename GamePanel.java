@@ -26,6 +26,7 @@ public class GamePanel extends AbstractPanel {
     
     new Thread(){
 		  public void run(){
+        
 			  while(true){
 				  repaint();
 				  try {
