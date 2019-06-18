@@ -4,6 +4,8 @@ import javax.swing.*;
 
 public class GamePanel extends AbstractPanel {
   MainFrame mainframe = null;
+  PlaySounds soundofzombie;
+  PlaySounds shootingsound;
 
   Image skyImage = new ImageIcon("./img/sky1.png").getImage(); 
   Image groundImage = new ImageIcon("./img/ground1.png").getImage(); 
@@ -20,6 +22,10 @@ public class GamePanel extends AbstractPanel {
   Monster monster = new Monster(this);
   
   GamePanel(MainFrame mf){
+    
+    soundofzombie = new PlaySounds("./music/soundofzombie.wav");
+    shootingsound = new PlaySounds("./music/shootingsound.wav");
+
     this.mainframe = mf;
     this.setSize(this.mainframe.getSize());
     this.setLayout(null);
