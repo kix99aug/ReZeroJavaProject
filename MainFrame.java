@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Random;
 
 public class MainFrame extends JFrame {
-  HashMap<String,JPanel> panels = new HashMap<String,JPanel>();
+  HashMap<String,AbstractPanel> panels = new HashMap<String,AbstractPanel>();
   Image cursorImage = new ImageIcon("./img/cursor.png").getImage();
   Point hotspot = new Point(0, 0);
   String username;
