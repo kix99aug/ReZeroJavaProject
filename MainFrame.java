@@ -13,11 +13,10 @@ public class MainFrame extends JFrame {
   String username;
   PlaySounds BGM;
    
-  public int[] store_X;
-  public int[] store_Y;
-  public int[] choose;
+  public int[] store_X = new int[8];
+  public int[] store_Y = new int[8];
+  public int[] choose = new int[8];
   MainFrame(){
-    //File BGM = new File("");
     super("Game");
     
     
@@ -28,6 +27,7 @@ public class MainFrame extends JFrame {
     panels.put("inputname", new InputNamePanel(this));
     panels.put("menu", new MenuPanel(this));
     panels.put("bag", new BagPanel(this));
+    positionXY();
     panels.put("game", new GamePanel(this));
     for(JPanel p : panels.values()){
       this.getContentPane().add(p);
@@ -35,7 +35,7 @@ public class MainFrame extends JFrame {
     changeScene("inputname");
     this.setVisible(true);
     BGM = new PlaySounds("./music/BGM.wav");
-    BGM.run();
+    //BGM.run();
   }
   public void positionXY(){
     for(int i =0; i <8; i++){
