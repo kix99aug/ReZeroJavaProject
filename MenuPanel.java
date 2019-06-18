@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 public class MenuPanel extends AbstractPanel {
   MainFrame mainframe = null;
@@ -24,9 +27,9 @@ public class MenuPanel extends AbstractPanel {
     logo.setBorder(null);
     logo.setIcon(LogoImg);
     this.setLayout(null);
-    startButton = new Button("play",(1280-buttonW)/2,300,buttonW,buttonH,this);
-    bagButton = new Button("inventory",(1280-buttonW)/2,400,buttonW,buttonH,this);
-    exitButton = new Button("quit",(1280-buttonW)/2,500,buttonW,buttonH,this);    
+    startButton = new Button("play",(1280-buttonW)/2,400,buttonW,buttonH,this);
+    bagButton = new Button("inventory",(1280-buttonW)/2,500,buttonW,buttonH,this);
+    exitButton = new Button("quit",(1280-buttonW)/2,600,buttonW,buttonH,this);    
   }
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == startButton) {
@@ -42,6 +45,7 @@ public class MenuPanel extends AbstractPanel {
      // mf.getContentPane().add();
     }*/
 } 
+  
   public void paintComponent(Graphics g){
     super.paintComponent(g);
     g.drawImage(bgImage, 0, 0,this.mainframe.getWidth(),this.mainframe.getHeight(),mainframe);
