@@ -17,7 +17,6 @@ public class MainFrame extends JFrame {
   public int[] store_Y = new int[8];
   public int[] choose = new int[8];
   MainFrame(){
-    //File BGM = new File("");
     super("Game");
     
     
@@ -36,7 +35,7 @@ public class MainFrame extends JFrame {
     changeScene("inputname");
     this.setVisible(true);
     BGM = new PlaySounds("./music/BGM.wav");
-    BGM.run();
+    //BGM.run();
   }
   public void positionXY(){
     for(int i =0; i <8; i++){
