@@ -74,6 +74,7 @@ public class BagPanel extends AbstractPanel {
           weaponButtons[i]=new SetButton(weaponImages[i], position_X+(int)65*rem, position_Y, wid_height,wid_height, this);
           weaponButtons[i].setVisible(false);
         }  
+        //測試用陣列 之後要刪掉
         check_weapon[1]=1;
         resetButton_position(weaponButtons,3,check_weapon);
         
@@ -166,7 +167,9 @@ public class BagPanel extends AbstractPanel {
         check_armor[1]=1;
         check_armor[5]=1;
         check_armor[11]=1;
-
+        check_armor[4]=1;
+        check_armor[3]=1;
+        check_armor[10]=1;
         resetButton_position(armorButtons,12,check_armor);
         // int position_Y = 210;
         // int position_X = 745;
@@ -210,11 +213,12 @@ public class BagPanel extends AbstractPanel {
         {
           if(check[j]!=0)
           {
-            if (j == 5){position_Y+=58;rem = 0;}
-            else if (j == 10){position_Y+=58;rem = 0;}
+            if (i == 5){position_Y+=58;rem = 0;}
+            else if (i == 10){position_Y+=58;rem = 0;}
             else{rem++;} 
             b[j].setLocation(position_X+(int)65*rem, position_Y);
             b[j].setVisible(true);
+            i++;
           } 
           else b[j].setVisible(false);
         }
