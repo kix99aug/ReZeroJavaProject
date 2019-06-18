@@ -34,7 +34,7 @@ public class MainFrame extends JFrame {
     changeScene("inputname");
     this.setVisible(true);
     BGM = new PlaySounds("./music/BGM.wav");
-    //BGM.run();
+    BGM.run();
   }
   public void positionXY(){
     for(int i =0; i <8; i++){
@@ -49,7 +49,7 @@ public class MainFrame extends JFrame {
       p.setVisible(false);
     }
     panels.get(target).setVisible(true);
-    if(target=="menu") BGM._stop();
+    //if(target=="menu") BGM._stop();
     if(target=="game") BGM.change("./music/gameoverBGM.wav");
   }
 }
