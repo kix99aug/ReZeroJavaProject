@@ -23,10 +23,7 @@ public class GamePanel extends AbstractPanel {
     this.mainframe = mf;
     this.setSize(this.mainframe.getSize());
     this.setLayout(null);
-<<<<<<< HEAD
-=======
     // Monster = new Monster();
->>>>>>> 2a976019a00149cf9f465dd79febe3c4cc49b3ab
     new Thread(){
 		  public void run(){
         
