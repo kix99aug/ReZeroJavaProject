@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 public class BagPanel extends AbstractPanel {
+    PlaySounds mouseexited;
     MainFrame mainframe = null;
     JButton closebutton = new JButton();
     JButton chose_armor_button = new JButton();
@@ -158,7 +159,10 @@ public class BagPanel extends AbstractPanel {
         }
         chose_weapon_button.setIcon(chose_weapon_Image);
         chose_armor_button.setIcon(chose_armor_Image);
-        chose_material_button.setIcon(chose_material_Image_p);     
+        chose_material_button.setIcon(chose_material_Image_p);
+        
+        
+
       }
 
       //按下裝備欄按鈕
@@ -195,7 +199,28 @@ public class BagPanel extends AbstractPanel {
         }
         chose_weapon_button.setIcon(chose_weapon_Image);
         chose_armor_button.setIcon(chose_armor_Image_p);
-        chose_material_button.setIcon(chose_material_Image);     
+        chose_material_button.setIcon(chose_material_Image); 
+
+        chose_weapon_button.addMouseListener(new MouseAdapter(){
+         public void mousePressed(MouseEvent me) {
+          mouseexited = new PlaySounds("./music/click.wav");
+          mouseexited.start();
+       }
+      });
+      chose_armor_button.addMouseListener(new MouseAdapter(){
+        public void mousePressed(MouseEvent me) {
+         mouseexited = new PlaySounds("./music/click.wav");
+         mouseexited.start();
+      }
+     });
+     chose_material_button.addMouseListener(new MouseAdapter(){
+      public void mousePressed(MouseEvent me) {
+       mouseexited = new PlaySounds("./music/click.wav");
+       mouseexited.start();
+    }
+   });
+
+        
       }
     }
     public void paintComponent(Graphics g){
