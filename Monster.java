@@ -54,7 +54,7 @@ public class Monster extends Thread {
 	public int chooseMonster = ran.nextInt(4);
 	public GamePanel gp;
 	// public double x = 100, y = 500;
-	public double x = (double)ran.nextInt(1000)+100,y = (double)ran.nextInt(400)+320;
+	public double x = (double)ran.nextInt(1000)+100,y = (double)ran.nextInt(400)+320-50;
 	
 	public int width = 74, height = 100;
 	public Image img ;

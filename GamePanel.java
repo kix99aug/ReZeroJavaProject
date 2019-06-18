@@ -57,7 +57,7 @@ public class GamePanel extends AbstractPanel {
       g.drawImage(obstacle[this.mainframe.choose], this.mainframe.store_X[i],
           this.mainframe.store_Y[i] + i * 80 + 320 - 214, 175, 214, mainframe);
     }
-    g.drawImage(character.img,(int)character.x,(int)character.y,character.img.getWidth(this)*3,character.img.getHeight(this)*3,mainframe);
+    // g.drawImage(character.img,(int)character.x,(int)character.y,character.img.getWidth(this)*3,character.img.getHeight(this)*3,mainframe);
     for(int i = 0; i < 5; i++){
       g.drawImage(monster[i].img,(int)monster[i].x,(int)monster[i].y,-monster[i].img.getWidth(this),monster[i].img.getHeight(this),mainframe);
     }
