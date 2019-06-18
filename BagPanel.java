@@ -74,6 +74,10 @@ public class BagPanel extends AbstractPanel {
           weaponButtons[i]=new SetButton(weaponImages[i], position_X+(int)65*rem, position_Y, wid_height,wid_height, this);
           weaponButtons[i].setVisible(false);
         }  
+        //測試用陣列 之後要刪掉
+        check_weapon[1]=1;
+        resetButton_position(weaponButtons,3,check_weapon);
+        
         position_Y = 210;
         position_X = 745;
         rem = -1;
@@ -84,8 +88,8 @@ public class BagPanel extends AbstractPanel {
          materialButtons[i].setVisible(false);
        }  
         //以下建立圖標
-        chose_armor_button=new SetButton(chose_armor_Image_p,1085,248,64,70,this);
-        chose_weapon_button=new SetButton(chose_weapon_Image,1085,179, 64,70,this);
+        chose_armor_button=new SetButton(chose_armor_Image,1085,248,64,70,this);
+        chose_weapon_button=new SetButton(chose_weapon_Image_p,1085,179, 64,70,this);
         chose_material_button=new SetButton(chose_material_Image,1085,315, 64,70,this);
         //右上叉叉
         closebutton = new Button("close",1063,45,83,98,this);
@@ -106,20 +110,21 @@ public class BagPanel extends AbstractPanel {
           b.setVisible(false);
         }
         check_weapon[1]=1;
-          int position_Y = 210;
-          int position_X = 745;
-          int rem = -1;
+        resetButton_position(weaponButtons,3,check_weapon);
+          // int position_Y = 210;
+          // int position_X = 745;
+          // int rem = -1;
 
-          for(int j=0;j<3;j++)
-          {
-            if(check_weapon[j]!=0)
-            {
-              rem++;
-              weaponButtons[j].setLocation(position_X+(int)65*rem, position_Y);
-              weaponButtons[j].setVisible(true);
-            } 
-            else weaponButtons[j].setVisible(false);
-          }
+          // for(int j=0;j<3;j++)
+          // {
+          //   if(check_weapon[j]!=0)
+          //   {
+          //     rem++;
+          //     weaponButtons[j].setLocation(position_X+(int)65*rem, position_Y);
+          //     weaponButtons[j].setVisible(true);
+          //   } 
+          //   else weaponButtons[j].setVisible(false);
+          // }
         chose_weapon_button.setIcon(chose_weapon_Image_p);
         chose_armor_button.setIcon(chose_armor_Image);
         chose_material_button.setIcon(chose_material_Image);
@@ -132,19 +137,21 @@ public class BagPanel extends AbstractPanel {
         }
         check_material[2]=1;
         check_material[0]=1;
-          int position_Y = 210;
-          int position_X = 745;
-          int rem = -1;
-          for(int j=0;j<3;j++)
-          {
-            if(check_material[j]!=0)
-            {
-              rem++;
-              materialButtons[j].setLocation(position_X+(int)65*rem, position_Y);
-              materialButtons[j].setVisible(true);
-            } 
-            else materialButtons[j].setVisible(false);
-          }
+        resetButton_position(materialButtons,3,check_material);
+
+          // int position_Y = 210;
+          // int position_X = 745;
+          // int rem = -1;
+          // for(int j=0;j<3;j++)
+          // {
+          //   if(check_material[j]!=0)
+          //   {
+          //     rem++;
+          //     materialButtons[j].setLocation(position_X+(int)65*rem, position_Y);
+          //     materialButtons[j].setVisible(true);
+          //   } 
+          //   else materialButtons[j].setVisible(false);
+          // }
 
         for(JButton b:weaponButtons){
           b.setVisible(false);
@@ -160,22 +167,25 @@ public class BagPanel extends AbstractPanel {
         check_armor[1]=1;
         check_armor[5]=1;
         check_armor[11]=1;
-
-        int position_Y = 210;
-        int position_X = 745;
-        int rem = -1;
-        for(int j=0;j<12;j++)
-        {
-          if(check_armor[j]!=0)
-          {
-            if (i == 5){position_Y+=58;rem = 0;}
-            else if (i == 10){position_Y+=58;rem = 0;}
-            else{rem++;} 
-            armorButtons[j].setLocation(position_X+(int)65*rem, position_Y);
-            armorButtons[j].setVisible(true);
-          } 
-          else armorButtons[j].setVisible(false);
-        }
+        check_armor[4]=1;
+        check_armor[3]=1;
+        check_armor[10]=1;
+        resetButton_position(armorButtons,12,check_armor);
+        // int position_Y = 210;
+        // int position_X = 745;
+        // int rem = -1;
+        // for(int j=0;j<12;j++)
+        // {
+        //   if(check_armor[j]!=0)
+        //   {
+        //     if (j == 5){position_Y+=58;rem = 0;}
+        //     else if (j == 10){position_Y+=58;rem = 0;}
+        //     else{rem++;} 
+        //     armorButtons[j].setLocation(position_X+(int)65*rem, position_Y);
+        //     armorButtons[j].setVisible(true);
+        //   } 
+        //   else armorButtons[j].setVisible(false);
+        // }
 
         for(JButton b:materialButtons){
           b.setVisible(false);
@@ -193,7 +203,26 @@ public class BagPanel extends AbstractPanel {
         g.drawImage(bgImage, 0, 0,mainframe);
       }
 
-
+      public void resetButton_position(JButton[] b,int n,int[] check)
+      {
+        int i=0;
+        int position_Y = 210;
+        int position_X = 745;
+        int rem = -1;
+        for(int j=0;j<n;j++)
+        {
+          if(check[j]!=0)
+          {
+            if (i == 5){position_Y+=58;rem = 0;}
+            else if (i == 10){position_Y+=58;rem = 0;}
+            else{rem++;} 
+            b[j].setLocation(position_X+(int)65*rem, position_Y);
+            b[j].setVisible(true);
+            i++;
+          } 
+          else b[j].setVisible(false);
+        }
+      }
 
     
 }

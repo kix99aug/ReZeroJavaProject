@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Random;
 
 public class MainFrame extends JFrame {
-  HashMap<String,JPanel> panels = new HashMap<String,JPanel>();
+  HashMap<String,AbstractPanel> panels = new HashMap<String,AbstractPanel>();
   Image cursorImage = new ImageIcon("./img/cursor.png").getImage();
   Point hotspot = new Point(0, 0);
   String username;
@@ -35,7 +35,7 @@ public class MainFrame extends JFrame {
     changeScene("inputname");
     this.setVisible(true);
     BGM = new PlaySounds("./music/BGM.wav");
-    //BGM.run();
+    BGM.run();
   }
   public void positionXY(){
       Random ran = new Random();
@@ -51,7 +51,7 @@ public class MainFrame extends JFrame {
       p.setVisible(false);
     }
     panels.get(target).setVisible(true);
-    if(target=="menu") BGM._stop();
+    //if(target=="menu") BGM._stop();
     if(target=="game") BGM.change("./music/gameoverBGM.wav");
   }
 }
