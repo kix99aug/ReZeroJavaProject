@@ -15,7 +15,7 @@ public class MainFrame extends JFrame {
    
   public int[] store_X = new int[8];
   public int[] store_Y = new int[8];
-  public int[] choose = new int[8];
+  public int choose ;
   MainFrame(){
     super("Game");
     
@@ -38,11 +38,12 @@ public class MainFrame extends JFrame {
     //BGM.run();
   }
   public void positionXY(){
-    for(int i =0; i <8; i++){
       Random ran = new Random();
-      this.store_X[i] = ran.nextInt(2560);
-      this.store_Y[i] = ran.nextInt(50);
-      this.choose[i] = ran.nextInt(5);
+    this.choose = ran.nextInt(4);
+    for(int i =0; i <8; i++){
+      this.store_X[i] = ran.nextInt(1280);
+      this.store_Y[i] = ran.nextInt(80);
+      
     }
   }
   public void changeScene(String target){
