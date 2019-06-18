@@ -29,7 +29,7 @@ public class Character extends Thread {
 	public GamePanel gp;
 	public double x = 100, y = 500;
 	public int width = 74, height = 100;
-	public Image img = new ImageIcon("img/Character/adventurer-idle-00.png").getImage();
+	public Image img;
 
 	public boolean left = false, right = false, down = false, up = false;
 	public int state = 0; //0 = idle
