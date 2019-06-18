@@ -162,7 +162,6 @@ public class BagPanel extends AbstractPanel {
         chose_material_button.setIcon(chose_material_Image_p);
         
         
-
       }
 
       //按下裝備欄按鈕
