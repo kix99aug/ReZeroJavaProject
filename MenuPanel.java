@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 public class MenuPanel extends AbstractPanel {
   MainFrame mainframe = null;
@@ -42,6 +45,7 @@ public class MenuPanel extends AbstractPanel {
      // mf.getContentPane().add();
     }*/
 } 
+  
   public void paintComponent(Graphics g){
     super.paintComponent(g);
     g.drawImage(bgImage, 0, 0,this.mainframe.getWidth(),this.mainframe.getHeight(),mainframe);
