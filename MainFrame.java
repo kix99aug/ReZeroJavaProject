@@ -7,15 +7,15 @@ import java.io.IOException;
 import java.util.Random;
 
 public class MainFrame extends JFrame {
-  HashMap<String,JPanel> panels = new HashMap<String,JPanel>();
+  HashMap<String,AbstractPanel> panels = new HashMap<String,AbstractPanel>();
   Image cursorImage = new ImageIcon("./img/cursor.png").getImage();
   Point hotspot = new Point(0, 0);
   String username;
   PlaySounds BGM;
    
-  public int[] store_X;
-  public int[] store_Y;
-  public int[] choose;
+  public int[] store_X = new int[8];
+  public int[] store_Y = new int[8];
+  public int[] choose = new int[8];
   MainFrame(){
     super("Game");
     
@@ -27,6 +27,7 @@ public class MainFrame extends JFrame {
     panels.put("inputname", new InputNamePanel(this));
     panels.put("menu", new MenuPanel(this));
     panels.put("bag", new BagPanel(this));
+    positionXY();
     panels.put("game", new GamePanel(this));
     for(JPanel p : panels.values()){
       this.getContentPane().add(p);
