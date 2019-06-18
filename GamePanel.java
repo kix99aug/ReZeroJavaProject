@@ -17,7 +17,7 @@ public class GamePanel extends AbstractPanel {
   int bgx = 0,bgy=0;
 
   Character character = new Character(this);
-  
+  Monster monster = new Monster(this);
   
   GamePanel(MainFrame mf){
     this.mainframe = mf;
@@ -53,6 +53,7 @@ public class GamePanel extends AbstractPanel {
       g.drawImage(obstacle[this.mainframe.choose], this.mainframe.store_X[i], this.mainframe.store_Y[i]+i*80+320-214,175,214,mainframe);
     }
     g.drawImage(character.img,(int)character.x,(int)character.y,character.img.getWidth(this)*3,character.img.getHeight(this)*3,mainframe);
+    g.drawImage(monster.img,(int)monster.x,(int)monster.y,monster.img.getWidth(this),monster.img.getHeight(this),mainframe);
     // g.drawImage(Monster.batimg[0], dx1, dy1, dx2);
   }
 }
