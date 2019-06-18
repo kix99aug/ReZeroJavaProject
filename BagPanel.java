@@ -188,14 +188,6 @@ public class BagPanel extends AbstractPanel {
 
       //按下裝備欄按鈕
       if (e.getSource() == chose_armor_button) {
-
-        int i=0;
-        check_armor[1]=1;
-        check_armor[5]=1;
-        check_armor[11]=1;
-        check_armor[4]=1;
-        check_armor[3]=1;
-        check_armor[10]=1;
         resetButton_position(armorButtons,12,check_armor);
 
         for(JButton b:materialButtons){
