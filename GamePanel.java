@@ -16,14 +16,14 @@ public class GamePanel extends AbstractPanel {
     new ImageIcon("./img/MapSource/obstacle6.png").getImage()
   }; 
   int bgx = 0,bgy=0;
-  
+
+  Character character = new Character(this);
   
   
   GamePanel(MainFrame mf){
     this.mainframe = mf;
     this.setSize(this.mainframe.getSize());
     this.setLayout(null);
-    
     new Thread(){
 		  public void run(){
         
@@ -44,7 +44,6 @@ public class GamePanel extends AbstractPanel {
     
   }
   public void paint(Graphics g){
-    
     super.paint(g);
     for(int i = 0;i<2560;i+=319){
       g.drawImage(skyImage, i, 0,mainframe);
@@ -53,5 +52,6 @@ public class GamePanel extends AbstractPanel {
     for(int i = 0; i < 8;i++){
       g.drawImage(obstacle[this.mainframe.choose[i]], this.mainframe.store_X[i], this.mainframe.store_Y[i]+i*50+320-214,175,214,mainframe);
     }
+    g.drawImage(character.img,(int)character.x,(int)character.y,character.img.getWidth(this)*3,character.img.getHeight(this)*3,mainframe);
   }
 }
