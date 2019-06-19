@@ -79,10 +79,14 @@ public class Monster extends MapItem {
 		}
 	}
 
-	public void run() {
+	public void run(GamePanel gp) {
 		while (true) {
+			this.gp =gp;
+			double store_X,store_Y;
+			store_X = this.x-gp.character.x;
+			store_Y = this.y-gp.character.y;
 			try {
-				this.sleep(20);
+				this.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
