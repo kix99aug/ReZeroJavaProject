@@ -37,6 +37,35 @@ public class Obstacle extends MapItem {
 		Rectangle rect = null;
 		return false;
     }
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getFacing() {
+		return facing;
+	}
+
+	public int _getState() {
+		return 1;
+	}
+
+	public Image getImage() {
+		return img;
+	}
+
    
     public Rectangle getHitbox(){
 		return new Rectangle((int) this.x + 16*3, (int) this.y + 24*3, 17*3, 12*3);

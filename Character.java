@@ -59,7 +59,7 @@ public class Character extends MapItem {
 	}
 	public GamePanel gp;
 	public double x = 100, y = 500;
-	public int width = 74, height = 100;
+	public int width = 150, height = 111;
 	public Image img;
 
 	public boolean left = false, right = false, down = false, up = false;
@@ -100,6 +100,35 @@ public class Character extends MapItem {
 		Rectangle rect = null;
 		return false;
 	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getFacing() {
+		return facing;
+	}
+
+	public int _getState() {
+		return state;
+	}
+
+	public Image getImage() {
+		return img;
+	}
+
 	public Rectangle getHitbox(){
 		return new Rectangle((int) this.x + 16*3, (int) this.y + 24*3, 17*3, 12*3);
 	}
