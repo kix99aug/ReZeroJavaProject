@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class BagPanel extends AbstractPanel {
+public class BagPanel extends  AbstractPanel {
     PropInformation propinformation = new PropInformation(); 
 
     PlaySounds mouseexited;
@@ -19,17 +19,18 @@ public class BagPanel extends AbstractPanel {
     JButton put_now_prop=new JButton();
     public BAG_character bagcharacter = new BAG_character(this);
 
+    JButton how_many_material_img[]={new JButton(),new JButton(),new JButton()};
     int wid_height=40;
     // ImageIcon use_Image=new ImageIcon(new ImageIcon("./img/btn/use.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
     // ImageIcon upgrade_Image=new ImageIcon(new ImageIcon("./img/btn/upgrade.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
     public int level=0;
     public String material="";
-    public String Attack_defend_HP="Attack";
+    public String Attack_defend_HP="";
     public int value=10;
-    public JLabel prop_level=new JLabel("Level "+level, SwingConstants.LEFT);
-    public JLabel prop_material=new JLabel("Need 10 "+material, SwingConstants.LEFT);
-    public JLabel prop_value=new JLabel(Attack_defend_HP+"  "+value, SwingConstants.LEFT);
-
+    public JLabel prop_level=new JLabel("", SwingConstants.LEFT);
+    public JLabel prop_material=new JLabel(""+material, SwingConstants.LEFT);
+    public JLabel prop_value=new JLabel("", SwingConstants.LEFT);
+    JLabel how_many_material[]={new JLabel("", SwingConstants.LEFT),new JLabel("", SwingConstants.LEFT),new JLabel("", SwingConstants.LEFT)};
     Image bgImage = new ImageIcon("./img/inventory/bagbg.png").getImage(); 
     ImageIcon armorImages[] = {
         new ImageIcon(new ImageIcon("./img/inventory/diamondarmor.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT)),
@@ -67,7 +68,7 @@ public class BagPanel extends AbstractPanel {
 
      public int[] check_armor={0,0,0,0,0,0,0,0,0,0,0,0};
      public int[] check_weapon={0,0,0};
-     public int[] check_material={50,50,50};
+     public int[] check_material={55,55,55};
 
      BagPanel(MainFrame mf){
       
@@ -75,19 +76,17 @@ public class BagPanel extends AbstractPanel {
         this.setSize(this.mainframe.getSize());
         this.setLayout(null);
 
-
-
-        prop_level.setSize(80,40);
+        prop_level.setSize(160,40);
         prop_level.setLocation(820,415);
         prop_level.setBorder(null);
         prop_level.setFont(new Font("NasuM", Font.BOLD, 16));
         this.add(prop_level);
-        prop_material.setSize(80,40);
+        prop_material.setSize(160,40);
         prop_material.setLocation(820,445);
         prop_material.setBorder(null);
         prop_material.setFont(new Font("NasuM", Font.BOLD, 16));
         this.add(prop_material);
-        prop_value.setSize(80,40);
+        prop_value.setSize(160,40);
         prop_value.setLocation(820,475);
         prop_value.setBorder(null);
         prop_value.setFont(new Font("NasuM", Font.BOLD, 16));
@@ -96,7 +95,20 @@ public class BagPanel extends AbstractPanel {
         use=new Button("use", 975, 425, 80,40,this);
         upgrade=new Button("upgrade", 975, 468, 80,40, this);
         put_now_prop=new SetButton(black, 755, 450, wid_height ,  wid_height,this);
-        
+        // put_now_prop.setVisible(false);
+        for(int i=0;i<3;i++)
+        {
+          how_many_material_img[i]=new SetButton(materialImages[i], 760+70*i, 430, 30 , 30,this);
+          
+          how_many_material[i].setSize(160,40);
+          how_many_material[i].setLocation(765+70*i,470);
+          how_many_material[i].setBorder(null);
+          how_many_material[i].setFont(new Font("NasuM", Font.BOLD, 16));
+          this.add(how_many_material[i]);
+          how_many_material[i].setText(""+check_material[i]);
+           how_many_material[i].setVisible(false);
+           how_many_material_img[i].setVisible(false);
+        }
         int position_Y = 205;
         int position_X = 745;
         int rem = -1;
@@ -159,9 +171,6 @@ public class BagPanel extends AbstractPanel {
         armorButtons[8].setVisible(true);
         armorButtons[11].setLocation(747+260,605);
         armorButtons[11].setVisible(true);
-        
-
-
     }
     //int 素材數量  n
     public int  isWeapon=3;
@@ -174,15 +183,7 @@ public class BagPanel extends AbstractPanel {
           isWeapon=1;
           index=i;
           check_material_overflow(index);
-          int[] arr=propinformation.weapon_level;
-          level=arr[i];
-          prop_level.setText("Level "+level);
-          material="";
-          Attack_defend_HP="Attack";
-          value=10;
-          // prop_material=new JLabel("Need 10 "+material, SwingConstants.LEFT);
-          // prop_value=new JLabel(Attack_defend_HP+"  "+value, SwingConstants.LEFT);
-          //prop_material.setText();
+          setWeapon_text(i);
           put_now_prop.setIcon(weaponImages[i]);
         }
       }
@@ -193,9 +194,7 @@ public class BagPanel extends AbstractPanel {
           isWeapon=0;
           index=i;
           check_material_overflow(index);
-          int[] arr=propinformation.armor_level;
-          level=arr[i];
-          prop_level.setText("Level "+level);
+          setArmor_text(index);
           put_now_prop.setIcon(armorImages[i]);
         }
       }
@@ -214,21 +213,18 @@ public class BagPanel extends AbstractPanel {
        if(e.getSource() == upgrade)
        {
         propinformation.upgrade(isWeapon,index);
-        int[] arr=propinformation.weapon_level;
         if(isWeapon==1){
-           check_material[index]=check_material[index]-10;
-           check_material_overflow(index);
+          if(check_material[index]>=10)check_material[index]=check_material[index]-10;
+          check_material_overflow(index);
+          setWeapon_text(index);
+          System.out.println(check_material[index]);
         }
         else if(isWeapon==0)
         {
-          check_material[index%3]=check_material[index%3]-10;
+          if(check_material[index%3]>=10)check_material[index%3]=check_material[index%3]-10;
           check_material_overflow(index);
-          arr=propinformation.armor_level;
-          System.out.println(check_material);
-
-        }
-         level=arr[index];
-         prop_level.setText("Level "+level); 
+          setArmor_text(index);
+        } 
        }
       
 
@@ -245,9 +241,16 @@ public class BagPanel extends AbstractPanel {
         for(JButton b:materialButtons){
           if(b.getY()<600)b.setVisible(false);
         }
-        
+        for(int i=0;i<3;i++)
+        {
+           how_many_material[i].setVisible(false);
+           how_many_material_img[i].setVisible(false);
+        }
         resetButton_position(weaponButtons,3,check_weapon);
-
+        prop_level.setVisible(true);
+        prop_material.setVisible(true);
+        prop_value.setVisible(true);
+        put_now_prop.setVisible(true);
         chose_weapon_button.setIcon(chose_weapon_Image_p);
         chose_armor_button.setIcon(chose_armor_Image);
         chose_material_button.setIcon(chose_material_Image);
@@ -264,6 +267,16 @@ public class BagPanel extends AbstractPanel {
         for(JButton b:weaponButtons){
           if(b.getY()<600)b.setVisible(false);
         }
+        for(int i=0;i<3;i++)
+        {
+           how_many_material[i].setVisible(true);
+           how_many_material[i].setText(""+check_material[i]);
+           how_many_material_img[i].setVisible(true);
+        }
+        prop_level.setVisible(false);
+        prop_material.setVisible(false);
+        prop_value.setVisible(false);
+        put_now_prop.setVisible(false);
         chose_weapon_button.setIcon(chose_weapon_Image);
         chose_armor_button.setIcon(chose_armor_Image);
         chose_material_button.setIcon(chose_material_Image_p);      
@@ -279,10 +292,18 @@ public class BagPanel extends AbstractPanel {
         for(JButton b:weaponButtons){
           if(b.getY()<600) b.setVisible(false);
         }
+        for(int i=0;i<3;i++)
+        {
+           how_many_material[i].setVisible(false);
+           how_many_material_img[i].setVisible(false);
+        }
         chose_weapon_button.setIcon(chose_weapon_Image);
         chose_armor_button.setIcon(chose_armor_Image_p);
         chose_material_button.setIcon(chose_material_Image); 
-
+        prop_level.setVisible(true);
+        prop_material.setVisible(true);
+        prop_value.setVisible(true);
+        put_now_prop.setVisible(true);
         chose_weapon_button.addMouseListener(new MouseAdapter(){
          public void mousePressed(MouseEvent me) {
           mouseexited = new PlaySounds("./music/click.wav");
@@ -303,6 +324,7 @@ public class BagPanel extends AbstractPanel {
    });
     }
     }
+   
       public void resetButton_position(JButton[] b,int n,int[] check)
       {
         int i=0;
@@ -311,7 +333,7 @@ public class BagPanel extends AbstractPanel {
         int rem = -1;
         for(int j=0;j<n;j++)
         {
-          if(check[j]!=0)
+          if(check[j]>0)
           {
             if (i == 5){position_Y+=62;rem = 0;}
             else if (i == 10){position_Y+=62;rem = 0;}
@@ -402,9 +424,40 @@ public class BagPanel extends AbstractPanel {
           upgrade.setPressedIcon(overflow);
         }
       }
+      public void setWeapon_text(int index)
+      {
+        int[] arr=propinformation.weapon_level;
+        level=arr[index];
+        prop_level.setText("Level "+level);
+        if(index%3==0) material="diamonds";
+        else if(index%3==1) material="iron";
+        else if(index%3==2) material="woods";
+        prop_material.setText("Need 10 "+material);
+
+        Attack_defend_HP="Attack";
+        arr=propinformation.weapon_value;
+        value=arr[index];
+        prop_value.setText(Attack_defend_HP+"  "+value);
+      }
+
+      public void setArmor_text(int index)
+      {
+        int[] arr=propinformation.armor_level;
+        level=arr[index];
+        prop_level.setText("Level "+level);
+        if(index%3==0) material="diamonds";
+        else if(index%3==1) material="iron";
+        else if(index%3==2) material="woods";
+        prop_material.setText("Need 10 "+material);
+
+        if(index<=2||index>=9)Attack_defend_HP="Defend";
+        else Attack_defend_HP="HP";
+        arr=propinformation.armor_value;
+        value=arr[index];
+        prop_value.setText(Attack_defend_HP+"  "+value);
+      }
       public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawImage(bgImage, 0, 0,mainframe);
-        g.drawImage(bagcharacter.img, 110, 50,150*3,111*3, mainframe);
       }
 }
