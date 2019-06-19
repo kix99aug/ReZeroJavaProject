@@ -7,13 +7,10 @@ import java.util.Comparator;
 
 public class GamePanel extends AbstractPanel implements KeyListener {
   MainFrame mainframe = null;
-  PlaySounds soundofzombie;
-  PlaySounds shootingsound;
-
   Image skyImage = new ImageIcon("./img/sky1.png").getImage();
   Image groundImage = new ImageIcon("./img/ground1.png").getImage();
 
-
+  boolean gameover = false;
   int bgx = 0, bgy = 0;
 
   public void keyPressed(KeyEvent e) {
@@ -64,10 +61,6 @@ public class GamePanel extends AbstractPanel implements KeyListener {
   public ArrayList<Shoot> shoot = new ArrayList<Shoot>();
   
   GamePanel(MainFrame mf) {
-
-    soundofzombie = new PlaySounds("./music/soundofzombie.wav");
-    shootingsound = new PlaySounds("./music/shootingsound.wav");
-
     this.mainframe = mf;
     this.setSize(this.mainframe.getSize());
     this.setLayout(null);

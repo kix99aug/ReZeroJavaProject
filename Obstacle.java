@@ -5,38 +5,38 @@ import javax.swing.ImageIcon;
 
 
 public class Obstacle extends MapItem {
-    
-    Image obstacleimg[] = {new ImageIcon("./img/MapSource/obstacle3.png").getImage(),
-        new ImageIcon("./img/MapSource/obstacle4.png").getImage(),
-        new ImageIcon("./img/MapSource/obstacle5.png").getImage(),
-        new ImageIcon("./img/MapSource/obstacle6.png").getImage()};
-    public double x;
-    public double y;
-    public int choose ;
-    public Image img ;
+
+	Image obstacleimg[] = {new ImageIcon("./img/MapSource/obstacle3.png").getImage(),
+			new ImageIcon("./img/MapSource/obstacle4.png").getImage(),
+			new ImageIcon("./img/MapSource/obstacle5.png").getImage(),
+			new ImageIcon("./img/MapSource/obstacle6.png").getImage()};
+	public double x;
+	public double y;
+	public int choose;
+	public Image img;
 	public GamePanel gp;
 	// public double x = 100, y = 500;
-	public int width , height;
-    public boolean left = false, right = false, down = false, up = false;
-    
-    public int facing = 1;
-	
-	public Obstacle(GamePanel gp,int type) {
+	public int width, height;
+	public boolean left = false, right = false, down = false, up = false;
+
+	public int facing = 1;
+
+	public Obstacle(GamePanel gp, int type) {
 		this.gp = gp;
-        Random ran = new Random();
-        
-        this.img = obstacleimg[type];
-        this.width = this.img.getWidth(gp)*2;
-        this.height = this.img.getHeight(gp)*2;
-        this.x = (double)ran.nextInt(1000)+140;
-        this.y = (double)ran.nextInt(400)+320-height;
+		Random ran = new Random();
+
+		this.img = obstacleimg[type];
+		this.width = this.img.getWidth(gp) * 2;
+		this.height = this.img.getHeight(gp) * 2;
+		this.x = (double) ran.nextInt(1000) + 140;
+		this.y = (double) ran.nextInt(400) + 320 - height;
 	}
 
 	public boolean hit() {
 		Rectangle myrect = new Rectangle((int) this.x, (int) this.y, this.width, this.height);
 		Rectangle rect = null;
 		return false;
-    }
+	}
 
 	public double getX() {
 		return x;
@@ -66,9 +66,9 @@ public class Obstacle extends MapItem {
 		return img;
 	}
 
-   
-    public Rectangle getHitbox(){
-		return new Rectangle((int) this.x+45, (int) this.y+this.height-36, 15*3, 12*3);
-    }
-    
+
+	public Rectangle getHitbox() {
+		return new Rectangle((int) this.x + 45, (int) this.y + this.height - 36, 15 * 3, 12 * 3);
+	}
+
 }

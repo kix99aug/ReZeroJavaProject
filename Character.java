@@ -34,6 +34,7 @@ public class Character extends MapItem {
 		}
 		public void run() {
 			while (true) {
+				if(character.gp.gameover) return;
 				for (int i = 0; character.state == 0; i = (i + 1) % 3) {
 					character.img = idle_imgs[i];
 					try {
@@ -68,8 +69,7 @@ public class Character extends MapItem {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					if (i == 6)   
-						return;
+					if (i == 6) character.gp.gameover = true;
 				}
 			}
 		}
@@ -90,6 +90,7 @@ public class Character extends MapItem {
 
 	public void run() {
 		while (true) {
+      if (this.gp.gameover) return;
 			double move_x = (right ? 1 : 0) + (left ? -1 : 0);
 			double move_y = (down ? 1 : 0) + (up ? -1 : 0);
 			if (Math.abs(move_x) + Math.abs(move_y) == 2) {
