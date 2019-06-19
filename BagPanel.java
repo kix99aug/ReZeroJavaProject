@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 public class BagPanel extends AbstractPanel {
+    PropInformation propinformation = new PropInformation(); 
+
     PlaySounds mouseexited;
     MainFrame mainframe = null;
     JButton closebutton = new JButton();
@@ -11,10 +13,16 @@ public class BagPanel extends AbstractPanel {
     JButton armorButtons[]={new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton(),new JButton()};
     JButton weaponButtons[]={new JButton(),new JButton(),new JButton()};
     JButton materialButtons[]={new JButton(),new JButton(),new JButton()};
-    JButton put_equipment_Buttons[]={new JButton(),new JButton(),new JButton(),new JButton(),new JButton()};
+    JButton use=new JButton();
+    JButton upgrade=new JButton();
     int wid_height=40;
-    ImageIcon put_equipment_Image=new ImageIcon(new ImageIcon("./img/inventory/putequipment_test.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
-    //創array去判斷現在有沒有拿到道具 沒有的話就是空圖
+    // ImageIcon use_Image=new ImageIcon(new ImageIcon("./img/btn/use.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
+    // ImageIcon upgrade_Image=new ImageIcon(new ImageIcon("./img/btn/upgrade.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
+    
+    JLabel prop_level=new JLabel("等級", SwingConstants.RIGHT);
+    JLabel prop_material=new JLabel("所需素材", SwingConstants.RIGHT);
+    JLabel prop_value=new JLabel("數值", SwingConstants.RIGHT);
+
     Image bgImage = new ImageIcon("./img/inventory/bagbg.png").getImage(); 
     ImageIcon armorImages[] = {
         new ImageIcon(new ImageIcon("./img/inventory/diamondarmor.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT)),
@@ -30,7 +38,7 @@ public class BagPanel extends AbstractPanel {
         new ImageIcon(new ImageIcon("./img/inventory/ironpant.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT)),
         new ImageIcon(new ImageIcon("./img/inventory/woodpant.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT))
       }; 
-     ImageIcon weaponImages[] = {
+      ImageIcon weaponImages[] = {
         new ImageIcon(new ImageIcon("./img/inventory/diamondarrow.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT)),
         new ImageIcon(new ImageIcon("./img/inventory/ironarrow.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT)),
         new ImageIcon(new ImageIcon("./img/inventory/woodarrow.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT))
@@ -48,14 +56,44 @@ public class BagPanel extends AbstractPanel {
       ImageIcon chose_material_Image =new ImageIcon(new ImageIcon("./img/btn/ActiveC.png").getImage().getScaledInstance(64, 70, Image.SCALE_FAST));
       ImageIcon chose_armor_Image =new ImageIcon(new ImageIcon("./img/btn/ActiveB.png").getImage().getScaledInstance(64, 70, Image.SCALE_FAST));
 
-      int[] check_armor={0,0,0,0,0,0,0,0,0,0,0,0};
-      int[] check_weapon={0,0,0};
-      int[] check_material={0,0,0};
+     public int[] check_armor={0,0,0,0,0,0,0,0,0,0,0,0};
+     public int[] check_weapon={0,0,0};
+     public int[] check_material={500,500,500};
 
      BagPanel(MainFrame mf){
+
         this.mainframe = mf;
         this.setSize(this.mainframe.getSize());
         this.setLayout(null);
+
+        
+        prop_level.setSize(80,40);
+        prop_level.setLocation(820,425);
+        prop_level.setBorder(null);
+        this.add(prop_level);
+        prop_material.setSize(80,40);
+        prop_material.setLocation(820,450);
+        prop_material.setBorder(null);
+        this.add(prop_material);
+        prop_value.setSize(80,40);
+        prop_value.setLocation(820,475);
+        prop_value.setBorder(null);
+        this.add(prop_value);
+
+
+        use.setSize(80,40);
+        use.setLocation(975, 425);
+        use.setBorder(null);
+        use.setContentAreaFilled(false);
+        use.addActionListener(this);
+        this.add(use);
+        upgrade.setSize(80, 40);
+        upgrade.setLocation(975, 470);
+        upgrade.setBorder(null);
+        upgrade.setContentAreaFilled(false);
+        upgrade.addActionListener(this);
+        this.add(upgrade);
+
         int position_Y = 205;
         int position_X = 745;
         int rem = -1;
@@ -65,6 +103,7 @@ public class BagPanel extends AbstractPanel {
           else if (i == 10){position_Y+=62;rem = 0;}
           else{rem++;} 
           armorButtons[i]=new SetButton(armorImages[i], position_X+(int)65*rem, position_Y, wid_height,wid_height, this);
+          //armorButtons[i].setPressedIcon(armorImages_p[i]);
           armorButtons[i].setVisible(false);
         }
         
@@ -78,6 +117,8 @@ public class BagPanel extends AbstractPanel {
           weaponButtons[i].setVisible(false);
         }  
         //測試用陣列 之後要刪掉
+        check_armor[0]=1;
+        check_weapon[0]=1;
         check_weapon[0]=1;
         check_weapon[1]=1;
         check_material[2]=1;
@@ -97,15 +138,7 @@ public class BagPanel extends AbstractPanel {
          materialButtons[i]=new SetButton(materialImages[i], position_X+(int)65*rem, position_Y, wid_height,wid_height, this);
          materialButtons[i].setVisible(false);
        }  
-       //放置區
-      //  position_Y = 605;
-      //  position_X = 747;
 
-      //  for(int i=0;i<5;i++)
-      //  {
-      //    put_equipment_Buttons[i]=new SetButton(put_equipment_Image, position_X+65*i, position_Y, wid_height,wid_height, this);
-      //    put_equipment_Buttons[i].setVisible(true);
-      //  }  
 
         //以下建立圖標
         chose_armor_button=new SetButton(chose_armor_Image,1085,248,64,70,this);
@@ -128,25 +161,44 @@ public class BagPanel extends AbstractPanel {
 
 
     }
+    //int 素材數量  n
+    public int  isWeapon=3;
+    public int index=0;
     public void actionPerformed(ActionEvent e) {
-      if(e.getSource() == weaponButtons[1])
+      for(int i=0;i<3;i++)
       {
-        int x=weaponButtons[1].getX();
-        int y=weaponButtons[1].getY();
-        int i=0;
-        for(JButton b:weaponButtons)
+        if(e.getSource() == weaponButtons[i])
         {
-          if(b.getY()==605)
-          {
-            b.setLocation(x,y);
-            check_weapon[i]=1;
-          }
-          i++;
+          isWeapon=1;
+          index=i;
         }
-        weaponButtons[1].setLocation(747, 605);
-    
-        check_weapon[1]=0;
+        
       }
+      for(int i=0;i<12;i++)
+      {
+        if(e.getSource() == armorButtons[i])
+        {
+          isWeapon=0;
+          index=i;
+         // armorButtons[i].setIcon(armorImages_p[i]);
+        }
+      }
+      
+      if(e.getSource() == use) 
+      {
+        if(isWeapon==1)
+        {
+          change_weapon(index);
+        }
+        else if(isWeapon==0)
+        {
+          change_armor(index);
+         // armorButtons[index].setIcon(armorImages[index]);
+        } 
+      }
+       if(e.getSource() == upgrade)
+        propinformation.upgrade(isWeapon,index);
+
       //按下右上叉叉
       if (e.getSource() == closebutton) {
         this.mainframe.changeScene("menu");
@@ -238,14 +290,72 @@ public class BagPanel extends AbstractPanel {
             else{rem++;} 
             // int y=b[j].getY();
             // System.out.println(y);
-              b[j].setLocation(position_X+(int)65*rem, position_Y); 
-              b[j].setVisible(true);
-              i++;
-
+            b[j].setLocation(position_X+(int)65*rem, position_Y); 
+            b[j].setVisible(true);
+            i++;
           } 
           else if(b[j].getY()<600) b[j].setVisible(false);
         }
       }
 
-    
+      public void change_weapon(int n)
+      {
+        int x=weaponButtons[n].getX();
+        int y=weaponButtons[n].getY();
+        int i=0;
+        for(JButton b:weaponButtons)
+        {
+          if(b.getY()==605)
+          {
+            b.setLocation(x,y);
+            check_weapon[i] = 1;
+          }
+          i++;
+        }
+        weaponButtons[n].setLocation(747, 605);
+        check_weapon[n]=0;
+      }
+
+      
+      public void change_armor(int n)
+      {
+
+        int x=armorButtons[n].getX();
+        int y=armorButtons[n].getY();
+        int i=0;
+       
+        for(JButton b:armorButtons)
+        {
+          if(b.getX()==812&&n<=2)
+          {
+            b.setLocation(x,y);
+            check_armor[i] = 1;
+            armorButtons[n].setLocation(747+65, 605);
+            break;
+          }
+          else if(b.getX()==877&&n<=5)
+          {
+            b.setLocation(x,y);
+            check_armor[i] = 1;
+            armorButtons[n].setLocation(747+130, 605);
+            break;
+          }
+          else if(b.getX()==942&&n<=8)
+          {
+            b.setLocation(x,y);
+            check_armor[i] = 1;
+            armorButtons[n].setLocation(747+195, 605);
+            break;
+          }
+          else if(b.getX()==1007&&n<=11)
+          {
+            b.setLocation(x,y);
+            check_armor[i] = 1;
+            armorButtons[n].setLocation(747+260, 605);
+            break;
+          }
+          i++;
+        }
+        check_armor[n]=0;
+      }
 }
