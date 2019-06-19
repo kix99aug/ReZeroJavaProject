@@ -5,34 +5,33 @@ import javax.swing.ImageIcon;
 public class Character extends MapItem {
 	class Breath extends Thread {
 		Character character;
+		// Image arrow = new ImageIcon("");
 		Image[] idle_imgs = {new ImageIcon("img/Character/adventurer-idle-00.png").getImage(),
 				new ImageIcon("img/Character/adventurer-idle-01.png").getImage(),
 				new ImageIcon("img/Character/adventurer-idle-02.png").getImage()};
 		Image[] run_imgs = {new ImageIcon("img/Character/adventurer-run-00.png").getImage(),
 				new ImageIcon("img/Character/adventurer-run-01.png").getImage(),
 				new ImageIcon("img/Character/adventurer-run-02.png").getImage()};
-				// new ImageIcon("img/Character/adventurer-run-01.png").getImage()};
+		// new ImageIcon("img/Character/adventurer-run-01.png").getImage()};
 		Image[] shoot_imgs = {new ImageIcon("img/Character/adventurer-bow-00.png").getImage(),
-		new ImageIcon("img/Character/adventurer-bow-01.png").getImage(),
-		new ImageIcon("img/Character/adventurer-bow-02.png").getImage(),
-		new ImageIcon("img/Character/adventurer-bow-03.png").getImage(),
-		new ImageIcon("img/Character/adventurer-bow-04.png").getImage(),
-		new ImageIcon("img/Character/adventurer-bow-05.png").getImage(),
-		new ImageIcon("img/Character/adventurer-bow-06.png").getImage(),
-		new ImageIcon("img/Character/adventurer-bow-07.png").getImage(),
-		new ImageIcon("img/Character/adventurer-bow-08.png").getImage(),};
+				new ImageIcon("img/Character/adventurer-bow-01.png").getImage(),
+				new ImageIcon("img/Character/adventurer-bow-02.png").getImage(),
+				new ImageIcon("img/Character/adventurer-bow-03.png").getImage(),
+				new ImageIcon("img/Character/adventurer-bow-04.png").getImage(),
+				new ImageIcon("img/Character/adventurer-bow-05.png").getImage(),
+				new ImageIcon("img/Character/adventurer-bow-06.png").getImage(),
+				new ImageIcon("img/Character/adventurer-bow-07.png").getImage(),
+				new ImageIcon("img/Character/adventurer-bow-08.png").getImage(),};
 		Image[] die_imgs = {new ImageIcon("img/Character/adventurer-get-up-06.png").getImage(),
-		new ImageIcon("img/Character/adventurer-get-up-05.png").getImage(),
-		new ImageIcon("img/Character/adventurer-get-up-04.png").getImage(),
-		new ImageIcon("img/Character/adventurer-get-up-03.png").getImage(),
-		new ImageIcon("img/Character/adventurer-get-up-02.png").getImage(),
-		new ImageIcon("img/Character/adventurer-get-up-01.png").getImage(),
-		new ImageIcon("img/Character/adventurer-get-up-00.png").getImage()};
-
+				new ImageIcon("img/Character/adventurer-get-up-05.png").getImage(),
+				new ImageIcon("img/Character/adventurer-get-up-04.png").getImage(),
+				new ImageIcon("img/Character/adventurer-get-up-03.png").getImage(),
+				new ImageIcon("img/Character/adventurer-get-up-02.png").getImage(),
+				new ImageIcon("img/Character/adventurer-get-up-01.png").getImage(),
+				new ImageIcon("img/Character/adventurer-get-up-00.png").getImage()};
 		Breath(Character character) {
 			this.character = character;
 		}
-
 		public void run() {
 			while (true) {
 				for (int i = 0; character.state == 0; i = (i + 1) % 3) {
@@ -53,9 +52,10 @@ public class Character extends MapItem {
 				}
 				for (int i = 0; character.state == 2; i = (i + 1) % 9) {
 					character.img = shoot_imgs[i];
-					if (i == 8) new PlaySounds("./music/shootingsound.wav").start();
+					if (i == 8)
+						new PlaySounds("./music/shootingsound.wav").start();
 					try {
-						this.sleep(100);
+						this.sleep(75);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -67,18 +67,20 @@ public class Character extends MapItem {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					if (i == 6) return;
+					if (i == 6)   
+						return;
 				}
 			}
 		}
 	}
+
 	public GamePanel gp;
 	public double x = 100, y = 500;
 	public int width = 150, height = 111;
 	public Image img;
 
 	public boolean left = false, right = false, down = false, up = false;
-	public int facing =1;
+	public int facing = 1;
 	public int state = 2; // 0 = idle
 
 	public Character(GamePanel gp) {
@@ -94,12 +96,31 @@ public class Character extends MapItem {
 				move_y /= Math.sqrt(2);
 			}
 			// System.out.println(angle);
-			if ((left || right || down || up) && (!(left&&right&&down&&up))) {
+			if ((left || right || down || up) && (!(left && right && down && up))
+					&& ((0 < (x + 16 * 3 + move_x))
+							&& ((x + 16 * 3 + move_x) < (1280 - this.getHitbox().getWidth())))
+					&& ((320 < (y + 24 * 3 + move_y))
+							&& ((y + 24 * 3 + move_y) < (720 - this.getHitbox().getHeight())))) {
 				this.state = 1;
 				x += move_x;
 				y += move_y;
+				boolean unwalkable = false;
+				for (Obstacle o : gp.obstacle) {
+					if (unwalkable)
+						break;
+					else {
+						unwalkable = this.getHitbox().intersects(o.getHitbox());
+					}
+				}
+				if (unwalkable) {
+					x -= move_x;
+					y -= move_y;
+				}
+
 				facing = (move_x < 0) ? -1 : (move_x == 0) ? facing : 1;
-			} else this.state = 2;
+			} else
+				this.state = 2;
+
 			try {
 				this.sleep(10);
 			} catch (InterruptedException e) {
@@ -108,7 +129,7 @@ public class Character extends MapItem {
 		}
 	}
 
-	void breath(){
+	void breath() {
 		new Breath(this).start();
 	}
 
@@ -146,7 +167,7 @@ public class Character extends MapItem {
 		return img;
 	}
 
-	public Rectangle getHitbox(){
-		return new Rectangle((int) this.x + 16*3, (int) this.y + 24*3, 17*3, 12*3);
+	public Rectangle getHitbox() {
+		return new Rectangle((int) this.x + 16 * 3, (int) this.y + 24 * 3, 17 * 3, 12 * 3);
 	}
 }
