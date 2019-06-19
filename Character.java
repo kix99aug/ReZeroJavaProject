@@ -2,10 +2,8 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
-
-
 public class Character extends MapItem {
-	class Idle extends Thread {
+	class Breath extends Thread {
 		Character character;
 		Image[] idle_imgs = {new ImageIcon("img/Character/adventurer-idle-00.png").getImage(),
 				new ImageIcon("img/Character/adventurer-idle-01.png").getImage(),
@@ -23,8 +21,15 @@ public class Character extends MapItem {
 		new ImageIcon("img/Character/adventurer-bow-06.png").getImage(),
 		new ImageIcon("img/Character/adventurer-bow-07.png").getImage(),
 		new ImageIcon("img/Character/adventurer-bow-08.png").getImage(),};
+		Image[] die_imgs = {new ImageIcon("img/Character/adventurer-get-up-06.png").getImage(),
+		new ImageIcon("img/Character/adventurer-get-up-05.png").getImage(),
+		new ImageIcon("img/Character/adventurer-get-up-04.png").getImage(),
+		new ImageIcon("img/Character/adventurer-get-up-03.png").getImage(),
+		new ImageIcon("img/Character/adventurer-get-up-02.png").getImage(),
+		new ImageIcon("img/Character/adventurer-get-up-01.png").getImage(),
+		new ImageIcon("img/Character/adventurer-get-up-00.png").getImage()};
 
-		Idle(Character character) {
+		Breath(Character character) {
 			this.character = character;
 		}
 
@@ -48,11 +53,21 @@ public class Character extends MapItem {
 				}
 				for (int i = 0; character.state == 2; i = (i + 1) % 9) {
 					character.img = shoot_imgs[i];
+					if (i == 8) new PlaySounds("./music/shootingsound.wav").start();
 					try {
 						this.sleep(100);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+				}
+				for (int i = 0; character.state == 3; i = (i + 1) % 7) {
+					character.img = die_imgs[i];
+					try {
+						this.sleep(200);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					if (i == 6) return;
 				}
 			}
 		}
@@ -68,7 +83,6 @@ public class Character extends MapItem {
 
 	public Character(GamePanel gp) {
 		this.gp = gp;
-		new Idle(this).start();
 	}
 
 	public void run() {
@@ -85,7 +99,6 @@ public class Character extends MapItem {
 				x += move_x;
 				y += move_y;
 				facing = (move_x < 0) ? -1 : (move_x == 0) ? facing : 1;
-				System.out.println(facing);
 			} else this.state = 2;
 			try {
 				this.sleep(10);
@@ -93,6 +106,10 @@ public class Character extends MapItem {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	void breath(){
+		new Breath(this).start();
 	}
 
 	public boolean hit() {

@@ -43,6 +43,14 @@ public class MainFrame extends JFrame {
     panels.get(target).setVisible(true);
     panels.get(target).requestFocus();
     //if(target=="menu") BGM._stop();
-    if(target=="game") BGM.change("./music/gameoverBGM.wav");
+    if(target=="game") {
+      GamePanel gp = ((GamePanel)panels.get(target));
+      gp.character.start();
+      gp.character.breath();
+      for (Monster m : gp.monster){
+        m.start();
+        m.breath();
+      }
+      BGM.change("./music/鬼來電.wav");}
   }
 }

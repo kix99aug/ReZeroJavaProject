@@ -21,10 +21,10 @@ public class Monster extends MapItem {
 					new ImageIcon("./img/Monster/chibi-monsters-files/previews/skeleton3.png").getImage(),
 					new ImageIcon("./img/Monster/chibi-monsters-files/previews/skeleton4.png").getImage()}};
 
-	class Idle extends Thread {
+	class Breath extends Thread {
 		Monster monster;
 
-		Idle(Monster monster) {
+		Breath(Monster monster) {
 			this.monster = monster;
 		}
 
@@ -77,8 +77,6 @@ public class Monster extends MapItem {
 		} else {
 			this.shoot = false;
 		}
-		new Idle(this).start();
-		
 	}
 
 	public void run(GamePanel gp) {
@@ -99,6 +97,10 @@ public class Monster extends MapItem {
 		Rectangle myrect = new Rectangle((int) this.x, (int) this.y, this.width, this.height);
 		Rectangle rect = null;
 		return false;
+	}
+	
+	void breath(){
+		new Breath(this).start();
 	}
 
 	public double getX() {

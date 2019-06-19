@@ -256,9 +256,7 @@ public class BagPanel extends AbstractPanel {
         }
         chose_weapon_button.setIcon(chose_weapon_Image);
         chose_armor_button.setIcon(chose_armor_Image);
-        chose_material_button.setIcon(chose_material_Image_p);
-        
-        
+        chose_material_button.setIcon(chose_material_Image_p);      
       }
 
       //按下裝備欄按鈕
@@ -293,9 +291,7 @@ public class BagPanel extends AbstractPanel {
        mouseexited.start();
     }
    });
-
-        
-      }
+    }
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -320,8 +316,6 @@ public class BagPanel extends AbstractPanel {
             b[j].setLocation(position_X+(int)65*rem, position_Y); 
             b[j].setVisible(true);
             i++;
-            
-            
           } 
           else if(b[j].getY()<600) b[j].setVisible(false);
         }

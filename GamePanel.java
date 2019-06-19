@@ -68,7 +68,6 @@ public class GamePanel extends AbstractPanel implements KeyListener {
     this.mainframe = mf;
     this.setSize(this.mainframe.getSize());
     this.setLayout(null);
-    character.start();
     // Monster = new Monster();
     int choose = new Random().nextInt(4);
     for (int i = 0; i < 5; i++) {
