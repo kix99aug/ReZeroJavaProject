@@ -125,6 +125,6 @@ public class Monster extends MapItem {
 	}
 
 	public Rectangle getHitbox() {
-		return new Rectangle((int) this.x + 16 * 3, (int) this.y + 24 * 3, 17 * 3, 12 * 3);
+		return new Rectangle((int) this.x+5, (int) this.y+25 , 17 * 3, 14 * 3);
 	}
 }
