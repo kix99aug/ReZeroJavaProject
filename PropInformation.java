@@ -23,8 +23,8 @@ public class PropInformation{
                 armor_value[index]++;
             }
         }
-        System.out.println(weapon_level[index]);
-        System.out.println(weapon_value[index]);
+        //System.out.println(weapon_level[index]);
+        //System.out.println(weapon_value[index]);
 
 }
 }
