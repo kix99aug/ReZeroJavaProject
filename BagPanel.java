@@ -27,12 +27,10 @@ public class BagPanel extends  AbstractPanel {
     public String Attack_defend_HP="";
     public int value=10;
     
-    public int HP=100;
-    public int Attack=0;
-    public int defend=0;
-    public JLabel HP_text=new JLabel("", SwingConstants.LEFT);
-    public JLabel Attack_text=new JLabel("", SwingConstants.LEFT);
-    public JLabel defend_text=new JLabel("", SwingConstants.LEFT);
+  
+    public JLabel HP_text=new JLabel("HP  000", SwingConstants.LEFT);
+    public JLabel Attack_text=new JLabel("Attack  00", SwingConstants.LEFT);
+    public JLabel defend_text=new JLabel("Defend  00", SwingConstants.LEFT);
 
     public JLabel prop_level=new JLabel("", SwingConstants.LEFT);
     public JLabel prop_material=new JLabel(""+material, SwingConstants.LEFT);
@@ -77,29 +75,58 @@ public class BagPanel extends  AbstractPanel {
 
      public int[] check_armor={0,0,0,0,0,0,0,0,0,0,0,0};
      public int[] check_weapon={0,0,0};
-     public int[] check_material={55,55,55};
+     public int[] check_material={0,0,0};
   
      BagPanel(MainFrame mf){
       
         this.mainframe = mf;
+
         this.setSize(this.mainframe.getSize());
         this.setLayout(null);
-
+        // this.mainframe.HP
         prop_level.setSize(160,40);
         prop_level.setLocation(820,415);
         prop_level.setBorder(null);
         prop_level.setFont(new Font("NasuM", Font.BOLD, 16));
+        prop_level.setForeground(Color.WHITE);
         this.add(prop_level);
         prop_material.setSize(160,40);
         prop_material.setLocation(820,445);
         prop_material.setBorder(null);
         prop_material.setFont(new Font("NasuM", Font.BOLD, 16));
+        prop_material.setForeground(Color.WHITE);
         this.add(prop_material);
         prop_value.setSize(160,40);
         prop_value.setLocation(820,475);
         prop_value.setBorder(null);
         prop_value.setFont(new Font("NasuM", Font.BOLD, 16));
+        prop_value.setForeground(Color.WHITE);
         this.add(prop_value);
+
+        
+        HP_text.setSize(160,40);
+        HP_text.setLocation(320,560);
+        HP_text.setBorder(null);
+        HP_text.setFont(new Font("NasuM", Font.BOLD, 24));
+        HP_text.setForeground(Color.WHITE);
+        HP_text.setText("HP  "+(20+this.mainframe.HP));
+        this.add(HP_text);
+        Attack_text.setSize(160,40);
+        Attack_text.setLocation(320,590);
+        Attack_text.setBorder(null);
+        Attack_text.setFont(new Font("NasuM", Font.BOLD, 24));
+        Attack_text.setForeground(Color.WHITE);
+        Attack_text.setText("Attack  "+(10+this.mainframe.Attack));
+        this.add(Attack_text);
+        defend_text.setSize(160,40);
+        defend_text.setLocation(320,620);
+        defend_text.setBorder(null);
+        defend_text.setFont(new Font("NasuM", Font.BOLD, 24));
+        defend_text.setForeground(Color.WHITE);
+        defend_text.setText("Defend  "+(20+this.mainframe.defend));
+        this.add(defend_text);
+        
+        
 
         use=new Button("use", 975, 428, 80,40,this);
         upgrade=new Button("upgrade", 975, 468, 80,40, this);
@@ -113,6 +140,7 @@ public class BagPanel extends  AbstractPanel {
           how_many_material[i].setLocation(765+70*i,470);
           how_many_material[i].setBorder(null);
           how_many_material[i].setFont(new Font("NasuM", Font.BOLD, 16));
+          how_many_material[i].setForeground(Color.WHITE);
           this.add(how_many_material[i]);
           how_many_material[i].setText(""+check_material[i]);
            how_many_material[i].setVisible(false);
@@ -139,15 +167,6 @@ public class BagPanel extends  AbstractPanel {
           weaponButtons[i].setVisible(false);
         }  
         //測試用陣列 之後要刪掉
-        check_armor[0]=1;
-        check_weapon[0]=1;
-        check_weapon[0]=1;
-        check_weapon[1]=1;
-
-        check_armor[1]=1;
-        check_armor[4]=1;
-        check_armor[3]=1;
-        check_armor[10]=1;
         resetButton_position(weaponButtons,3,check_weapon);
         
         position_Y = 205;
@@ -180,7 +199,7 @@ public class BagPanel extends  AbstractPanel {
         armorButtons[11].setVisible(true);
     }
     //int 素材數量  n
-    public int  isWeapon=3;
+    public int isWeapon=3;
     public int index=0;
     public void actionPerformed(ActionEvent e) {
       for(int i=0;i<3;i++)
@@ -211,10 +230,41 @@ public class BagPanel extends  AbstractPanel {
         if(isWeapon==1)
         {
           change_weapon(index);
+          int i=0;
+          for(JButton b:weaponButtons)
+         {
+            if(b.getY()==605)
+            {
+              this.mainframe.Attack=propinformation.weapon_value[i];
+              System.out.println(this.mainframe.Attack);
+           }
+           i++;
+          }
+          Attack_text.setText("Attack  "+this.mainframe.Attack);
         }
         else if(isWeapon==0)
         {
           change_armor(index);
+          int i=0;
+          int setdefend=0;
+          int setHP=0;
+          for(JButton b:armorButtons)
+          {
+              if(b.getY()==605)
+              {
+                if(i<=2||i>=9)setdefend+=propinformation.armor_value[i];
+               // System.out.println(this.mainframe.defend);
+                else setHP+=propinformation.armor_value[i];
+                this.mainframe.defend=setdefend;
+                this.mainframe.HP=100+setHP;
+                System.out.println(this.mainframe.defend);
+                System.out.println(this.mainframe.HP);
+            }
+            i++;
+          }
+          defend_text.setText("Defend  "+this.mainframe.defend);
+          HP_text.setText("HP  "+this.mainframe.HP);
+
         } 
       }
        if(e.getSource() == upgrade)
@@ -224,13 +274,44 @@ public class BagPanel extends  AbstractPanel {
           if(check_material[index]>=10)check_material[index]=check_material[index]-10;
           check_material_overflow(index);
           setWeapon_text(index);
-          System.out.println(check_material[index]);
+          int i=0;
+          for(JButton b:weaponButtons)
+         {
+            if(b.getY()==605)
+            {
+              this.mainframe.Attack=propinformation.weapon_value[i];
+              System.out.println(this.mainframe.Attack);
+           }
+           i++;
+          }
+          Attack_text.setText("Attack  "+this.mainframe.Attack);
+          
         }
         else if(isWeapon==0)
         {
           if(check_material[index%3]>=10)check_material[index%3]=check_material[index%3]-10;
           check_material_overflow(index);
           setArmor_text(index);
+          int i=0;
+          int setdefend=0;
+          int setHP=0;
+          for(JButton b:armorButtons)
+          {
+              if(b.getY()==605)
+              {
+                if(i<=2||i>=9)setdefend+=propinformation.armor_value[i];
+               // System.out.println(this.mainframe.defend);
+                else setHP+=propinformation.armor_value[i];
+                this.mainframe.defend=setdefend;
+                this.mainframe.HP=100+setHP;
+                System.out.println(this.mainframe.defend);
+                System.out.println(this.mainframe.HP);
+            }
+            i++;
+          }
+          defend_text.setText("Defend  "+this.mainframe.defend);
+          HP_text.setText("HP  "+this.mainframe.HP);
+
         } 
        }
       
@@ -460,6 +541,9 @@ public class BagPanel extends  AbstractPanel {
         arr=propinformation.weapon_value;
         value=arr[index];
         prop_value.setText(Attack_defend_HP+"  "+value);
+
+
+        
       }
 
       public void setArmor_text(int index)
