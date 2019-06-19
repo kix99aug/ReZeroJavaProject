@@ -17,6 +17,8 @@ public class BagPanel extends AbstractPanel {
     JButton use=new JButton();
     JButton upgrade=new JButton();
     JButton put_now_prop=new JButton();
+    public BAG_character bagcharacter = new BAG_character(this);
+
     int wid_height=40;
     // ImageIcon use_Image=new ImageIcon(new ImageIcon("./img/btn/use.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
     // ImageIcon upgrade_Image=new ImageIcon(new ImageIcon("./img/btn/upgrade.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
@@ -68,10 +70,12 @@ public class BagPanel extends AbstractPanel {
      public int[] check_material={50,50,50};
 
      BagPanel(MainFrame mf){
-
+      
         this.mainframe = mf;
         this.setSize(this.mainframe.getSize());
         this.setLayout(null);
+
+
 
         prop_level.setSize(80,40);
         prop_level.setLocation(820,415);
@@ -178,10 +182,9 @@ public class BagPanel extends AbstractPanel {
           value=10;
           // prop_material=new JLabel("Need 10 "+material, SwingConstants.LEFT);
           // prop_value=new JLabel(Attack_defend_HP+"  "+value, SwingConstants.LEFT);
-          prop_material.setText(text);
+          //prop_material.setText();
           put_now_prop.setIcon(weaponImages[i]);
         }
-        
       }
       for(int i=0;i<12;i++)
       {
@@ -300,11 +303,6 @@ public class BagPanel extends AbstractPanel {
    });
     }
     }
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        g.drawImage(bgImage, 0, 0,mainframe);
-      }
-
       public void resetButton_position(JButton[] b,int n,int[] check)
       {
         int i=0;
@@ -403,5 +401,10 @@ public class BagPanel extends AbstractPanel {
           upgrade.setRolloverIcon(overflow);
           upgrade.setPressedIcon(overflow);
         }
+      }
+      public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        g.drawImage(bgImage, 0, 0,mainframe);
+        g.drawImage(bagcharacter.img, 110, 50,150*3,111*3, mainframe);
       }
 }
