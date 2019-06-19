@@ -16,18 +16,37 @@ public class Spit extends MapItem {
 
   public int facing = 1;
 
-  public Spit(GamePanel gp,double x,double y) {
+  public Spit(GamePanel gp,double x,double y,int face) {
     this.gp = gp;
     this.x = x;
     this.y = y;
-    this.width = 30;
-    this.height = 6;
+    this.width = 10;
+	this.height = 10;
+  this.facing = face;
+  this.start();
   }
 
-  public boolean hit() {
-    Rectangle myrect = new Rectangle((int) this.x, (int) this.y, this.width, this.height);
-    Rectangle rect = null;
-    return false;
+  public void run() {
+    while (true) {
+      this.x += this.facing;
+      for (Obstacle o : gp.obstacle) {
+		if (this.getHitbox().intersects(o.getHitbox())) {
+			gp.spit.remove(this);
+			return;
+		}
+      }
+     
+        if (this.getHitbox().intersects(this.gp.character.getHitbox())) {
+          gp.spit.remove(this);
+          return;
+        }
+      
+      try {
+        this.sleep(5);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   public double getX() {
@@ -60,7 +79,7 @@ public class Spit extends MapItem {
 
 
   public Rectangle getHitbox() {
-    return new Rectangle((int) this.x + 45, (int) this.y + this.height - 36, 15 * 3, 12 * 3);
+    return new Rectangle((int) this.x, (int) this.y, 10, 10);
   }
 
 }

@@ -34,8 +34,13 @@ public class Monster extends MapItem {
 					
 					if(monster.chooseMonster == 0){
 						if(i == 2){
-							monster.gp.spit.add(new Spit(gp,monster.x+129,monster.y+60));
+							monster.gp.spit.add(new Spit(gp,(monster.facing > 0)?monster.x+52:monster.x-11,monster.y+32,monster.facing));
 							new PlaySounds("./music/shootingsound.wav").start();
+							try {
+								this.sleep(1000);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 					try {
@@ -216,6 +221,6 @@ public class Monster extends MapItem {
 	}
 
 	public Rectangle getHitbox() {
-		return new Rectangle((int) this.x + 5, (int) this.y + 25, 17 * 3, 14 * 3);
+		return new Rectangle((int) this.x + 5, (int) this.y + 20, 17 * 3, 15 * 3);
 	}
 }
