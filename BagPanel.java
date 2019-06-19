@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class BagPanel extends AbstractPanel {
+public class BagPanel extends  AbstractPanel {
     PropInformation propinformation = new PropInformation(); 
     PlaySounds mouseexited;
     MainFrame mainframe = null;
@@ -16,6 +16,8 @@ public class BagPanel extends AbstractPanel {
     JButton use=new JButton();
     JButton upgrade=new JButton();
     JButton put_now_prop=new JButton();
+    public BAG_character bagcharacter = new BAG_character(this);
+
     JButton how_many_material_img[]={new JButton(),new JButton(),new JButton()};
     int wid_height=40;
     // ImageIcon use_Image=new ImageIcon(new ImageIcon("./img/btn/use.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
@@ -78,7 +80,7 @@ public class BagPanel extends AbstractPanel {
      public int[] check_material={55,55,55};
   
      BagPanel(MainFrame mf){
-
+      
         this.mainframe = mf;
         this.setSize(this.mainframe.getSize());
         this.setLayout(null);
@@ -192,7 +194,6 @@ public class BagPanel extends AbstractPanel {
           setWeapon_text(i);
           put_now_prop.setIcon(weaponImages[i]);
         }
-        
       }
       for(int i=0;i<12;i++)
       {
@@ -436,7 +437,6 @@ public class BagPanel extends AbstractPanel {
           upgrade.setPressedIcon(overflow);
         }
       }
-
       public void setWeapon_text(int index)
       {
         int[] arr=propinformation.weapon_level;
@@ -472,6 +472,6 @@ public class BagPanel extends AbstractPanel {
       public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawImage(bgImage, 0, 0,mainframe);
+        g.drawImage(bagcharacter.img, 145, 70,(int)(150*2.5),(int)(111*2.5), mainframe);
       }
-
 }

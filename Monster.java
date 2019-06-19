@@ -76,30 +76,90 @@ public class Monster extends MapItem {
 			this.shoot = false;
 		}
 	}
+	// 0 1 2
+	// 3 4 5
+	// 6 7 8
 
 	public void run() {
 		while (true) {
-			double store_X, store_Y;
-			store_X = this.x - gp.character.x - gp.character.getWidth() / 2 + this.width / 2;
-			store_Y = this.y - gp.character.y - gp.character.getHeight() / 2 + this.height / 2;
-			this.facing = store_X < 0 ? 1 : -1;
-			this.x -= 1 * (store_X > 0 ? 1 : -1);
-			this.y -= 1 * (store_Y > 0 ? 1 : -1);
-			boolean unwalkable = this.getHitbox().intersects(gp.character.getHitbox());
-			for (Obstacle o : gp.obstacle){
-				if (unwalkable) {
-					this.y-=1;
+
+			double min_x = this.x,min_y =  this.y,min_dis = (this.x-gp.character.x)*(this.x-gp.character.x)+(this.y-gp.character.y)*(this.y-gp.character.y);
+			double org_x = this.x,org_y = this.y;
+			for(int i =0;i<9;i++){
+				this.x = org_x;
+				this.y = org_y;
+				this.x +=(i%3-1)*40  / ((i % 2 == 0)? Math.sqrt(2) : 1) ;
+				this.y +=((int)(i/3)-1)*40 / ((i % 2 == 0)? Math.sqrt(2) : 1);
+				boolean unwalkable = false;
+				if(this.getHitbox().intersects(gp.character.getHitbox())){
+					//attack
+					this.x = org_x;
+					this.y = org_y;
 					break;
-				}else{
+				} else for (Obstacle o : gp.obstacle){
 					unwalkable = this.getHitbox().intersects(o.getHitbox());
+					if (unwalkable) break;
+				}
+				if (!unwalkable) {
+					double dis = (this.x-gp.character.x)*(this.x-gp.character.x)+(this.y-gp.character.y)*(this.y-gp.character.y);
+					if (dis < min_dis) {
+						min_x = this.x;
+						min_y = this.y;
+						min_dis = dis;
+					}
 				}
 			}
-			if (unwalkable) {
-				this.x += 1 * (store_X > 0 ? 1 : -1);
-				this.y += 1 * (store_Y > 0 ? 1 : -1);
-			} 
+			this.x = org_x;
+			this.y = org_y;
+			double offset_x = min_x - this.x ,offset_y =  min_y- this.y ;
+			for(int i = 0;i< 50;i++){
+				if(this.chooseMonster != 0){
+					this.x += offset_x/50;
+					this.y += offset_y/50;
+					if(offset_x<0){
+						this.facing = -1;
+					}
+					else{
+						this.facing = 1;
+					}
+				}else{
+					this.facing = (gp.character.x - this.x < 0)? -1 :1;
+				}
+				
+				try {
+					this.sleep(20-this.chooseMonster*5);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+			// double store_X, store_Y;
+			// store_X = this.x - gp.character.x - gp.character.getWidth() / 2 + this.width / 2;
+			// store_Y = this.y - gp.character.y - gp.character.getHeight() / 2 + this.height / 2;
+			// this.facing = store_X < 0 ? 1 : -1;
+			// this.x -= 1 * (store_X > 0 ? 1 : -1);
+			// this.y -= 1 * (store_Y > 0 ? 1 : -1);
+			// boolean unwalkable = this.getHitbox().intersects(gp.character.getHitbox());
+			// for (Obstacle o : gp.obstacle){
+			// 	if (unwalkable) {
+					
+						
+					
+			// 		//this.x+= 1*(store_X/Math.abs(store_X));
+			// 		break;
+			// 	}else{
+			// 		//this.x-= 1*(store_X/Math.abs(store_X));
+			// 		unwalkable = this.getHitbox().intersects(o.getHitbox());
+			// 		if(unwalkable){
+			// 			this.y+=1;
+			// 		}
+			// 	}
+			// }
+			// if (unwalkable) {
+			// 	this.x += 1 * (store_X > 0 ? 1 : -1);
+			// 	this.y += 1 * (store_Y > 0 ? 1 : -1);
+			// } 
 			try {
-				this.sleep(30 * (chooseMonster + 1));
+				this.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
