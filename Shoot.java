@@ -13,7 +13,7 @@ public class Shoot extends MapItem {
   public double y;
   public Image img;
   public GamePanel gp;
-  public MainFrame mf;
+
   public int width, height;
   public boolean left = false, right = false, down = false, up = false;
 
@@ -38,6 +38,16 @@ public class Shoot extends MapItem {
       }
       for (Monster m : gp.monster){
         if (this.getHitbox().intersects(m.getHitbox())) {
+          m.HP-=(gp.mainframe.Attack-m.DEFEND);
+          if(m.HP<=0){
+            Random ran = new Random();
+            int quality = ran.nextInt(100);
+            if(quality<=50){
+              gp.
+            }
+            
+            gp.monster.remove(m);
+          }
           gp.shoot.remove(this);
           return;
         }

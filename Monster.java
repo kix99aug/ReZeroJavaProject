@@ -73,6 +73,7 @@ public class Monster extends MapItem {
 	Random ran = new Random();
 	public int chooseMonster = ran.nextInt(4);
 	public GamePanel gp;
+
 	// public double x = 100, y = 500;
 	public double x = (double) ran.nextInt(1000) + 100, y = (double) ran.nextInt(400) + 320 - 50;
 
@@ -111,6 +112,7 @@ public class Monster extends MapItem {
 				boolean unwalkable = false;
 				if(this.getHitbox().intersects(gp.character.getHitbox())){
 					//attack
+					gp.mainframe.HP -= (this.ATTACK-gp.mainframe.defend); 
 					this.x = org_x;
 					this.y = org_y;
 					break;

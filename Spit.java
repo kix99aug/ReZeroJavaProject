@@ -11,7 +11,6 @@ public class Spit extends MapItem {
   public double y;
   public Image img =new ImageIcon("./img/Monster/spit.png").getImage();
   public GamePanel gp;
-  public MainFrame mf;
   public int width, height;
   public boolean left = false, right = false, down = false, up = false;
 
@@ -38,7 +37,10 @@ public class Spit extends MapItem {
       }
      
         if (this.getHitbox().intersects(this.gp.character.getHitbox())) {
-          mf.HP -= (20-mf.defend); 
+          gp.mainframe.HP -= (20-gp.mainframe.defend); 
+          if(gp.mainframe.HP <= 0){
+            
+          }
           gp.spit.remove(this);
           return;
         }
