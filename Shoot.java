@@ -11,17 +11,20 @@ public class Shoot extends MapItem {
       new ImageIcon("./img/woodarrow.png").getImage()};
   public double x;
   public double y;
-  public int choose;
   public Image img;
   public GamePanel gp;
-  // public double x = 100, y = 500;
   public int width, height;
   public boolean left = false, right = false, down = false, up = false;
 
   public int facing = 1;
 
-  public Shoot(GamePanel gp) {
+  public Shoot(GamePanel gp,double x,double y) {
     this.gp = gp;
+    this.img = arrowImages[0];
+    this.x = x;
+    this.y = y;
+    this.width = 30;
+    this.height = 6;
   }
 
   public boolean hit() {
