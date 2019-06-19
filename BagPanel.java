@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 public class BagPanel extends AbstractPanel {
     PropInformation propinformation = new PropInformation(); 
 
@@ -15,13 +16,17 @@ public class BagPanel extends AbstractPanel {
     JButton materialButtons[]={new JButton(),new JButton(),new JButton()};
     JButton use=new JButton();
     JButton upgrade=new JButton();
+    JButton put_now_prop=new JButton();
     int wid_height=40;
     // ImageIcon use_Image=new ImageIcon(new ImageIcon("./img/btn/use.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
     // ImageIcon upgrade_Image=new ImageIcon(new ImageIcon("./img/btn/upgrade.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
-    
-    JLabel prop_level=new JLabel("等級", SwingConstants.RIGHT);
-    JLabel prop_material=new JLabel("所需素材", SwingConstants.RIGHT);
-    JLabel prop_value=new JLabel("數值", SwingConstants.RIGHT);
+    public int level=0;
+    public String material="";
+    public  String Attack_defend_HP="Attack";
+    public int value=10;
+    public JLabel prop_level=new JLabel("Level "+level, SwingConstants.LEFT);
+    public JLabel prop_material=new JLabel("Need 10 "+material, SwingConstants.LEFT);
+    public JLabel prop_value=new JLabel(Attack_defend_HP+"  "+value, SwingConstants.LEFT);
 
     Image bgImage = new ImageIcon("./img/inventory/bagbg.png").getImage(); 
     ImageIcon armorImages[] = {
@@ -55,6 +60,8 @@ public class BagPanel extends AbstractPanel {
       ImageIcon chose_weapon_Image =new ImageIcon(new ImageIcon("./img/btn/ActiveA.png").getImage().getScaledInstance(64, 70, Image.SCALE_FAST));
       ImageIcon chose_material_Image =new ImageIcon(new ImageIcon("./img/btn/ActiveC.png").getImage().getScaledInstance(64, 70, Image.SCALE_FAST));
       ImageIcon chose_armor_Image =new ImageIcon(new ImageIcon("./img/btn/ActiveB.png").getImage().getScaledInstance(64, 70, Image.SCALE_FAST));
+     
+      ImageIcon black =new ImageIcon(new ImageIcon("./img/inventory/black.png").getImage().getScaledInstance(64, 70, Image.SCALE_FAST));
 
      public int[] check_armor={0,0,0,0,0,0,0,0,0,0,0,0};
      public int[] check_weapon={0,0,0};
@@ -68,16 +75,19 @@ public class BagPanel extends AbstractPanel {
 
         
         prop_level.setSize(80,40);
-        prop_level.setLocation(820,425);
+        prop_level.setLocation(820,415);
         prop_level.setBorder(null);
+        prop_level.setFont(new Font("NasuM", Font.BOLD, 16));
         this.add(prop_level);
         prop_material.setSize(80,40);
-        prop_material.setLocation(820,450);
+        prop_material.setLocation(820,445);
         prop_material.setBorder(null);
+        prop_material.setFont(new Font("NasuM", Font.BOLD, 16));
         this.add(prop_material);
         prop_value.setSize(80,40);
         prop_value.setLocation(820,475);
         prop_value.setBorder(null);
+        prop_value.setFont(new Font("NasuM", Font.BOLD, 16));
         this.add(prop_value);
 
 
@@ -94,6 +104,8 @@ public class BagPanel extends AbstractPanel {
         upgrade.addActionListener(this);
         this.add(upgrade);
 
+        put_now_prop=new SetButton(black, 755, 450, wid_height ,  wid_height,this);
+        
         int position_Y = 205;
         int position_X = 745;
         int rem = -1;
@@ -171,6 +183,11 @@ public class BagPanel extends AbstractPanel {
         {
           isWeapon=1;
           index=i;
+          int[] arr=propinformation.weapon_level;
+          level=arr[i];
+          prop_level.setText("Level "+level);
+         // System.out.println(level);
+          put_now_prop.setIcon(weaponImages[i]);
         }
         
       }
@@ -180,7 +197,7 @@ public class BagPanel extends AbstractPanel {
         {
           isWeapon=0;
           index=i;
-         // armorButtons[i].setIcon(armorImages_p[i]);
+          put_now_prop.setIcon(armorImages[i]);
         }
       }
       
@@ -197,7 +214,13 @@ public class BagPanel extends AbstractPanel {
         } 
       }
        if(e.getSource() == upgrade)
+       {
         propinformation.upgrade(isWeapon,index);
+         int[] arr=propinformation.weapon_level;
+         level=arr[index];
+         prop_level.setText("Level "+level); 
+       }
+      
 
       //按下右上叉叉
       if (e.getSource() == closebutton) {
