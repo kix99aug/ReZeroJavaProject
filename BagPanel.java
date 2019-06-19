@@ -13,8 +13,11 @@ public class BagPanel extends AbstractPanel {
     JButton materialButtons[]={new JButton(),new JButton(),new JButton()};
     JButton use=new JButton();
     JButton upgrade=new JButton();
-    
     int wid_height=40;
+    ImageIcon use_Image=new ImageIcon(new ImageIcon("./img/btn/use.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
+    ImageIcon upgrade_Image=new ImageIcon(new ImageIcon("./img/btn/upgrade.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
+
+    
 
     Image bgImage = new ImageIcon("./img/inventory/bagbg.png").getImage(); 
     ImageIcon armorImages[] = {
@@ -60,10 +63,16 @@ public class BagPanel extends AbstractPanel {
 
         use.setSize(80,40);
         use.setLocation(975, 425);
+        use.setBorder(null);
+        use.setContentAreaFilled(false);
         use.addActionListener(this);
         this.add(use);
-                upgrade.setSize(80, 40);
-        upgrade.setLocation(975, 465);
+        upgrade.setSize(80, 40);
+        upgrade.setLocation(975, 470);
+        upgrade.setBorder(null);
+        upgrade.setContentAreaFilled(false);
+        upgrade.addActionListener(this);
+        this.add(upgrade);
 
         int position_Y = 205;
         int position_X = 745;
@@ -130,14 +139,14 @@ public class BagPanel extends AbstractPanel {
 
     }
     //int 素材數量  n
-    boolean isWeapon=false;
+    int  isWeapon=3;
     int index=0;
     public void actionPerformed(ActionEvent e) {
       for(int i=0;i<3;i++)
       {
         if(e.getSource() == weaponButtons[i])
         {
-          isWeapon=true;
+          isWeapon=1;
           index=i;
         }
         
@@ -146,15 +155,15 @@ public class BagPanel extends AbstractPanel {
       {
         if(e.getSource() == armorButtons[i])
         {
-          isWeapon=false;
+          isWeapon=0;
           index=i;
         }
       }
       
       if(e.getSource() == use) 
       {
-        if(isWeapon)change_weapon(index);
-        else change_armor(index);
+        if(isWeapon==1)change_weapon(index);
+        else if(isWeapon==0) change_armor(index);
       }
 
       //按下右上叉叉
