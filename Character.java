@@ -89,7 +89,7 @@ public class Character extends Thread {
 				System.out.println(facing);
 			} else this.state = 2;
 			try {
-				this.sleep(20);
+				this.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

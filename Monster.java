@@ -25,10 +25,10 @@ public class Monster extends Thread {
 		Idle(Monster monster) {
 			this.monster = monster;
 		}
-
-		public void run() {
-			if (monster.chooseMonster != 3) {
-				for (int i = 0; monster.state == 0; i = (i + 1) % 3) {
+		public void run(){
+			
+			if(monster.chooseMonster != 3){
+				for(int i = 0;monster.state==0;i=(i+1)%3){
 					monster.img = images[monster.chooseMonster][i];
 					try {
 						this.sleep(200);
@@ -53,9 +53,11 @@ public class Monster extends Thread {
 	Random ran = new Random();
 	public int chooseMonster = ran.nextInt(4);
 	public GamePanel gp;
-	public double x = 100, y = 500;
+	// public double x = 100, y = 500;
+	public double x = (double)ran.nextInt(1000)+100,y = (double)ran.nextInt(400)+320-50;
+	
 	public int width = 74, height = 100;
-	public Image img = new ImageIcon("img/Character/adventurer-idle-00.png").getImage();
+	public Image img ;
 
 	public boolean left = false, right = false, down = false, up = false;
 	public int state = 0; // 0 = idle

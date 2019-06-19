@@ -4,6 +4,8 @@ import javax.swing.*;
 
 public class GamePanel extends AbstractPanel  implements KeyListener {
   MainFrame mainframe = null;
+  PlaySounds soundofzombie;
+  PlaySounds shootingsound;
 
   Image skyImage = new ImageIcon("./img/sky1.png").getImage();
   Image groundImage = new ImageIcon("./img/ground1.png").getImage();
@@ -47,19 +49,26 @@ public class GamePanel extends AbstractPanel  implements KeyListener {
 
 
   Character character = new Character(this);
-  Monster monster = new Monster(this);
+  Monster monster[] = new Monster[5];
+  
+  GamePanel(MainFrame mf){
+    
+    soundofzombie = new PlaySounds("./music/soundofzombie.wav");
+    shootingsound = new PlaySounds("./music/shootingsound.wav");
 
-  GamePanel(MainFrame mf) {
     this.mainframe = mf;
     this.setSize(this.mainframe.getSize());
     this.setLayout(null);
     character.start();
     // Monster = new Monster();
-    new Thread() {
-      public void run() {
-
-        while (true) {
-          repaint();
+    for(int i = 0; i < 5; i++){
+      monster[i] = new Monster(this);
+    }
+    new Thread(){
+  
+		  public void run(){
+			  while(true){
+				  repaint();
           try {
             Thread.sleep(10);
           } catch (InterruptedException e) {
@@ -87,12 +96,15 @@ public class GamePanel extends AbstractPanel  implements KeyListener {
       g.drawImage(obstacle[this.mainframe.choose], this.mainframe.store_X[i],
           this.mainframe.store_Y[i] + i * 80 + 320 - 214, 175, 214, mainframe);
     }
+    // g.drawImage(character.img,(int)character.x,(int)character.y,character.img.getWidth(this)*3,character.img.getHeight(this)*3,mainframe);
+    for(int i = 0; i < 5; i++){
+      g.drawImage(monster[i].img,(int)monster[i].x,(int)monster[i].y,-monster[i].img.getWidth(this),monster[i].img.getHeight(this),mainframe);
+    }
+    
     g.drawImage(character.img,
         (int) character.x + ((character.facing == -1) ? character.img.getWidth(this) * 3 : 0),
         (int) character.y, character.img.getWidth(this) * 3 * character.facing,
         character.img.getHeight(this) * 3, mainframe);
-    g.drawImage(monster.img, (int) monster.x, (int) monster.y, monster.img.getWidth(this),
-        monster.img.getHeight(this), mainframe);
-    // g.drawImage(Monster.batimg[0], dx1, dy1, dx2);
+    
   }
 }
