@@ -87,8 +87,12 @@ public class Monster extends MapItem {
 			this.y -= 1 * (store_Y > 0 ? 1 : -1);
 			boolean unwalkable = this.getHitbox().intersects(gp.character.getHitbox());
 			for (Obstacle o : gp.obstacle){
-				if (unwalkable) break;
-				unwalkable = this.getHitbox().intersects(o.getHitbox());
+				if (unwalkable) {
+					this.y-=1;
+					break;
+				}else{
+					unwalkable = this.getHitbox().intersects(o.getHitbox());
+				}
 			}
 			if (unwalkable) {
 				this.x += 1 * (store_X > 0 ? 1 : -1);
