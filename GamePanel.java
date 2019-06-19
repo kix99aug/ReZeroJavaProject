@@ -57,9 +57,11 @@ public class GamePanel extends AbstractPanel implements KeyListener {
 
 
   public Character character = new Character(this);
-  public Monster monster[] = new Monster[5];
-  public Obstacle obstacle[] = new Obstacle[5];
-
+  //public Monster monster[] = new Monster[5];
+  //public Obstacle obstacle[] = new Obstacle[5];
+  public ArrayList<Monster> monster = new ArrayList<Monster>();
+  public ArrayList<Obstacle> obstacle = new ArrayList<Obstacle>();
+  
   GamePanel(MainFrame mf) {
 
     soundofzombie = new PlaySounds("./music/soundofzombie.wav");
@@ -71,9 +73,9 @@ public class GamePanel extends AbstractPanel implements KeyListener {
     // Monster = new Monster();
     int choose = new Random().nextInt(4);
     for (int i = 0; i < 5; i++) {
-      monster[i] = new Monster(this);
+      monster.add(new Monster(this));
 
-      obstacle[i] = new Obstacle(this, choose);
+      obstacle.add ( new Obstacle(this, choose));
     }
 
     new Thread() {
