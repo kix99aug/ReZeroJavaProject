@@ -10,10 +10,7 @@ public class GamePanel extends AbstractPanel  implements KeyListener {
   Image skyImage = new ImageIcon("./img/sky1.png").getImage();
   Image groundImage = new ImageIcon("./img/ground1.png").getImage();
 
-  Image obstacle[] = {new ImageIcon("./img/MapSource/obstacle3.png").getImage(),
-      new ImageIcon("./img/MapSource/obstacle4.png").getImage(),
-      new ImageIcon("./img/MapSource/obstacle5.png").getImage(),
-      new ImageIcon("./img/MapSource/obstacle6.png").getImage()};
+
   int bgx = 0, bgy = 0;
 
   public void keyPressed(KeyEvent e) {
@@ -50,7 +47,7 @@ public class GamePanel extends AbstractPanel  implements KeyListener {
 
   Character character = new Character(this);
   Monster monster[] = new Monster[5];
-  
+  Obstacle obstacle[] = new Obstacle[5];
   GamePanel(MainFrame mf){
     
     soundofzombie = new PlaySounds("./music/soundofzombie.wav");
@@ -63,6 +60,7 @@ public class GamePanel extends AbstractPanel  implements KeyListener {
     // Monster = new Monster();
     for(int i = 0; i < 5; i++){
       monster[i] = new Monster(this);
+      obstacle[i] = new Obstacle(this);
     }
     new Thread(){
   
@@ -93,8 +91,7 @@ public class GamePanel extends AbstractPanel  implements KeyListener {
       g.drawImage(groundImage, i, 320, mainframe);
     }
     for (int i = 0; i < 5; i++) {
-      g.drawImage(obstacle[this.mainframe.choose], this.mainframe.store_X[i],
-          this.mainframe.store_Y[i] + i * 80 + 320 - 214, 175, 214, mainframe);
+      g.drawImage(obstacle[i].img,(int)obstacle[i].store_X,(int)obstacle[i].store_Y,-obstacle[i].img.getWidth(this),monster[i].img.getHeight(this),mainframe);
     }
     // g.drawImage(character.img,(int)character.x,(int)character.y,character.img.getWidth(this)*3,character.img.getHeight(this)*3,mainframe);
     for(int i = 0; i < 5; i++){

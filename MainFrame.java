@@ -14,9 +14,7 @@ public class MainFrame extends JFrame {
   String username;
   PlaySounds BGM;
    
-  public int[] store_X = new int[8];
-  public int[] store_Y = new int[8];
-  public int choose ;
+
   MainFrame(){
     super("Little Adventure");
     this.setCursor(getToolkit().createCustomCursor(cursorImage, hotspot, "Cursor"));
@@ -26,7 +24,7 @@ public class MainFrame extends JFrame {
     panels.put("inputname", new InputNamePanel(this));
     panels.put("menu", new MenuPanel(this));
     panels.put("bag", new BagPanel(this));
-    positionXY();
+    
     panels.put("game", new GamePanel(this));
     for(JPanel p : panels.values()){
       this.getContentPane().add(p);
@@ -36,15 +34,7 @@ public class MainFrame extends JFrame {
     BGM = new PlaySounds("./music/BGM.wav");
     BGM.run();
   }
-  public void positionXY(){
-      Random ran = new Random();
-    this.choose = ran.nextInt(4);
-    for(int i =0; i <8; i++){
-      this.store_X[i] = ran.nextInt(1280);
-      this.store_Y[i] = ran.nextInt(80);
-      
-    }
-  }
+  
 
   public void changeScene(String target){
     for(JPanel p : panels.values()){
