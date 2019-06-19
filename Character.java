@@ -52,8 +52,9 @@ public class Character extends MapItem {
 				}
 				for (int i = 0; character.state == 2; i = (i + 1) % 9) {
 					character.img = shoot_imgs[i];
-					if (i == 8)
-						new PlaySounds("./music/shootingsound.wav").start();
+					if (i == 8){
+						character.gp.shoot.add(new Shoot(gp,character.x+129,character.y+60));
+						new PlaySounds("./music/shootingsound.wav").start();}
 					try {
 						this.sleep(75);
 					} catch (InterruptedException e) {
