@@ -51,6 +51,6 @@ public class MainFrame extends JFrame {
         m.start();
         m.breath();
       }
-      BGM.change("./music/鬼來電.wav");}
+      BGM.change("./music/鬼來電.wav",-20);}
   }
 }
