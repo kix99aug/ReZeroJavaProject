@@ -22,7 +22,7 @@ public class BagPanel extends AbstractPanel {
     // ImageIcon upgrade_Image=new ImageIcon(new ImageIcon("./img/btn/upgrade.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
     public int level=0;
     public String material="";
-    public  String Attack_defend_HP="Attack";
+    public String Attack_defend_HP="Attack";
     public int value=10;
     public JLabel prop_level=new JLabel("Level "+level, SwingConstants.LEFT);
     public JLabel prop_material=new JLabel("Need 10 "+material, SwingConstants.LEFT);
@@ -65,7 +65,7 @@ public class BagPanel extends AbstractPanel {
 
      public int[] check_armor={0,0,0,0,0,0,0,0,0,0,0,0};
      public int[] check_weapon={0,0,0};
-     public int[] check_material={500,500,500};
+     public int[] check_material={50,50,50};
 
      BagPanel(MainFrame mf){
 
@@ -91,19 +91,20 @@ public class BagPanel extends AbstractPanel {
         this.add(prop_value);
 
 
-        use.setSize(80,40);
-        use.setLocation(975, 425);
-        use.setBorder(null);
-        use.setContentAreaFilled(false);
-        use.addActionListener(this);
-        this.add(use);
-        upgrade.setSize(80, 40);
-        upgrade.setLocation(975, 470);
-        upgrade.setBorder(null);
-        upgrade.setContentAreaFilled(false);
-        upgrade.addActionListener(this);
-        this.add(upgrade);
-
+        // use.setSize(80,40);
+        // use.setLocation(975, 425);
+        // use.setBorder(null);
+        // use.setContentAreaFilled(false);
+        // use.addActionListener(this);
+        // this.add(use);
+        // upgrade.setSize(80, 40);
+        // upgrade.setLocation(975, 470);
+        // upgrade.setBorder(null);
+        // upgrade.setContentAreaFilled(false);
+        // upgrade.addActionListener(this);
+        // this.add(upgrade);
+        use=new Button("use", 975, 425, 80,40,this);
+        upgrade=new Button("upgrade", 975, 468, 80,40, this);
         put_now_prop=new SetButton(black, 755, 450, wid_height ,  wid_height,this);
         
         int position_Y = 205;
@@ -133,8 +134,7 @@ public class BagPanel extends AbstractPanel {
         check_weapon[0]=1;
         check_weapon[0]=1;
         check_weapon[1]=1;
-        check_material[2]=1;
-        check_material[0]=1;
+
         check_armor[1]=1;
         check_armor[4]=1;
         check_armor[3]=1;
@@ -183,10 +183,10 @@ public class BagPanel extends AbstractPanel {
         {
           isWeapon=1;
           index=i;
+          check_material_overflow(index);
           int[] arr=propinformation.weapon_level;
           level=arr[i];
           prop_level.setText("Level "+level);
-         // System.out.println(level);
           put_now_prop.setIcon(weaponImages[i]);
         }
         
@@ -197,10 +197,14 @@ public class BagPanel extends AbstractPanel {
         {
           isWeapon=0;
           index=i;
+          check_material_overflow(index);
+          int[] arr=propinformation.armor_level;
+          level=arr[i];
+          prop_level.setText("Level "+level);
           put_now_prop.setIcon(armorImages[i]);
         }
       }
-      
+
       if(e.getSource() == use) 
       {
         if(isWeapon==1)
@@ -216,7 +220,19 @@ public class BagPanel extends AbstractPanel {
        if(e.getSource() == upgrade)
        {
         propinformation.upgrade(isWeapon,index);
-         int[] arr=propinformation.weapon_level;
+        int[] arr=propinformation.weapon_level;
+        if(isWeapon==1){
+           check_material[index]=check_material[index]-10;
+           check_material_overflow(index);
+        }
+        else if(isWeapon==0)
+        {
+          check_material[index]=check_material[index]-10;
+          check_material_overflow(index);
+          arr=propinformation.armor_level;
+          System.out.println(check_material);
+
+        }
          level=arr[index];
          prop_level.setText("Level "+level); 
        }
@@ -380,5 +396,15 @@ public class BagPanel extends AbstractPanel {
           i++;
         }
         check_armor[n]=0;
+      }
+
+      public void check_material_overflow(int index)
+      {
+        if(check_material[index%3]>=10){
+          upgrade.setEnabled(true);
+        }
+        if(check_material[index%3]<10){
+          upgrade.setEnabled(false);
+        }
       }
 }
