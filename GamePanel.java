@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Comparator;
 
 public class GamePanel extends AbstractPanel  implements KeyListener {
   MainFrame mainframe = null;
@@ -58,9 +61,10 @@ public class GamePanel extends AbstractPanel  implements KeyListener {
     this.setLayout(null);
     character.start();
     // Monster = new Monster();
+    int choose = new Random().nextInt(4);
     for(int i = 0; i < 5; i++){
       monster[i] = new Monster(this);
-      obstacle[i] = new Obstacle(this);
+      obstacle[i] = new Obstacle(this,choose);
     }
     new Thread(){
   
@@ -91,17 +95,38 @@ public class GamePanel extends AbstractPanel  implements KeyListener {
       g.drawImage(groundImage, i, 320, mainframe);
     }
     for (int i = 0; i < 5; i++) {
-      g.drawImage(obstacle[i].img,(int)obstacle[i].store_X,(int)obstacle[i].store_Y,-obstacle[i].img.getWidth(this),monster[i].img.getHeight(this),mainframe);
+      g.drawImage(obstacle[i].img,(int)obstacle[i].x,(int)obstacle[i].y,-obstacle[i].img.getWidth(this),monster[i].img.getHeight(this),mainframe);
     }
     // g.drawImage(character.img,(int)character.x,(int)character.y,character.img.getWidth(this)*3,character.img.getHeight(this)*3,mainframe);
     for(int i = 0; i < 5; i++){
       g.drawImage(monster[i].img,(int)monster[i].x,(int)monster[i].y,-monster[i].img.getWidth(this),monster[i].img.getHeight(this),mainframe);
     }
-    
-    g.drawImage(character.img,
-        (int) character.x + ((character.facing == -1) ? character.img.getWidth(this) * 3 : 0),
-        (int) character.y, character.img.getWidth(this) * 3 * character.facing,
-        character.img.getHeight(this) * 3, mainframe);
-    g.drawRect(character.getHitbox().x,character.getHitbox().y,character.getHitbox().width,character.getHitbox().height);
+    ArrayList<MapItem> items = new ArrayList<MapItem>();
+    items.add(character);
+    for(Obstacle i : obstacle){
+      items.add(i);
+    }
+    for(Monster i : monster){
+      items.add(i);
+    }
+    items.sort(new Comparator<MapItem>() {
+      @Override
+      public int compare(MapItem i1,MapItem i2){
+        return (i1.getHitbox().y+i1.getHitbox().height)-(i2.getHitbox().y+i2.getHitbox().height);
+      }
+    });
+    for(MapItem i : items){
+      g.drawImage(i.img,
+        (int) i.x + ((i.facing == -1) ? i.img.getWidth(this) * 3 : 0),
+        (int) i.y,
+        i.width ,
+        i.height, mainframe);
+        g.drawRect(i.getHitbox().x,i.getHitbox().y,i.getHitbox().width,i.getHitbox().height);
+    }
+    // g.drawImage(character.img,
+    //     (int) character.x + ((character.facing == -1) ? character.img.getWidth(this) * 3 : 0),
+    //     (int) character.y, character.img.getWidth(this) * 3 * character.facing,
+    //     character.img.getHeight(this) * 3, mainframe);
+    // g.drawRect(character.getHitbox().x,character.getHitbox().y,character.getHitbox().width,character.getHitbox().height);
   }
 }

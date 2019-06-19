@@ -4,40 +4,39 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 
-public class Obstacle extends Thread {
+public class Obstacle extends MapItem {
     
-    Image obstacle[] = {new ImageIcon("./img/MapSource/obstacle3.png").getImage(),
+    Image obstacleimg[] = {new ImageIcon("./img/MapSource/obstacle3.png").getImage(),
         new ImageIcon("./img/MapSource/obstacle4.png").getImage(),
         new ImageIcon("./img/MapSource/obstacle5.png").getImage(),
         new ImageIcon("./img/MapSource/obstacle6.png").getImage()};
-    public double store_X;
-    public double store_Y;
+    public double x;
+    public double y;
     public int choose ;
     public Image img ;
-    public void positionXY(){
-       
-        Random ran = new Random();
-        this.choose = ran.nextInt(4);
-        this.store_X = (double)ran.nextInt(1280);
-        this.store_Y = (double)ran.nextInt(80);
-    }
 	public GamePanel gp;
 	// public double x = 100, y = 500;
-	public int width = 74, height = 100;
-	public Image img;
-	public boolean left = false, right = false, down = false, up = false;
+	public int width = 66*3 , height = 128*3;
+    public boolean left = false, right = false, down = false, up = false;
+    
+    public int facing = 1;
 	
-	public Obstacle(GamePanel gp) {
+	public Obstacle(GamePanel gp,int type) {
 		this.gp = gp;
-		positionXY();
+        Random ran = new Random();
+        this.x = (double)ran.nextInt(1280);
+        this.y = (double)ran.nextInt(400)+320-50*3;
+        this.img = obstacleimg[type];
 	}
 
 	public boolean hit() {
-		Rectangle myrect = new Rectangle((int) this.store_X, (int) this.store_Y, this.width, this.height);
+		Rectangle myrect = new Rectangle((int) this.x, (int) this.y, this.width, this.height);
 		Rectangle rect = null;
 		return false;
     }
-    public void run(){
-			obstacle.img = 
+   
+    public Rectangle getHitbox(){
+		return new Rectangle((int) this.x + 16*3, (int) this.y + 24*3, 17*3, 12*3);
     }
+    
 }
