@@ -32,6 +32,7 @@ public class Shoot extends MapItem {
 
   public void run() {
     while (true) {
+      if (this.gp.gameover) return;
       this.x += this.facing;
       for (Obstacle o : gp.obstacle) {
         if (this.getHitbox().intersects(o.getHitbox())) return;

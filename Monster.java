@@ -27,6 +27,7 @@ public class Monster extends MapItem {
 		}
 
 		public void run() {
+      if (monster.gp.gameover) return;
 
 			if (monster.chooseMonster != 3) {
 				for (int i = 0; monster.state == 0; i = (i + 1) % 3) {
@@ -102,6 +103,7 @@ public class Monster extends MapItem {
 	public void run() {
 		while (true) {
 
+      if (this.gp.gameover) return;
 			double min_x = this.x,min_y =  this.y,min_dis = (this.x-gp.character.x)*(this.x-gp.character.x)+(this.y-gp.character.y)*(this.y-gp.character.y);
 			double org_x = this.x,org_y = this.y;
 			for(int i =0;i<9;i++){
