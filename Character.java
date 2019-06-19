@@ -2,8 +2,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
-
-
 public class Character extends MapItem {
 	class Breath extends Thread {
 		Character character;
@@ -85,7 +83,6 @@ public class Character extends MapItem {
 
 	public Character(GamePanel gp) {
 		this.gp = gp;
-		
 	}
 
 	public void run() {
@@ -102,7 +99,6 @@ public class Character extends MapItem {
 				x += move_x;
 				y += move_y;
 				facing = (move_x < 0) ? -1 : (move_x == 0) ? facing : 1;
-				System.out.println(facing);
 			} else this.state = 2;
 			try {
 				this.sleep(10);
@@ -112,7 +108,7 @@ public class Character extends MapItem {
 		}
 	}
 
-	void Breath(){
+	void breath(){
 		new Breath(this).start();
 	}
 
