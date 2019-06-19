@@ -14,8 +14,8 @@ public class BagPanel extends AbstractPanel {
     JButton use=new JButton();
     JButton upgrade=new JButton();
     int wid_height=40;
-    ImageIcon use_Image=new ImageIcon(new ImageIcon("./img/btn/use.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
-    ImageIcon upgrade_Image=new ImageIcon(new ImageIcon("./img/btn/upgrade.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
+    // ImageIcon use_Image=new ImageIcon(new ImageIcon("./img/btn/use.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
+    // ImageIcon upgrade_Image=new ImageIcon(new ImageIcon("./img/btn/upgrade.png").getImage().getScaledInstance( wid_height,  wid_height, Image.SCALE_DEFAULT));
 
     
 
@@ -55,7 +55,7 @@ public class BagPanel extends AbstractPanel {
       int[] check_armor={0,0,0,0,0,0,0,0,0,0,0,0};
       int[] check_weapon={0,0,0};
       int[] check_material={0,0,0};
-
+      
      BagPanel(MainFrame mf){
         this.mainframe = mf;
         this.setSize(this.mainframe.getSize());
