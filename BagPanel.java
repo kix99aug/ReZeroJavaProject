@@ -73,7 +73,6 @@ public class BagPanel extends AbstractPanel {
         this.setSize(this.mainframe.getSize());
         this.setLayout(null);
 
-        
         prop_level.setSize(80,40);
         prop_level.setLocation(820,415);
         prop_level.setBorder(null);
@@ -90,19 +89,6 @@ public class BagPanel extends AbstractPanel {
         prop_value.setFont(new Font("NasuM", Font.BOLD, 16));
         this.add(prop_value);
 
-
-        // use.setSize(80,40);
-        // use.setLocation(975, 425);
-        // use.setBorder(null);
-        // use.setContentAreaFilled(false);
-        // use.addActionListener(this);
-        // this.add(use);
-        // upgrade.setSize(80, 40);
-        // upgrade.setLocation(975, 470);
-        // upgrade.setBorder(null);
-        // upgrade.setContentAreaFilled(false);
-        // upgrade.addActionListener(this);
-        // this.add(upgrade);
         use=new Button("use", 975, 425, 80,40,this);
         upgrade=new Button("upgrade", 975, 468, 80,40, this);
         put_now_prop=new SetButton(black, 755, 450, wid_height ,  wid_height,this);
@@ -187,6 +173,12 @@ public class BagPanel extends AbstractPanel {
           int[] arr=propinformation.weapon_level;
           level=arr[i];
           prop_level.setText("Level "+level);
+          material="";
+          Attack_defend_HP="Attack";
+          value=10;
+          // prop_material=new JLabel("Need 10 "+material, SwingConstants.LEFT);
+          // prop_value=new JLabel(Attack_defend_HP+"  "+value, SwingConstants.LEFT);
+          prop_material.setText(text);
           put_now_prop.setIcon(weaponImages[i]);
         }
         
@@ -214,7 +206,6 @@ public class BagPanel extends AbstractPanel {
         else if(isWeapon==0)
         {
           change_armor(index);
-         // armorButtons[index].setIcon(armorImages[index]);
         } 
       }
        if(e.getSource() == upgrade)
@@ -227,7 +218,7 @@ public class BagPanel extends AbstractPanel {
         }
         else if(isWeapon==0)
         {
-          check_material[index]=check_material[index]-10;
+          check_material[index%3]=check_material[index%3]-10;
           check_material_overflow(index);
           arr=propinformation.armor_level;
           System.out.println(check_material);
@@ -397,14 +388,20 @@ public class BagPanel extends AbstractPanel {
         }
         check_armor[n]=0;
       }
-
+      ImageIcon overflow =new ImageIcon(new ImageIcon("./img/btn/upgrade_d.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST));
       public void check_material_overflow(int index)
       {
         if(check_material[index%3]>=10){
-          upgrade.setEnabled(true);
+          propinformation.upgradeable = true;
+          upgrade.setIcon(new ImageIcon(new ImageIcon("./img/btn/upgrade.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST)));
+          upgrade.setRolloverIcon(new ImageIcon(new ImageIcon("./img/btn/upgrade_r.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST)));
+          upgrade.setPressedIcon(new ImageIcon(new ImageIcon("./img/btn/upgrade_p.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST)));
         }
         if(check_material[index%3]<10){
-          upgrade.setEnabled(false);
+          propinformation.upgradeable = false;
+          upgrade.setIcon(overflow);
+          upgrade.setRolloverIcon(overflow);
+          upgrade.setPressedIcon(overflow);
         }
       }
 }
