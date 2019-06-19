@@ -14,8 +14,8 @@ public class MainFrame extends JFrame {
   String username;
   PlaySounds BGM;
   public int HP=100;
-  public int Attack=0;
-  public int defend=0;
+  public int Attack=20;
+  public int defend=10;
   
   MainFrame(){
     super("Little Adventure");

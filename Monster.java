@@ -18,7 +18,7 @@ public class Monster extends MapItem {
 					new ImageIcon("./img/Monster/chibi-monsters-files/previews/skeleton2.png").getImage(),
 					new ImageIcon("./img/Monster/chibi-monsters-files/previews/skeleton3.png").getImage(),
 					new ImageIcon("./img/Monster/chibi-monsters-files/previews/skeleton4.png").getImage() } };
-
+					boolean dead = false;
 	class Breath extends Thread {
 		Monster monster;
 
@@ -44,6 +44,7 @@ public class Monster extends MapItem {
 							}
 						}
 					}
+					if (monster.dead) return;
 					try {
 						this.sleep(200);
 					} catch (InterruptedException e) {
@@ -181,6 +182,7 @@ public class Monster extends MapItem {
 			// 	this.x += 1 * (store_X > 0 ? 1 : -1);
 			// 	this.y += 1 * (store_Y > 0 ? 1 : -1);
 			// } 
+			if(this.dead) return;
 			try {
 				this.sleep(1000);
 			} catch (InterruptedException e) {

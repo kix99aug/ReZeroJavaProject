@@ -100,7 +100,7 @@ public class Character extends MapItem {
 
 	public void run() {
 		while (true) {
-			if (this.gp.gameover)
+			if (this.state == 3)
 				return;
 			double move_x = (right ? 1 : 0) + (left ? -1 : 0);
 			double move_y = (down ? 1 : 0) + (up ? -1 : 0);

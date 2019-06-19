@@ -31,6 +31,7 @@ public class Shoot extends MapItem {
   }
 
   public void run() {
+    BagPanel bg = ((BagPanel)(gp.mainframe.panels.get("bag")));
     while (true) {
       if (this.gp.gameover) return;
       this.x += this.facing;
@@ -39,14 +40,44 @@ public class Shoot extends MapItem {
       }
       for (Monster m : gp.monster){
         if (this.getHitbox().intersects(m.getHitbox())) {
-          m.HP-=(gp.mainframe.Attack-m.DEFEND);
+          m.HP-=(gp.mainframe.Attack);
           if(m.HP<=0){
             Random ran = new Random();
             int quality = ran.nextInt(100);
-            if(quality<=50){
-              gp.
+            int equip = ran.nextInt(100);
+            int which = ran.nextInt(4);
+            if(quality<=70){
+              //調素材
+              if(equip<60){
+                bg.check_material[2]++;
+              }
+              else if(equip<90){
+                bg.check_material[1]++;
+              }
+              else{
+                bg.check_material[0]++;
+              }
             }
-            
+            else{
+              //裝備
+              if(equip<60){
+
+              }
+              else if(equip<85){
+                bg.check_armor[which*3+1] = 1;
+              }
+              else if(equip<90){
+                bg.check_armor[which*3+0] = 1;
+              }
+              else if(equip<97){
+                bg.check_weapon[1] = 1;
+              }
+              else{
+                bg.check_weapon[0] = 1;
+
+              }
+            }
+            m.dead =true;
             gp.monster.remove(m);
           }
           gp.shoot.remove(this);
