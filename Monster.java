@@ -27,10 +27,10 @@ public class Monster extends MapItem {
 		}
 
 		public void run() {
-      if (monster.gp.gameover) return;
 
 			if (monster.chooseMonster != 3) {
 				for (int i = 0; monster.state == 0; i = (i + 1) % 3) {
+					if (monster.gp.gameover) return;
 					monster.img = monster.images[monster.chooseMonster][i];
 					
 					if(monster.chooseMonster == 0){
@@ -56,6 +56,7 @@ public class Monster extends MapItem {
 					
 			else {
 				for (int i = 0; monster.state == 0; i = (i + 1) % 4) {
+					if (monster.gp.gameover) return;
 					monster.img = monster.images[monster.chooseMonster][i];
 					try {
 						this.sleep(200);

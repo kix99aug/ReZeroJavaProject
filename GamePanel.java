@@ -12,6 +12,7 @@ public class GamePanel extends AbstractPanel implements KeyListener {
 
   boolean gameover = false;
   int bgx = 0, bgy = 0;
+  int tobecontinue_x = 1280;
 
   public void keyPressed(KeyEvent e) {
     System.out.println(e.getKeyCode());
@@ -53,42 +54,64 @@ public class GamePanel extends AbstractPanel implements KeyListener {
   }
 
 
-  public Character character = new Character(this);
-  //public Monster monster[] = new Monster[5];
-  //public Obstacle obstacle[] = new Obstacle[5];
-  public ArrayList<Monster> monster = new ArrayList<Monster>();
-  public ArrayList<Obstacle> obstacle = new ArrayList<Obstacle>();
-  public ArrayList<Shoot> shoot = new ArrayList<Shoot>();
-  public ArrayList<Spit> spit = new ArrayList<Spit>();
-  
+  public Character character;
+  // public Monster monster[] = new Monster[5];
+  // public Obstacle obstacle[] = new Obstacle[5];
+  public ArrayList<Monster> monster;
+  public ArrayList<Obstacle> obstacle;
+  public ArrayList<Shoot> shoot;
+  public ArrayList<Spit> spit;
+
+  class PrintScreen extends Thread {
+    GamePanel gp;
+
+    PrintScreen(GamePanel gp) {
+      this.gp = gp;
+    }
+
+    public void run() {
+      int count = 0;
+      while (true) {
+        repaint();
+        if (gp.gameover)
+          count++;
+        if (count == 2000) {
+          gp.mainframe.changeScene("menu");
+          return;
+        }
+        try {
+          Thread.sleep(5);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+  }
+
   GamePanel(MainFrame mf) {
     this.mainframe = mf;
     this.setSize(this.mainframe.getSize());
     this.setLayout(null);
-    // Monster = new Monster();
+    this.addKeyListener(this);
+    this.setFocusable(true);
+  }
+
+  public void newGame() {
+    gameover = false;
+    tobecontinue_x = 1280;
+    character = new Character(this);
+
+    monster = new ArrayList<Monster>();
+    obstacle = new ArrayList<Obstacle>();
+    shoot = new ArrayList<Shoot>();
+    spit = new ArrayList<Spit>();
     int choose = new Random().nextInt(4);
     for (int i = 0; i < 5; i++) {
       monster.add(new Monster(this));
 
-      obstacle.add ( new Obstacle(this, choose));
+      obstacle.add(new Obstacle(this, choose));
     }
-
-    new Thread() {
-
-      public void run() {
-        while (true) {
-          repaint();
-          try {
-            Thread.sleep(10);
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-        }
-      }
-    }.start();
-    this.addKeyListener(this);
-    this.setFocusable(true);
-
+    new PrintScreen(this).start();
   }
 
   public void actionPerformed(ActionEvent e) {
@@ -126,6 +149,12 @@ public class GamePanel extends AbstractPanel implements KeyListener {
       g.drawImage(i.getImage(), (int) i.getX() + ((i.getFacing() == -1) ? i.getWidth() : 0),
           (int) i.getY(), i.getWidth() * i.getFacing(), i.getHeight(), mainframe);
       g.drawRect(i.getHitbox().x, i.getHitbox().y, i.getHitbox().width, i.getHitbox().height);
+    }
+    if (this.gameover) {
+      g.setColor(new Color(180, 120, 30, 100));
+      g.fillRect(0, 0, 1280, 720);
+      g.drawImage(new ImageIcon("./img/tobecontinue.png").getImage(),
+          (tobecontinue_x > 50) ? tobecontinue_x -= 3 : 50, 600, 256, 110, this);
     }
   }
 }
