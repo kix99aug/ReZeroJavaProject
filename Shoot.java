@@ -18,13 +18,35 @@ public class Shoot extends MapItem {
 
   public int facing = 1;
 
-  public Shoot(GamePanel gp,double x,double y) {
+  public Shoot(GamePanel gp, double x, double y, int facing) {
     this.gp = gp;
     this.img = arrowImages[0];
     this.x = x;
     this.y = y;
     this.width = 30;
     this.height = 6;
+    this.facing = facing;
+    this.start();
+  }
+
+  public void run() {
+    while (true) {
+      this.x += this.facing;
+      for (Obstacle o : gp.obstacle) {
+        if (this.getHitbox().intersects(o.getHitbox())) return;
+      }
+      for (Monster m : gp.monster){
+        if (this.getHitbox().intersects(m.getHitbox())) {
+          gp.shoot.remove(this);
+          return;
+        }
+      }
+      try {
+        this.sleep(5);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   public boolean hit() {
@@ -63,7 +85,7 @@ public class Shoot extends MapItem {
 
 
   public Rectangle getHitbox() {
-    return new Rectangle((int) this.x + 45, (int) this.y + this.height - 36, 15 * 3, 12 * 3);
+    return new Rectangle((int) this.x + 22, (int) this.y, 8, 6);
   }
 
 }
