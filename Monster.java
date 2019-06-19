@@ -49,7 +49,7 @@ public class Monster extends MapItem {
 
 		}
 	}
-
+	public boolean shoot;
 	Random ran = new Random();
 	public int chooseMonster = ran.nextInt(4);
 	public GamePanel gp;
@@ -67,7 +67,13 @@ public class Monster extends MapItem {
 		this.gp = gp;
 		this.img = this.images[chooseMonster][0];
         this.width = this.img.getWidth(gp);
-        this.height = this.img.getHeight(gp);
+		this.height = this.img.getHeight(gp);
+		if(this.chooseMonster == 0){
+			this.shoot = true;
+		} 
+		else{
+			this.shoot = false;
+		}
 		new Idle(this).start();
 	}
 

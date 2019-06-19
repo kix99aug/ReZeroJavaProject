@@ -16,7 +16,7 @@ public class Obstacle extends MapItem {
     public Image img ;
 	public GamePanel gp;
 	// public double x = 100, y = 500;
-	public int width = 66*3 , height = 128*3;
+	public int width , height;
     public boolean left = false, right = false, down = false, up = false;
     
     public int facing = 1;
@@ -24,9 +24,12 @@ public class Obstacle extends MapItem {
 	public Obstacle(GamePanel gp,int type) {
 		this.gp = gp;
         Random ran = new Random();
-        this.x = (double)ran.nextInt(1280);
-        this.y = (double)ran.nextInt(400)+320-50*3;
+        
         this.img = obstacleimg[type];
+        this.width = this.img.getWidth(gp)*2;
+        this.height = this.img.getHeight(gp)*2;
+        this.x = (double)ran.nextInt(1280);
+        this.y = (double)ran.nextInt(400)+320-height;
 	}
 
 	public boolean hit() {
