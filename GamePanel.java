@@ -102,6 +102,6 @@ public class GamePanel extends AbstractPanel  implements KeyListener {
         (int) character.x + ((character.facing == -1) ? character.img.getWidth(this) * 3 : 0),
         (int) character.y, character.img.getWidth(this) * 3 * character.facing,
         character.img.getHeight(this) * 3, mainframe);
-    
+    g.drawRect(character.getHitbox().x,character.getHitbox().y,character.getHitbox().width,character.getHitbox().height);
   }
 }

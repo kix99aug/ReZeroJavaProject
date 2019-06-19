@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 
 
 
-public class Character extends Thread {
+public class Character extends MapItem {
 	class Idle extends Thread {
 		Character character;
 		Image[] idle_imgs = {new ImageIcon("img/Character/adventurer-idle-00.png").getImage(),
@@ -57,7 +57,6 @@ public class Character extends Thread {
 			}
 		}
 	}
-
 	public GamePanel gp;
 	public double x = 100, y = 500;
 	public int width = 74, height = 100;
@@ -100,5 +99,8 @@ public class Character extends Thread {
 		Rectangle myrect = new Rectangle((int) this.x, (int) this.y, this.width, this.height);
 		Rectangle rect = null;
 		return false;
+	}
+	public Rectangle getHitbox(){
+		return new Rectangle((int) this.x + 16*3, (int) this.y + 24*3, 17*3, 12*3);
 	}
 }
