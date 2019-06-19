@@ -31,13 +31,24 @@ public class Monster extends MapItem {
 			if (monster.chooseMonster != 3) {
 				for (int i = 0; monster.state == 0; i = (i + 1) % 3) {
 					monster.img = monster.images[monster.chooseMonster][i];
+					
+					if(monster.chooseMonster == 0){
+						if(i == 2){
+							monster.gp.spit.add(new Spit(gp,monster.x+129,monster.y+60));
+							new PlaySounds("./music/shootingsound.wav").start();
+						}
+					}
 					try {
 						this.sleep(200);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-				}
-			} else {
+					}
+
+			}
+			
+					
+			else {
 				for (int i = 0; monster.state == 0; i = (i + 1) % 4) {
 					monster.img = monster.images[monster.chooseMonster][i];
 					try {

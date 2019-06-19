@@ -5,99 +5,62 @@ import javax.swing.ImageIcon;
 
 
 public class Spit extends MapItem {
-	class Breath extends Thread {
-		Spit spit;
 
-		Breath(Spit spit) {
-			this.spit = spit;
-		}
+ 
+  public double x;
+  public double y;
+  public Image img =new ImageIcon("./img/Monster/spit.png").getImage();
+  public GamePanel gp;
+  public int width, height;
+  public boolean left = false, right = false, down = false, up = false;
 
-		public void run() {
+  public int facing = 1;
 
-			try {
-				this.sleep(200);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+  public Spit(GamePanel gp,double x,double y) {
+    this.gp = gp;
+    this.x = x;
+    this.y = y;
+    this.width = 30;
+    this.height = 6;
+  }
 
-		}
-	}
+  public boolean hit() {
+    Rectangle myrect = new Rectangle((int) this.x, (int) this.y, this.width, this.height);
+    Rectangle rect = null;
+    return false;
+  }
 
-	
-	Random ran = new Random();
-	
-	public GamePanel gp;
-	// public double x = 100, y = 500;
-	public double x = (double) ran.nextInt(1000) + 100, y = (double) ran.nextInt(400) + 320 - 50;
+  public double getX() {
+    return x;
+  }
 
-	public int width, height;
-	public Image img = new ImageIcon("./img/Monster/spit.png").getImage();
+  public double getY() {
+    return y;
+  }
 
-	public boolean left = false, right = false, down = false, up = false;
-	public int state = 0; // 0 = idle
-	public int facing = 1;
+  public int getWidth() {
+    return width;
+  }
 
-	public Spit(GamePanel gp) {
-		this.gp = gp;
-		this.width = this.img.getWidth(gp);
-		this.height = this.img.getHeight(gp);
-		this.x = gp.
-	}
-	// 0 1 2
-	// 3 4 5
-	// 6 7 8
+  public int getHeight() {
+    return height;
+  }
 
-	public void run() {
-		while (true) {
+  public int getFacing() {
+    return facing;
+  }
 
-			
-			try {
-				this.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+  public int _getState() {
+    return 1;
+  }
 
-	public boolean hit() {
-		Rectangle myrect = new Rectangle((int) this.x, (int) this.y, this.width, this.height);
-		Rectangle rect = null;
-		return false;
-	}
+  public Image getImage() {
+    return img;
+  }
 
-	void breath() {
-		new Breath(this).start();
-	}
 
-	public double getX() {
-		return x;
-	}
+  public Rectangle getHitbox() {
+    return new Rectangle((int) this.x + 45, (int) this.y + this.height - 36, 15 * 3, 12 * 3);
+  }
 
-	public double getY() {
-		return y;
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public int getFacing() {
-		return facing;
-	}
-
-	public int _getState() {
-		return state;
-	}
-
-	public Image getImage() {
-		return img;
-	}
-
-	public Rectangle getHitbox() {
-		return new Rectangle((int) this.x + 5, (int) this.y + 25, 17 * 3, 14 * 3);
-	}
 }
