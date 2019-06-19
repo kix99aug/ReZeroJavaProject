@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class GamePanel extends AbstractPanel {
+public class GamePanel extends AbstractPanel  implements KeyListener {
   MainFrame mainframe = null;
 
   Image skyImage = new ImageIcon("./img/sky1.png").getImage();
@@ -14,6 +14,36 @@ public class GamePanel extends AbstractPanel {
       new ImageIcon("./img/MapSource/obstacle6.png").getImage()};
   int bgx = 0, bgy = 0;
 
+  public void keyPressed(KeyEvent e) {
+    System.out.println(e.getKeyCode());
+    switch(e.getKeyCode()){
+      case 37:this.character.left=true;
+      break;
+      case 38:this.character.up=true;
+      break;
+      case 39:this.character.right=true;
+      break;
+      case 40:this.character.down=true;
+      break;
+    }
+  }
+
+  public void keyReleased(KeyEvent e) {
+    System.out.println(e.getKeyCode());
+    switch(e.getKeyCode()){
+      case 37:this.character.left=false;
+      break;
+      case 38:this.character.up=false;
+      break;
+      case 39:this.character.right=false;
+      break;
+      case 40:this.character.down=false;
+      break;
+    }
+  }
+
+  public void keyTyped(KeyEvent e) {
+  }
 
 
   Character character = new Character(this);
@@ -38,6 +68,9 @@ public class GamePanel extends AbstractPanel {
         }
       }
     }.start();
+    this.addKeyListener(this);
+    this.setFocusable(true);
+
   }
 
   public void actionPerformed(ActionEvent e) {

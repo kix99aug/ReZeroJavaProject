@@ -7,7 +7,7 @@ import java.io.*;
 import java.io.IOException;
 import java.util.Random;
 
-public class MainFrame extends JFrame  implements KeyListener {
+public class MainFrame extends JFrame {
   HashMap<String,AbstractPanel> panels = new HashMap<String,AbstractPanel>();
   Image cursorImage = new ImageIcon("./img/cursor.png").getImage();
   Point hotspot = new Point(0, 0);
@@ -37,8 +37,6 @@ public class MainFrame extends JFrame  implements KeyListener {
     this.setVisible(true);
     BGM = new PlaySounds("./music/BGM.wav");
     BGM.run();
-    this.addKeyListener(this);
-    this.setFocusable(true);
   }
   public void positionXY(){
       Random ran = new Random();
@@ -49,44 +47,13 @@ public class MainFrame extends JFrame  implements KeyListener {
       
     }
   }
-  public void keyPressed(KeyEvent e) {
-    GamePanel gp = (GamePanel)panels.get("game");
-    System.out.println(e.getKeyCode());
-    switch(e.getKeyCode()){
-      case 37:gp.character.left=true;
-      break;
-      case 38:gp.character.up=true;
-      break;
-      case 39:gp.character.right=true;
-      break;
-      case 40:gp.character.down=true;
-      break;
-    }
-  }
-
-  public void keyReleased(KeyEvent e) {
-    GamePanel gp = (GamePanel)panels.get("game");
-    System.out.println(e.getKeyCode());
-    switch(e.getKeyCode()){
-      case 37:gp.character.left=false;
-      break;
-      case 38:gp.character.up=false;
-      break;
-      case 39:gp.character.right=false;
-      break;
-      case 40:gp.character.down=false;
-      break;
-    }
-  }
-
-  public void keyTyped(KeyEvent e) {
-  }
 
   public void changeScene(String target){
     for(JPanel p : panels.values()){
       p.setVisible(false);
     }
     panels.get(target).setVisible(true);
+    panels.get(target).requestFocus();
     //if(target=="menu") BGM._stop();
     if(target=="game") BGM.change("./music/gameoverBGM.wav");
   }

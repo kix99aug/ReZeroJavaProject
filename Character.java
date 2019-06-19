@@ -12,8 +12,11 @@ public class Character extends Thread {
 				new ImageIcon("img/Character/adventurer-idle-02.png").getImage()};
 		Image[] run_imgs = {new ImageIcon("img/Character/adventurer-run-00.png").getImage(),
 				new ImageIcon("img/Character/adventurer-run-01.png").getImage(),
-				new ImageIcon("img/Character/adventurer-run-02.png").getImage(),
-				new ImageIcon("img/Character/adventurer-run-01.png").getImage()};
+				new ImageIcon("img/Character/adventurer-run-02.png").getImage()};
+				// new ImageIcon("img/Character/adventurer-run-01.png").getImage()};
+		Image[] shoot_imgs = {new ImageIcon("img/Character/adventurer-run-00.png").getImage(),
+		new ImageIcon("img/Character/adventurer-run-01.png").getImage(),
+		new ImageIcon("img/Character/adventurer-run-02.png").getImage()};
 
 		Idle(Character character) {
 			this.character = character;
@@ -29,7 +32,7 @@ public class Character extends Thread {
 						e.printStackTrace();
 					}
 				}
-				for (int i = 0; character.state == 1; i = (i + 1) % 4) {
+				for (int i = 0; character.state == 1; i = (i + 1) % 3) {
 					character.img = run_imgs[i];
 					try {
 						this.sleep(200);
@@ -68,7 +71,7 @@ public class Character extends Thread {
 				this.state = 1;
 				x += move_x;
 				y += move_y;
-				facing = (move_x < 0) ? -1 : 1;
+				facing = (move_x < 0) ? -1 : (move_x == 0) ? facing : 1;
 				System.out.println(facing);
 			} else this.state = 0;
 			try {
