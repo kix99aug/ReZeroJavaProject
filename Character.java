@@ -14,9 +14,15 @@ public class Character extends Thread {
 				new ImageIcon("img/Character/adventurer-run-01.png").getImage(),
 				new ImageIcon("img/Character/adventurer-run-02.png").getImage()};
 				// new ImageIcon("img/Character/adventurer-run-01.png").getImage()};
-		Image[] shoot_imgs = {new ImageIcon("img/Character/adventurer-run-00.png").getImage(),
-		new ImageIcon("img/Character/adventurer-run-01.png").getImage(),
-		new ImageIcon("img/Character/adventurer-run-02.png").getImage()};
+		Image[] shoot_imgs = {new ImageIcon("img/Character/adventurer-bow-00.png").getImage(),
+		new ImageIcon("img/Character/adventurer-bow-01.png").getImage(),
+		new ImageIcon("img/Character/adventurer-bow-02.png").getImage(),
+		new ImageIcon("img/Character/adventurer-bow-03.png").getImage(),
+		new ImageIcon("img/Character/adventurer-bow-04.png").getImage(),
+		new ImageIcon("img/Character/adventurer-bow-05.png").getImage(),
+		new ImageIcon("img/Character/adventurer-bow-06.png").getImage(),
+		new ImageIcon("img/Character/adventurer-bow-07.png").getImage(),
+		new ImageIcon("img/Character/adventurer-bow-08.png").getImage(),};
 
 		Idle(Character character) {
 			this.character = character;
@@ -40,6 +46,14 @@ public class Character extends Thread {
 						e.printStackTrace();
 					}
 				}
+				for (int i = 0; character.state == 2; i = (i + 1) % 9) {
+					character.img = shoot_imgs[i];
+					try {
+						this.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	}
@@ -51,7 +65,7 @@ public class Character extends Thread {
 
 	public boolean left = false, right = false, down = false, up = false;
 	public int facing =1;
-	public int state = 0; // 0 = idle
+	public int state = 2; // 0 = idle
 
 	public Character(GamePanel gp) {
 		this.gp = gp;
@@ -73,7 +87,7 @@ public class Character extends Thread {
 				y += move_y;
 				facing = (move_x < 0) ? -1 : (move_x == 0) ? facing : 1;
 				System.out.println(facing);
-			} else this.state = 0;
+			} else this.state = 2;
 			try {
 				this.sleep(20);
 			} catch (InterruptedException e) {

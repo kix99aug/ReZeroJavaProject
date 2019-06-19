@@ -18,12 +18,10 @@ public class MainFrame extends JFrame {
   public int[] store_Y = new int[8];
   public int choose ;
   MainFrame(){
-    super("Game");
-    
-    
+    super("Little Adventure");
     this.setCursor(getToolkit().createCustomCursor(cursorImage, hotspot, "Cursor"));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(1280, 720);
+    this.setBounds((getToolkit().getScreenSize().width-1280)/2,(getToolkit().getScreenSize().height-720)/2,1280, 720);
     this.setUndecorated(true);
     panels.put("inputname", new InputNamePanel(this));
     panels.put("menu", new MenuPanel(this));
