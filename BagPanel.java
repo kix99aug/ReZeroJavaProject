@@ -128,7 +128,7 @@ public class BagPanel extends  AbstractPanel {
         
         
 
-        use=new Button("use", 975, 425, 80,40,this);
+        use=new Button("use", 975, 428, 80,40,this);
         upgrade=new Button("upgrade", 975, 468, 80,40, this);
         put_now_prop=new SetButton(black, 755, 450, wid_height ,  wid_height,this);
         // put_now_prop.setVisible(false);
@@ -157,7 +157,6 @@ public class BagPanel extends  AbstractPanel {
           armorButtons[i]=new SetButton(armorImages[i], position_X+(int)65*rem, position_Y, wid_height,wid_height, this);
           armorButtons[i].setVisible(false);
         }
-        
          position_Y = 205;
          position_X = 745;
          rem = -1;
@@ -408,22 +407,32 @@ public class BagPanel extends  AbstractPanel {
         prop_material.setVisible(true);
         prop_value.setVisible(true);
         put_now_prop.setVisible(true);
+
         chose_weapon_button.addMouseListener(new MouseAdapter(){
          public void mousePressed(MouseEvent me) {
+          use.setVisible(true);
+          upgrade.setVisible(true);
+
           mouseexited = new PlaySounds("./music/click.wav");
           mouseexited.start();
        }
       });
       chose_armor_button.addMouseListener(new MouseAdapter(){
         public void mousePressed(MouseEvent me) {
+          use.setVisible(true);
+          upgrade.setVisible(true);
+   
          mouseexited = new PlaySounds("./music/click.wav");
          mouseexited.start();
       }
      });
      chose_material_button.addMouseListener(new MouseAdapter(){
       public void mousePressed(MouseEvent me) {
-       mouseexited = new PlaySounds("./music/click.wav");
-       mouseexited.start();
+        propinformation.notmaterialtab = false;
+        use.setVisible(false);
+        upgrade.setVisible(false);
+        mouseexited = new PlaySounds("./music/click.wav");
+        mouseexited.start();
     }
    });
     }
@@ -515,16 +524,16 @@ public class BagPanel extends  AbstractPanel {
       public void check_material_overflow(int index)
       {
         if(check_material[index%3]>=10){
+          upgrade.setVisible(true);
+
           propinformation.upgradeable = true;
-          upgrade.setIcon(new ImageIcon(new ImageIcon("./img/btn/upgrade.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST)));
-          upgrade.setRolloverIcon(new ImageIcon(new ImageIcon("./img/btn/upgrade_r.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST)));
-          upgrade.setPressedIcon(new ImageIcon(new ImageIcon("./img/btn/upgrade_p.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST)));
         }
         if(check_material[index%3]<10){
           propinformation.upgradeable = false;
-          upgrade.setIcon(overflow);
-          upgrade.setRolloverIcon(overflow);
-          upgrade.setPressedIcon(overflow);
+          upgrade.setVisible(false);
+
+          //upgrade.setRolloverIcon(overflow);
+          //upgrade.setPressedIcon(overflow);
         }
       }
       public void setWeapon_text(int index)
