@@ -4,7 +4,6 @@ import javax.swing.*;
 
 public class BagPanel extends AbstractPanel {
     PropInformation propinformation = new PropInformation(); 
-
     PlaySounds mouseexited;
     MainFrame mainframe = null;
     JButton closebutton = new JButton();
@@ -25,6 +24,14 @@ public class BagPanel extends AbstractPanel {
     public String material="";
     public String Attack_defend_HP="";
     public int value=10;
+    
+    public int HP=100;
+    public int Attack=0;
+    public int defend=0;
+    public JLabel HP_text=new JLabel("", SwingConstants.LEFT);
+    public JLabel Attack_text=new JLabel("", SwingConstants.LEFT);
+    public JLabel defend_text=new JLabel("", SwingConstants.LEFT);
+
     public JLabel prop_level=new JLabel("", SwingConstants.LEFT);
     public JLabel prop_material=new JLabel(""+material, SwingConstants.LEFT);
     public JLabel prop_value=new JLabel("", SwingConstants.LEFT);
@@ -63,11 +70,13 @@ public class BagPanel extends AbstractPanel {
       ImageIcon chose_armor_Image =new ImageIcon(new ImageIcon("./img/btn/ActiveB.png").getImage().getScaledInstance(64, 70, Image.SCALE_FAST));
      
       ImageIcon black =new ImageIcon(new ImageIcon("./img/inventory/black.png").getImage().getScaledInstance(64, 70, Image.SCALE_FAST));
+      ImageIcon overflow =new ImageIcon(new ImageIcon("./img/btn/upgrade_d.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST));
+      ImageIcon use_black =new ImageIcon(new ImageIcon("./img/btn/use_d.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST));
 
      public int[] check_armor={0,0,0,0,0,0,0,0,0,0,0,0};
      public int[] check_weapon={0,0,0};
      public int[] check_material={55,55,55};
-
+  
      BagPanel(MainFrame mf){
 
         this.mainframe = mf;
@@ -116,7 +125,6 @@ public class BagPanel extends AbstractPanel {
           else if (i == 10){position_Y+=62;rem = 0;}
           else{rem++;} 
           armorButtons[i]=new SetButton(armorImages[i], position_X+(int)65*rem, position_Y, wid_height,wid_height, this);
-          //armorButtons[i].setPressedIcon(armorImages_p[i]);
           armorButtons[i].setVisible(false);
         }
         
@@ -234,6 +242,8 @@ public class BagPanel extends AbstractPanel {
       
       //按了武器欄的按鈕
       if (e.getSource() == chose_weapon_button) {
+        // use.setIcon(new ImageIcon(new ImageIcon("./img/btn/use.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST)));
+        // upgrade.setIcon(new ImageIcon(new ImageIcon("./img/btn/upgrade.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST)));
         for(JButton b:armorButtons){
           if(b.getY()<600)b.setVisible(false);
         }
@@ -276,6 +286,8 @@ public class BagPanel extends AbstractPanel {
         prop_material.setVisible(false);
         prop_value.setVisible(false);
         put_now_prop.setVisible(false);
+        // use.setIcon(use_black);
+        // upgrade.setIcon(overflow);
         chose_weapon_button.setIcon(chose_weapon_Image);
         chose_armor_button.setIcon(chose_armor_Image);
         chose_material_button.setIcon(chose_material_Image_p);      
@@ -283,6 +295,8 @@ public class BagPanel extends AbstractPanel {
 
       //按下裝備欄按鈕
       if (e.getSource() == chose_armor_button) {
+        // use.setIcon(new ImageIcon(new ImageIcon("./img/btn/use.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST)));
+        // upgrade.setIcon(new ImageIcon(new ImageIcon("./img/btn/upgrade.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST)));
         resetButton_position(armorButtons,12,check_armor);
 
         for(JButton b:materialButtons){
@@ -407,7 +421,6 @@ public class BagPanel extends AbstractPanel {
         }
         check_armor[n]=0;
       }
-      ImageIcon overflow =new ImageIcon(new ImageIcon("./img/btn/upgrade_d.png").getImage().getScaledInstance(80, 40, Image.SCALE_FAST));
       public void check_material_overflow(int index)
       {
         if(check_material[index%3]>=10){
