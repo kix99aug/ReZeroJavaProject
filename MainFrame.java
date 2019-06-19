@@ -48,6 +48,7 @@ public class MainFrame extends JFrame {
     // if(target=="menu") BGM._stop();
     if (target == "game") {
       GamePanel gp = ((GamePanel) panels.get(target));
+      gp.newGame();
       gp.character.start();
       gp.character.breath();
       for (Monster m : gp.monster) {
