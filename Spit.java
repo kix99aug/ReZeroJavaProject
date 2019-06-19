@@ -4,14 +4,12 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 
-public class Shoot extends MapItem {
+public class Spit extends MapItem {
 
-  Image arrowImages[] = {new ImageIcon("./img/diamondarrow.png").getImage(),
-      new ImageIcon("./img/ironarrow.png").getImage(),
-      new ImageIcon("./img/woodarrow.png").getImage()};
+ 
   public double x;
   public double y;
-  public Image img;
+  public Image img =new ImageIcon("./img/Monster/spit.png").getImage();
   public GamePanel gp;
   public MainFrame mf;
   public int width, height;
@@ -19,42 +17,38 @@ public class Shoot extends MapItem {
 
   public int facing = 1;
 
-  public Shoot(GamePanel gp, double x, double y, int facing) {
+  public Spit(GamePanel gp,double x,double y,int face) {
     this.gp = gp;
-    this.img = arrowImages[0];
     this.x = x;
     this.y = y;
-    this.width = 30;
-    this.height = 6;
-    this.facing = facing;
-    this.start();
+    this.width = 10;
+	this.height = 10;
+  this.facing = face;
+  this.start();
   }
 
   public void run() {
     while (true) {
-      if (this.gp.gameover) return;
       this.x += this.facing;
       for (Obstacle o : gp.obstacle) {
-        if (this.getHitbox().intersects(o.getHitbox())) return;
+		if (this.getHitbox().intersects(o.getHitbox())) {
+			gp.spit.remove(this);
+			return;
+		}
       }
-      for (Monster m : gp.monster){
-        if (this.getHitbox().intersects(m.getHitbox())) {
-          gp.shoot.remove(this);
+     
+        if (this.getHitbox().intersects(this.gp.character.getHitbox())) {
+          mf.HP -= (20-mf.defend); 
+          gp.spit.remove(this);
           return;
         }
-      }
+      
       try {
         this.sleep(5);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
     }
-  }
-
-  public boolean hit() {
-    Rectangle myrect = new Rectangle((int) this.x, (int) this.y, this.width, this.height);
-    Rectangle rect = null;
-    return false;
   }
 
   public double getX() {
@@ -87,7 +81,7 @@ public class Shoot extends MapItem {
 
 
   public Rectangle getHitbox() {
-    return new Rectangle((int) this.x + 22, (int) this.y, 8, 6);
+    return new Rectangle((int) this.x, (int) this.y, 10, 10);
   }
 
 }

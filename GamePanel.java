@@ -59,6 +59,7 @@ public class GamePanel extends AbstractPanel implements KeyListener {
   public ArrayList<Monster> monster = new ArrayList<Monster>();
   public ArrayList<Obstacle> obstacle = new ArrayList<Obstacle>();
   public ArrayList<Shoot> shoot = new ArrayList<Shoot>();
+  public ArrayList<Spit> spit = new ArrayList<Spit>();
   
   GamePanel(MainFrame mf) {
     this.mainframe = mf;
@@ -109,6 +110,9 @@ public class GamePanel extends AbstractPanel implements KeyListener {
       items.add(i);
     }
     for (Shoot s : shoot) {
+      items.add(s);
+    }
+    for (Spit s : spit) {
       items.add(s);
     }
     items.sort(new Comparator<MapItem>() {

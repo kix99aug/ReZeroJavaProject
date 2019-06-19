@@ -32,13 +32,29 @@ public class Monster extends MapItem {
 			if (monster.chooseMonster != 3) {
 				for (int i = 0; monster.state == 0; i = (i + 1) % 3) {
 					monster.img = monster.images[monster.chooseMonster][i];
+					
+					if(monster.chooseMonster == 0){
+						if(i == 2){
+							monster.gp.spit.add(new Spit(gp,(monster.facing > 0)?monster.x+52:monster.x-11,monster.y+32,monster.facing));
+							new PlaySounds("./music/shootingsound.wav").start();
+							try {
+								this.sleep(1000);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+					}
 					try {
 						this.sleep(200);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-				}
-			} else {
+					}
+
+			}
+			
+					
+			else {
 				for (int i = 0; monster.state == 0; i = (i + 1) % 4) {
 					monster.img = monster.images[monster.chooseMonster][i];
 					try {
@@ -51,7 +67,9 @@ public class Monster extends MapItem {
 
 		}
 	}
-
+	public int HP = 200;
+	public int ATTACK = 20;
+	public int DEFEND = 10;
 	public boolean shoot;
 	Random ran = new Random();
 	public int chooseMonster = ran.nextInt(4);
@@ -207,6 +225,6 @@ public class Monster extends MapItem {
 	}
 
 	public Rectangle getHitbox() {
-		return new Rectangle((int) this.x + 5, (int) this.y + 25, 17 * 3, 14 * 3);
+		return new Rectangle((int) this.x + 5, (int) this.y + 20, 17 * 3, 15 * 3);
 	}
 }
