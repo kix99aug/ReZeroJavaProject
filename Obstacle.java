@@ -28,7 +28,7 @@ public class Obstacle extends MapItem {
         this.img = obstacleimg[type];
         this.width = this.img.getWidth(gp)*2;
         this.height = this.img.getHeight(gp)*2;
-        this.x = (double)ran.nextInt(1280);
+        this.x = (double)ran.nextInt(1000)+140;
         this.y = (double)ran.nextInt(400)+320-height;
 	}
 
@@ -68,7 +68,7 @@ public class Obstacle extends MapItem {
 
    
     public Rectangle getHitbox(){
-		return new Rectangle((int) this.x + 16*3, (int) this.y + 24*3, 17*3, 12*3);
+		return new Rectangle((int) this.x+45, (int) this.y+this.height-36, 15*3, 12*3);
     }
     
 }
