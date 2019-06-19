@@ -51,6 +51,13 @@ public class MainFrame extends JFrame {
         m.start();
         m.breath();
       }
+
       BGM.change("./music/鬼來電.wav",-20);}
+      if(target == "bag"){
+        BagPanel bp = ((BagPanel)panels.get(target));
+        bp.bagcharacter.start();
+        
+      }
   }
+  
 }
