@@ -1,26 +1,37 @@
 import java.io.*;
 import java.io.IOException;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.*;
 
 public class PlaySounds extends Thread {
 
     private String filename;
     AudioInputStream audioInputStream;
     boolean ifstop = false;
-
+    float volume;
     PlaySounds(String wavfile) {
-        filename = wavfile;
+        this.filename = wavfile;
+        this.volume = 0;
+    }
+
+    PlaySounds(String wavfile , float volume) {
+        this.filename = wavfile;
+        this.volume = volume;
+    }
+
+    public void change(String wavefile,float volume) {
+        if (wavefile == filename)
+            return;
+        filename = wavefile;
+        new PlaySounds(wavefile,volume).start();
+        ifstop = true;
+        _stop();
     }
 
     public void change(String wavefile) {
         if (wavefile == filename)
             return;
         filename = wavefile;
-        new PlaySounds(wavefile).start();
+        new PlaySounds(wavefile,0).start();
         ifstop = true;
         _stop();
     }
@@ -45,6 +56,9 @@ public class PlaySounds extends Thread {
             e.printStackTrace();
             return;
         }
+        FloatControl gainControl = 
+    (FloatControl)auline.getControl(FloatControl.Type.MASTER_GAIN);
+    gainControl.setValue(volume);
         auline.start();
         int nBytesRead = 0;
         // 這是緩衝
