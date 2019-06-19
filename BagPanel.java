@@ -75,7 +75,7 @@ public class BagPanel extends  AbstractPanel {
 
      public int[] check_armor={0,0,0,0,0,0,0,0,0,0,0,0};
      public int[] check_weapon={0,0,0};
-     public int[] check_material={55,55,55};
+     public int[] check_material={0,0,0};
   
      BagPanel(MainFrame mf){
       
@@ -167,15 +167,6 @@ public class BagPanel extends  AbstractPanel {
           weaponButtons[i].setVisible(false);
         }  
         //測試用陣列 之後要刪掉
-        check_armor[0]=1;
-        check_weapon[0]=1;
-        check_weapon[0]=1;
-        check_weapon[1]=1;
-
-        check_armor[1]=1;
-        check_armor[4]=1;
-        check_armor[3]=1;
-        check_armor[10]=1;
         resetButton_position(weaponButtons,3,check_weapon);
         
         position_Y = 205;
