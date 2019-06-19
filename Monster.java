@@ -66,7 +66,9 @@ public class Monster extends MapItem {
 
 		}
 	}
-
+	public int HP = 200;
+	public int ATTACK = 20;
+	public int DEFEND = 10;
 	public boolean shoot;
 	Random ran = new Random();
 	public int chooseMonster = ran.nextInt(4);

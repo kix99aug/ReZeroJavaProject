@@ -13,6 +13,7 @@ public class Shoot extends MapItem {
   public double y;
   public Image img;
   public GamePanel gp;
+  public MainFrame mf;
   public int width, height;
   public boolean left = false, right = false, down = false, up = false;
 
