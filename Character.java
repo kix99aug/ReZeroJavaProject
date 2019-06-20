@@ -133,7 +133,7 @@ public class Character extends MapItem {
 				facing = (move_x < 0) ? -1 : (move_x == 0) ? facing : 1;
 			} else
 				this.state = 2;
-
+//60木 30鐵 10鑽 70素材 30裝備 
 			try {
 				this.sleep(10);
 			} catch (InterruptedException e) {

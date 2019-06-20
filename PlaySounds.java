@@ -8,21 +8,29 @@ public class PlaySounds extends Thread {
     AudioInputStream audioInputStream;
     boolean ifstop = false;
     float volume;
+    MainFrame mf;
     PlaySounds(String wavfile) {
         this.filename = wavfile;
         this.volume = 0;
     }
+    PlaySounds(String wavfile,MainFrame mf) {
+        this.filename = wavfile;
+        this.volume = 0;
+        this.mf = mf;
+    }
 
-    PlaySounds(String wavfile , float volume) {
+    PlaySounds(String wavfile , float volume,MainFrame mf) {
         this.filename = wavfile;
         this.volume = volume;
+        this.mf = mf;
     }
 
     public void change(String wavefile,float volume) {
         if (wavefile == filename)
             return;
         filename = wavefile;
-        new PlaySounds(wavefile,volume).start();
+        mf.BGM = new PlaySounds(wavefile,volume,mf);
+        mf.BGM.start();
         ifstop = true;
         _stop();
     }
@@ -31,7 +39,8 @@ public class PlaySounds extends Thread {
         if (wavefile == filename)
             return;
         filename = wavefile;
-        new PlaySounds(wavefile,0).start();
+        mf.BGM = new PlaySounds(wavefile,0,mf);
+        mf.BGM.start();
         ifstop = true;
         _stop();
     }
@@ -65,6 +74,7 @@ public class PlaySounds extends Thread {
         byte[] abData = new byte[512];
         try {
             while (nBytesRead != -1) {
+                if (ifstop) return;
                 if (audioInputStream == null) 
                 throw new IOException();
                 nBytesRead = audioInputStream.read(abData, 0, abData.length);

@@ -32,10 +32,10 @@ public class MainFrame extends JFrame {
     for (JPanel p : panels.values()) {
       this.getContentPane().add(p);
     }
+    BGM = new PlaySounds("./music/BGM.wav",this);
+    BGM.start();
     changeScene("inputname");
     this.setVisible(true);
-    BGM = new PlaySounds("./music/BGM.wav");
-    BGM.run();
   }
 
 
@@ -46,6 +46,7 @@ public class MainFrame extends JFrame {
     panels.get(target).setVisible(true);
     panels.get(target).requestFocus();
     // if(target=="menu") BGM._stop();
+    if (target != "game") BGM.change("./music/BGM.wav");
     if (target == "game") {
       GamePanel gp = ((GamePanel) panels.get(target));
       gp.newGame();
