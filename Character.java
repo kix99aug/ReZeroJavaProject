@@ -69,9 +69,16 @@ public class Character extends MapItem {
 					}
 				}
 				for (int i = 0; character.state == 3; i = (i + 1) % 7) {
-					character.img = die_imgs[i];
+					
+					
 					try {
-						this.sleep(200);
+						if(gp.monster.size() != 0){
+							character.img = die_imgs[i];
+							this.sleep(200);
+						}
+						else{
+							this.sleep(0);
+						}
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -89,18 +96,19 @@ public class Character extends MapItem {
 	public double x = 100, y = 500;
 	public int width = 150, height = 111;
 	public Image img;
-
+	public int hp;
 	public boolean left = false, right = false, down = false, up = false;
 	public int facing = 1;
 	public int state = 2; // 0 = idle
 
 	public Character(GamePanel gp) {
 		this.gp = gp;
+		this.hp = gp.mainframe.HP;
 	}
 
 	public void run() {
 		while (true) {
-			if (this.gp.gameover)
+			if (this.state == 3)
 				return;
 			double move_x = (right ? 1 : 0) + (left ? -1 : 0);
 			double move_y = (down ? 1 : 0) + (up ? -1 : 0);

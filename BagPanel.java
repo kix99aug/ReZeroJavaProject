@@ -140,21 +140,24 @@ public class BagPanel extends AbstractPanel {
     HP_text.setBorder(null);
     HP_text.setFont(new Font("NasuM", Font.BOLD, 24));
     HP_text.setForeground(Color.WHITE);
-    HP_text.setText("HP  " + (20 + this.mainframe.HP));
+    this.mainframe.HP= 20 + this.mainframe.HP;
+    HP_text.setText("HP  " + (this.mainframe.HP));
     this.add(HP_text);
     Attack_text.setSize(160, 40);
     Attack_text.setLocation(320, 590);
     Attack_text.setBorder(null);
     Attack_text.setFont(new Font("NasuM", Font.BOLD, 24));
     Attack_text.setForeground(Color.WHITE);
-    Attack_text.setText("Attack  " + (10 + this.mainframe.Attack));
+    this.mainframe.Attack=10 + this.mainframe.Attack;
+    Attack_text.setText("Attack  " + (this.mainframe.Attack));
     this.add(Attack_text);
     defend_text.setSize(160, 40);
     defend_text.setLocation(320, 620);
     defend_text.setBorder(null);
     defend_text.setFont(new Font("NasuM", Font.BOLD, 24));
     defend_text.setForeground(Color.WHITE);
-    defend_text.setText("Defend  " + (20 + this.mainframe.defend));
+    this.mainframe.defend=20 + this.mainframe.defend;
+    defend_text.setText("Defend  " + (this.mainframe.defend));
     this.add(defend_text);
 
 

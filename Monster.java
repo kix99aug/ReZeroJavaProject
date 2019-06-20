@@ -18,7 +18,7 @@ public class Monster extends MapItem {
 					new ImageIcon("./img/Monster/chibi-monsters-files/previews/skeleton2.png").getImage(),
 					new ImageIcon("./img/Monster/chibi-monsters-files/previews/skeleton3.png").getImage(),
 					new ImageIcon("./img/Monster/chibi-monsters-files/previews/skeleton4.png").getImage() } };
-
+					boolean dead = false;
 	class Breath extends Thread {
 		Monster monster;
 
@@ -36,7 +36,7 @@ public class Monster extends MapItem {
 					if(monster.chooseMonster == 0){
 						if(i == 2){
 							monster.gp.spit.add(new Spit(gp,(monster.facing > 0)?monster.x+52:monster.x-11,monster.y+32,monster.facing));
-							new PlaySounds("./music/shootingsound.wav").start();
+							new PlaySounds("./music/batfire.wav").start();
 							try {
 								this.sleep(1000);
 							} catch (InterruptedException e) {
@@ -44,6 +44,7 @@ public class Monster extends MapItem {
 							}
 						}
 					}
+					if (monster.dead) return;
 					try {
 						this.sleep(200);
 					} catch (InterruptedException e) {
@@ -68,13 +69,14 @@ public class Monster extends MapItem {
 
 		}
 	}
-	public int HP = 200;
+	public int HP = 60;
 	public int ATTACK = 20;
 	public int DEFEND = 10;
 	public boolean shoot;
 	Random ran = new Random();
 	public int chooseMonster = ran.nextInt(4);
 	public GamePanel gp;
+
 	// public double x = 100, y = 500;
 	public double x = (double) ran.nextInt(1000) + 100, y = (double) ran.nextInt(400) + 320 - 50;
 
@@ -114,6 +116,11 @@ public class Monster extends MapItem {
 				boolean unwalkable = false;
 				if(this.getHitbox().intersects(gp.character.getHitbox())){
 					//attack
+					new PlaySounds("./music/smash.wav").start();
+					gp.character.hp -= 20; 
+					if(gp.character.hp <= 0){
+					  this.gp.character.state = 3;
+					}
 					this.x = org_x;
 					this.y = org_y;
 					break;
@@ -179,6 +186,7 @@ public class Monster extends MapItem {
 			// 	this.x += 1 * (store_X > 0 ? 1 : -1);
 			// 	this.y += 1 * (store_Y > 0 ? 1 : -1);
 			// } 
+			if(this.dead) return;
 			try {
 				this.sleep(1000);
 			} catch (InterruptedException e) {
@@ -226,6 +234,6 @@ public class Monster extends MapItem {
 	}
 
 	public Rectangle getHitbox() {
-		return new Rectangle((int) this.x + 5, (int) this.y + 20, 17 * 3, 15 * 3);
+		return new Rectangle((int) this.x + 5, (int) this.y + 15, 17 * 3, 15 * 4);
 	}
 }

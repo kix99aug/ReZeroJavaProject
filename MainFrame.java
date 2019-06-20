@@ -13,11 +13,11 @@ public class MainFrame extends JFrame {
   Point hotspot = new Point(0, 0);
   String username;
   PlaySounds BGM;
-  public int HP = 100;
-  public int Attack = 0;
-  public int defend = 0;
-
-  MainFrame() {
+  public int HP=100;
+  public int Attack=0;
+  public int defend=0;
+  
+  MainFrame(){
     super("Little Adventure");
     this.setCursor(getToolkit().createCustomCursor(cursorImage, hotspot, "Cursor"));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
