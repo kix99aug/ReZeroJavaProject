@@ -38,8 +38,8 @@ public class Spit extends MapItem {
       }
      
         if (this.getHitbox().intersects(this.gp.character.getHitbox())) {
-          gp.mainframe.HP -= (20); 
-          if(gp.mainframe.HP <= 0){
+          gp.character.hp -= (20); 
+          if(gp.character.hp <= 0){
             this.gp.character.state = 3;
           }
           gp.spit.remove(this);

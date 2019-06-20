@@ -68,7 +68,7 @@ public class Obstacle extends MapItem {
 
 
 	public Rectangle getHitbox() {
-		return new Rectangle((int) this.x + 45, (int) this.y + this.height - 36, 15 * 3, 12 * 3);
+		return new Rectangle((int) this.x + 60, (int) this.y + this.height - 36, 30, 12 * 3);
 	}
 
 }

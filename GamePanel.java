@@ -75,7 +75,7 @@ public class GamePanel extends AbstractPanel implements KeyListener {
         repaint();
         if (gp.gameover)
           count++;
-        if (count == 2000) {
+        if (count == 1800) {
           gp.mainframe.changeScene("menu");
           return;
         }
@@ -148,8 +148,12 @@ public class GamePanel extends AbstractPanel implements KeyListener {
     for (MapItem i : items) {
       g.drawImage(i.getImage(), (int) i.getX() + ((i.getFacing() == -1) ? i.getWidth() : 0),
           (int) i.getY(), i.getWidth() * i.getFacing(), i.getHeight(), mainframe);
-      g.drawRect(i.getHitbox().x, i.getHitbox().y, i.getHitbox().width, i.getHitbox().height);
+      // g.drawRect(i.getHitbox().x, i.getHitbox().y, i.getHitbox().width, i.getHitbox().height);
     }
+    g.drawImage(new ImageIcon("./img/hpbar.png").getImage(),(int)character.x,(int)character.y-20,152,20,mainframe);
+    g.setColor(new Color(255, 0, 0,100));
+    g.fillRect((int)character.x+24, (int)character.y-20+4, 104*character.hp/ mainframe.HP, 12);
+
     if (this.gameover) {
       g.setColor(new Color(180, 120, 30, 100));
       g.fillRect(0, 0, 1280, 720);

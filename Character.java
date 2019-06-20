@@ -96,13 +96,14 @@ public class Character extends MapItem {
 	public double x = 100, y = 500;
 	public int width = 150, height = 111;
 	public Image img;
-
+	public int hp;
 	public boolean left = false, right = false, down = false, up = false;
 	public int facing = 1;
 	public int state = 2; // 0 = idle
 
 	public Character(GamePanel gp) {
 		this.gp = gp;
+		this.hp = gp.mainframe.HP;
 	}
 
 	public void run() {

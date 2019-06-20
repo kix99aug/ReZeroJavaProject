@@ -69,7 +69,7 @@ public class Monster extends MapItem {
 
 		}
 	}
-	public int HP = 20;
+	public int HP = 60;
 	public int ATTACK = 20;
 	public int DEFEND = 10;
 	public boolean shoot;
@@ -116,7 +116,11 @@ public class Monster extends MapItem {
 				boolean unwalkable = false;
 				if(this.getHitbox().intersects(gp.character.getHitbox())){
 					//attack
-					gp.mainframe.HP -= (20); 
+					new PlaySounds("./music/smash.wav").start();
+					gp.character.hp -= 20; 
+					if(gp.character.hp <= 0){
+					  this.gp.character.state = 3;
+					}
 					this.x = org_x;
 					this.y = org_y;
 					break;
@@ -230,6 +234,6 @@ public class Monster extends MapItem {
 	}
 
 	public Rectangle getHitbox() {
-		return new Rectangle((int) this.x + 5, (int) this.y + 20, 17 * 3, 15 * 3);
+		return new Rectangle((int) this.x + 5, (int) this.y + 15, 17 * 3, 15 * 4);
 	}
 }

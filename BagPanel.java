@@ -218,7 +218,7 @@ public class BagPanel extends AbstractPanel {
       materialButtons[i].setVisible(false);
     }
 
-    check_armor[1]=1;
+
     // 以下建立圖標
     chose_armor_button = new SetButton(chose_armor_Image, 1085, 248, 64, 70, this);
     chose_weapon_button = new SetButton(chose_weapon_Image_p, 1085, 179, 64, 70, this);
