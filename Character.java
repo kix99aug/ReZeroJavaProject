@@ -69,9 +69,16 @@ public class Character extends MapItem {
 					}
 				}
 				for (int i = 0; character.state == 3; i = (i + 1) % 7) {
-					character.img = die_imgs[i];
+					
+					
 					try {
-						this.sleep(200);
+						if(gp.monster.size() != 0){
+							character.img = die_imgs[i];
+							this.sleep(200);
+						}
+						else{
+							this.sleep(0);
+						}
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

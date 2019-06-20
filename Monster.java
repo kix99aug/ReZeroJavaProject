@@ -69,7 +69,7 @@ public class Monster extends MapItem {
 
 		}
 	}
-	public int HP = 200;
+	public int HP = 20;
 	public int ATTACK = 20;
 	public int DEFEND = 10;
 	public boolean shoot;
@@ -116,7 +116,7 @@ public class Monster extends MapItem {
 				boolean unwalkable = false;
 				if(this.getHitbox().intersects(gp.character.getHitbox())){
 					//attack
-					gp.mainframe.HP -= (this.ATTACK-gp.mainframe.defend); 
+					gp.mainframe.HP -= (20); 
 					this.x = org_x;
 					this.y = org_y;
 					break;

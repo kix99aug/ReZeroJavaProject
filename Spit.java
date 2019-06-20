@@ -38,7 +38,7 @@ public class Spit extends MapItem {
       }
      
         if (this.getHitbox().intersects(this.gp.character.getHitbox())) {
-          gp.mainframe.HP -= (20-gp.mainframe.defend); 
+          gp.mainframe.HP -= (20); 
           if(gp.mainframe.HP <= 0){
             this.gp.character.state = 3;
           }

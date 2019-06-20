@@ -27,6 +27,7 @@ public class Shoot extends MapItem {
     this.width = 30;
     this.height = 6;
     this.facing = facing;
+
     this.start();
   }
 
@@ -81,7 +82,13 @@ public class Shoot extends MapItem {
             gp.monster.remove(m);
           }
           gp.shoot.remove(this);
+          if(gp.monster.size() == 0){
+            this.gp.character.state = 3;
+          }
+          
           return;
+          
+         
         }
       }
       try {
