@@ -36,7 +36,7 @@ public class Monster extends MapItem {
 					if(monster.chooseMonster == 0){
 						if(i == 2){
 							monster.gp.spit.add(new Spit(gp,(monster.facing > 0)?monster.x+52:monster.x-11,monster.y+32,monster.facing));
-							new PlaySounds("./music/shootingsound.wav").start();
+							new PlaySounds("./music/batfire.wav").start();
 							try {
 								this.sleep(1000);
 							} catch (InterruptedException e) {
