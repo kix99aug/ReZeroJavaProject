@@ -11,5 +11,4 @@ public abstract class MapItem extends Thread{
   public abstract int _getState();
   public abstract Image getImage();
   public abstract Rectangle getHitbox();
-  
 }

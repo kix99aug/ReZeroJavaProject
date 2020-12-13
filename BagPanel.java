@@ -106,7 +106,7 @@ public class BagPanel extends AbstractPanel {
 
   public int[] check_armor = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
   public int[] check_weapon = {0, 0, 0};
-  public int[] check_material = {0, 0, 0};
+  public int[] check_material = {100, 100, 100};
 
   BagPanel(MainFrame mf) {
 
